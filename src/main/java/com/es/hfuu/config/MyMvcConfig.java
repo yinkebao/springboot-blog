@@ -1,7 +1,5 @@
-package com.example.config;
+package com.es.hfuu.config;
 
-import com.example.component.LoginHandlerInterceptor;
-import com.example.component.MyLocalResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.LocaleResolver;
@@ -53,7 +51,7 @@ public class MyMvcConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**")
                 .excludePathPatterns("/","/index.html","/user/login",
-                        "/asserts/**","/webjars/**");
+                        "/asserts/**","/webjars/**","/**.ico");
     }
 
 

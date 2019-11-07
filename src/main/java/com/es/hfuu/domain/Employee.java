@@ -1,4 +1,4 @@
-package com.example.entities;
+package com.es.hfuu.domain;
 
 import java.util.Date;
 

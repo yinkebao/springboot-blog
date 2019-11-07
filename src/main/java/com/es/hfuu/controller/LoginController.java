@@ -1,4 +1,4 @@
-package com.example.controller;
+package com.es.hfuu.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -1,4 +1,4 @@
-package com.example.component;
+package com.es.hfuu.config;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 

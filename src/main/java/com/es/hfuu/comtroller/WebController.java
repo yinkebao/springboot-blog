@@ -1,4 +1,4 @@
-package com.example.comtroller;
+package com.es.hfuu.comtroller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

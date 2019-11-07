@@ -1,10 +1,10 @@
-package com.example.dao;
+package com.es.hfuu.mapper;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.example.entities.Department;
+import com.es.hfuu.domain.Department;
 import org.springframework.stereotype.Repository;
 
 

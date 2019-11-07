@@ -1,4 +1,4 @@
-package com.example.entities;
+package com.es.hfuu.domain;
 
 public class Department {
 

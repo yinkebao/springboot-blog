@@ -1,14 +1,13 @@
-package com.example.comtroller;
+package com.es.hfuu.comtroller;
 
-import com.example.dao.EmployeeDao;
-import com.example.entities.Employee;
+import com.es.hfuu.mapper.EmployeeDao;
+import com.es.hfuu.domain.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.Collection;
-import java.util.List;
 
 /**
  * @ClassName EmployeeController
