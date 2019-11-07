@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<meta name="description" content="">
 		<meta name="author" content="">
-		<title>Signin Template for Bootstrap</title>
+		<title>登录</title>
 		<!-- Bootstrap core CSS -->
 		<link th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" rel="stylesheet">
 		<!-- Custom styles for this template -->
@@ -13,6 +13,9 @@
 	</head>
 
 	<body class="text-center">
+		<!-- 背景3D动画 -->
+		<div id="canvas" class="gradient"></div>
+
 		<form class="form-signin" th:action="@{/user/login}">
 			<img class="mb-4" th:src="@{/asserts/img/bootstrap-solid.svg}" alt="" width="72" height="72">
 			<h1 class="h3 mb-3 font-weight-normal" th:text="#{login.tip}">Please sign in</h1>
