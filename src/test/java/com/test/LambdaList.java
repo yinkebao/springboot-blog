@@ -25,7 +25,9 @@ public class LambdaList {
         employees.add(new Employee(11,"规范"));
         employees.add(new Employee(11,"明月"));
         employees.add(new Employee(17,"小平"));
-
+        //顺序排序
+        //employees.sort(Comparator.comparingInt(Employee::getId));
+        //倒序排序
         employees.sort((o1, o2) -> o2.getId() - o1.getId());
         System.out.println(employees);
     }
@@ -51,7 +53,7 @@ public class LambdaList {
     }
 
     /**
-     *set排序
+     * forEach 输出偶数
      */
     public static void testForEach(){
         List<Integer> list = new ArrayList<>();
@@ -79,6 +81,9 @@ public class LambdaList {
         employees.add(new Employee(17,"小平"));
         //删除id>10的元素
         //实现Predicate接口中的test方法，条件为true时，删除元素
+        //顺序排序
+        //employees.sort(Comparator.comparingInt(Employee::getId));
+        //倒序排序
         employees.removeIf(e -> e.getId()>11);
         System.out.println(employees);
     }
