@@ -7,9 +7,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @author ykb
  * @className BaseDomain
  * @description 所有Domain类的基类
+ * @author ykb
  * @date 2019/11/8
  **/
 public class BaseDomain implements Serializable {

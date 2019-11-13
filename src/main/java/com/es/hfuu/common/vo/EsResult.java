@@ -3,9 +3,9 @@ package com.es.hfuu.common.vo;
 import java.io.Serializable;
 
 /**
- * @author ykb
  * @className EsResult
  * @description 服务层调用返回值
+ * @author ykb
  * @date 2019/11/8
  **/
 public class EsResult <T> implements Serializable {

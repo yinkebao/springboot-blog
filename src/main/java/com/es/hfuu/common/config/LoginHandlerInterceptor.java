@@ -20,7 +20,7 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
         Object userName = request.getSession().getAttribute("userName");
         if (userName == null){
             request.setAttribute("msg","未登录，请登录后访问！");
-            request.getRequestDispatcher("/index.html").forward(request,response);
+            request.getRequestDispatcher("/templates/index.html").forward(request,response);
             return false;
         }else {
             return true;

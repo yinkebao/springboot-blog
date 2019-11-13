@@ -58,6 +58,14 @@ public interface UserService {
     User getSimpleUserById(Long id);
 
     /**
+     * 根据用户名获取用户的简单信息
+     * @Title: getSimpleUserById
+     * @param userName 用户名
+     * @return User 用户对象
+     */
+    User getSimpleUserByUserName(String userName);
+
+    /**
      * 根据用户Id获取用户的全部信息
      * @Title: getFullUserById
      * @param id 用户Id

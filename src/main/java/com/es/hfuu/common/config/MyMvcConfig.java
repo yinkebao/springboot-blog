@@ -35,8 +35,8 @@ public class MyMvcConfig implements WebMvcConfigurer {
     /** 配置视图解析器 */
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("login");
-        registry.addViewController("/index.html").setViewName("login");
+        registry.addViewController("/").setViewName("index");
+        registry.addViewController("/login").setViewName("login");
         registry.addViewController("/main.html").setViewName("dashboard");
     }
 
@@ -50,7 +50,7 @@ public class MyMvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**")
-                .excludePathPatterns("/","/index.html","/user/login",
+                .excludePathPatterns("/", "/templates/**","/user/login","/login",
                         "/asserts/**","/webjars/**","/**.ico");
     }
 

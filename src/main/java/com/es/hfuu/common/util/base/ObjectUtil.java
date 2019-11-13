@@ -7,10 +7,10 @@ import java.util.Iterator;
 import java.util.Map;
 
 /**
- * @className ObjectUtil
- * @deprecated 一些通用的函数
- * @author ykb
- * @date 2019/11/7
+ * @ClassName  ObjectUtil
+ * @Description  一些通用的函数
+ * @Author  ykb
+ * @Date  2019/11/7
  */
 public class ObjectUtil {
 

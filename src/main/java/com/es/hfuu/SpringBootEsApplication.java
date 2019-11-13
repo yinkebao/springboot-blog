@@ -8,8 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @description springboot启动类
  * @date 2019/9/8
  **/
-@MapperScan(value = "com.es.hfuu.mapper")
-@SpringBootApplication
+@MapperScan(value = "com.es.hfuu.**.mapper")
+@SpringBootApplication(scanBasePackages = "com.es.hfuu")
 public class SpringBootEsApplication {
 
     public static void main(String[] args) {

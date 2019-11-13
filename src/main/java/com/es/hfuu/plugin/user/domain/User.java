@@ -10,9 +10,9 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @author ykb
  * @className User
  * @description 用户
+ * @author ykb
  * @date 2019/11/8
  **/
 @ApiModel("角色对象Role")
@@ -41,12 +41,14 @@ public class User extends BaseDomain {
     private String headerUrl;
 
     @ApiModelProperty(value = "最后登录时间", name = "lastLoginTime")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date lastLoginTime;
 
     @ApiModelProperty(value = "最后登录IP", name = "lastLoginIp")
     private String lastLoginIp;
 
     @ApiModelProperty(value = "上次登录时间", name = "previousLoginTime")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date previousLoginTime;
 
     @ApiModelProperty(value = "上次登录Ip", name = "previousLoginIp")
