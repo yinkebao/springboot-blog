@@ -16,7 +16,7 @@ import java.util.Map;
 
 /**
  * @ClassName ExceptionHandlerFacade
- * @Description
+ * @Description 全局异常处理
  * @Author ykb
  * @Date 2019/11/8
  */

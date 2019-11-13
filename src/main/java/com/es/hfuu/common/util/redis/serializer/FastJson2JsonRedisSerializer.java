@@ -10,7 +10,7 @@ import java.util.Optional;
 
 /**
  * @ClassName FastJson2JsonRedisSerializer
- * @Description
+ * @Description 用阿里的fastJson来实现Redis的序列化
  * @Author ykb
  * @Date 2019/11/12
  */
