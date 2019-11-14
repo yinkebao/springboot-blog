@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head th:fragment="common_head">
+<head th:fragment="common_header">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>ykb的博客</title>
-    <!-- Bootstrap core CSS -->
+    <!-- 引入bootstrap -->
     <link th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link th:href="@{/asserts/css/signin.css}" rel="stylesheet">
@@ -13,7 +13,8 @@
 <body>
 
 </body>
-<script>
-
-</script>
+<div th:fragment="common_js">
+    <script type="text/javascript" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}" ></script>
+    <script type="text/javascript" th:src="@{/layui/layui.all.js}" ></script>
+</div>
 </html>
