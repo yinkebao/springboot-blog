@@ -1,0 +1,46 @@
+.index_main{
+    width: 100%;
+    height: 100%;
+}
+.layui-nav{
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+.title_name {
+    position: relative;
+    font-size: 28px;
+    width: 140px;
+    left: 48px;
+    top: 9px;
+    margin-right: 140px;
+    float: left;
+    z-index: 9999;
+}
+.center_main{
+    width: 66%;
+    overflow: hidden;
+    float: left;
+    border: solid 1px silver;
+}
+.hidden-title{
+    float: left;
+    width: 100%;
+    height: 70px;
+}
+.cards{
+    max-width: 348px;
+    float: left;
+    overflow: auto;
+    border: solid 1px silver;
+    background:url("static/common/img/head.jpg");
+    margin-left: 35%;
+}
+.card{
+    overflow: auto;
+    margin: 4px 0 4px 8px;
+    float: left;
+    height: 160px;
+    width: 200px;
+    border: solid 1px silver;
+}

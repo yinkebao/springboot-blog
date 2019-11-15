@@ -2,24 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:include="common/common_head::common_header">
 </head>
-<style type="text/css">
-    .index_main{
-        width: 100%;
-        height: 100%;
-    }
-    .layui-nav{
-        width: 100%;
-    }
-    .title_name {
-        position: relative;
-        font-size: 28px;
-        width: 140px;
-        left: 48px;
-        top: 9px;
-        margin-right: 140px;
-        float: left;
-    }
-</style>
+<link th:href="@{/common/css/index.css}" rel="stylesheet">
 <body>
 <div id="index_main" class="index_main">
     <ul class="layui-nav">
@@ -33,7 +16,7 @@
             <a href="">个人中心<span class="layui-badge-dot"></span></a>
         </li>
         <li class="layui-nav-item">
-            <a href=""><img th:src="@{/common/img/head.jpg}" class="layui-nav-img">我</a>
+            <a href=""><img th:src="@{common/img/head.jpg}" class="layui-nav-img">我</a>
             <dl class="layui-nav-child">
                 <dd><a href="javascript:;">修改信息</a></dd>
                 <dd><a href="javascript:;">安全管理</a></dd>
@@ -41,23 +24,44 @@
             </dl>
         </li>
     </ul>
+
+    <div class="center_main">
+        <div class="hidden-title">
+
+        </div>
+        <div class="cards">
+            <div class="card">
+
+            </div>
+            <div class="card">
+
+            </div>
+            <div class="card">
+
+            </div>
+            <div class="card">
+
+            </div>
+        </div>
+
+        <div class="cards">
+            <div class="card">
+
+            </div>
+            <div class="card">
+
+            </div>
+            <div class="card">
+
+            </div>
+            <div class="card">
+
+            </div>
+        </div>
+
+    </div>
 </div>
-
-
 </body>
 <div th:include="common/common_head::common_js"></div>
-<script>
-    $(function () {
-
-    });
-
-    //初始化layui
-    function initLayui(){
-        ;!function(){
-            //无需再执行layui.use()方法加载模块，直接使用即可
-            var form = layui.form
-                ,layer = layui.layer;
-        }();
-    }
-</script>
+<script type="text/javascript" th:src="@{/common/js/index.js}" ></script>
 </html>
