@@ -6,10 +6,11 @@
     position: fixed;
     top: 0;
     width: 100%;
+    z-index: 999;
 }
 .title_name {
     position: relative;
-    font-size: 28px;
+    font-size: 24px;
     width: 140px;
     left: 48px;
     top: 9px;
@@ -18,25 +19,41 @@
     z-index: 9999;
 }
 .center_main{
-    width: 66%;
-    overflow: hidden;
+    position: absolute;
+    width: 72%;
+    overflow-x: hidden;
+    overflow-y: auto;
     float: left;
     border: solid 1px silver;
+    left: 14%;
 }
 .hidden-title{
     float: left;
     width: 100%;
     height: 70px;
 }
+.footer{
+    position: absolute;
+    bottom: 0;
+    height: 92px;
+    width: 100%;
+    border: solid 1px silver;
+    color: white;
+    background: #373D41;
+    text-align: center;
+    font-size: 13px;
+    padding: 10px;
+}
 .cards{
-    max-width: 348px;
+    max-width: 428px;
     float: left;
     overflow: auto;
     border: solid 1px silver;
-    background:url("static/common/img/head.jpg");
-    margin-left: 35%;
+    margin-left: 10px;
 }
 .card{
+    background:url("../img/head.jpg") ;
+    background-size: cover;
     overflow: auto;
     margin: 4px 0 4px 8px;
     float: left;
