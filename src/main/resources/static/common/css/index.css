@@ -2,8 +2,11 @@
     width: 100%;
     height: 100vh;	/* 重点一 */
     margin: 0 auto;
-    background-image: url(../img/bg.jpg);
+    background-image: url(../img/bg.png);
+    /* 设置背景不重复 */
     background-repeat: no-repeat;
+    /* 设置背景不滚动 */
+    background-attachment: fixed;
     background-size: cover; /* 重点二 */
     overflow: auto;
 }
@@ -12,17 +15,17 @@
     height: 100%;
 }
 .layui-nav{
-    position: fixed;
-    top: 0;
+    /*position: fixed;*/
+    /*top: 0;*/
     width: 100%;
-    z-index: 999;
+    /*z-index: 999;*/
 }
 .title_name {
     position: relative;
     font-size: 24px;
     width: 140px;
     left: 64px;
-    top: 4px;
+    top: 14px;
     margin-right: 140px;
     float: left;
     z-index: 9999;
@@ -35,12 +38,24 @@
     float: left;
     border: solid 1px silver;
     margin-left: 14%;
-    margin-top: 68px;
+    margin-top: 1.5%;
 }
-.hidden-title{
-    float: left;
+.rotation_chart{
+    width: 66%;
+    height: 240px;
+    /*border: solid 1px silver;*/
+    margin: 10px;
+}
+.swiper-container{
     width: 100%;
-    height: 70px;
+    height: 100%;
+}
+.swiper-slide span{
+    position: absolute;
+    bottom: 40%;
+    text-align: center;
+    width: 100%;
+    height: auto;
 }
 .footer{
     position: fixed;
@@ -56,7 +71,7 @@
     padding: 10px;
 }
 .cards{
-    max-width: 300px;
+    max-width: 66%;
     float: left;
     overflow: auto;
     border: solid 1px silver;
@@ -71,13 +86,38 @@
     border: solid 1px silver;
 }
 .card_bg{
-    background-image :url("../img/head.jpg") ;
+    background-image :url("../img/head.jpg");
     background-repeat: no-repeat;
+    height: 100%;
+    width: auto;
+    max-width: 100%;
     background-size: cover; /* 重点二 */
-    /*background-size: cover;*/
 }
 .card_img p {
+    text-align: center;
     color: #0C0C0C;
     font-size: 14px;
     font-weight: 600;
+    padding: 10% 10% 10% 10%;
+
+}
+/* 响应式布局 */
+/** iPad **/
+@media only screen and (min-width: 768px) and (max-width: 1024px) {}
+
+/** iPhone **/
+@media only screen and (min-width: 320px) and (max-width: 767px) {}
+
+@media screen and (max-width: 980px) {
+    .center_main{
+        /*position: fixed;*/
+        width: 98%;
+        margin-left: 1%;
+    }
+    .rotation_chart{
+        width: 98%;
+    }
+    .cards{
+        max-width: 98%;
+    }
 }
