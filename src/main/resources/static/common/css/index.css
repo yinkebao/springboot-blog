@@ -111,13 +111,27 @@
 @media screen and (max-width: 980px) {
     .center_main{
         /*position: fixed;*/
+        border: 0;
         width: 98%;
-        margin-left: 1%;
+        margin-left: 0;
     }
     .rotation_chart{
         width: 98%;
+        height: 220px;
     }
     .cards{
         max-width: 98%;
+        border: 0;
+    }
+    .card_img{
+        overflow: hidden;
+        margin: 4px 0 4px 0;
+        float: left;
+        height: 230px;
+        width: 100%;
+        border: 0;
+    }
+    .title_name{
+        left: 30%;
     }
 }

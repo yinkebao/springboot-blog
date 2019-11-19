@@ -37,17 +37,17 @@ function setSwiperImgs() {
         {
             id:1,
             img:"/common/img/swiper1.png",
-            textName:"第一个标题"
+            textName:""
         },
         {
             id:2,
             img:"/common/img/swiper2.png",
-            textName:"第二个标题"
+            textName:""
         },
         {
             id:3,
             img:"/common/img/swiper3.png",
-            textName:"第三个标题"
+            textName:""
         }
     ];
     swipers.forEach(function (value) {
