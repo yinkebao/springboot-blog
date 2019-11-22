@@ -1,6 +1,6 @@
 
 $(function () {
-    initLayui();
+    // initLayui();
     init2DImg();
     setSwiperImgs();
     initSwiper();
@@ -28,7 +28,7 @@ function initSwiper() {
         //     el: '.swiper-scrollbar',
         // },
     });
-    mySwiper.enableMousewheelControl();
+    // mySwiper.enableMousewheelControl();
 }
 
 //设置轮播图背景图片

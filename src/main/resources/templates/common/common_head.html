@@ -2,14 +2,23 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="common_header">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- 响应式设置 -->
+    <!--
+        width  ----  viewport的宽度（width=device-width意思是：宽度等于设备宽度）
+        height ------  viewport的高度（height=device-height意思是：高度等于设备宽度）
+        initial-scale ----- 初始的缩放比例
+        minimum-scale ----- 允许用户缩放到的最小比例
+        maximum-scale ----- 允许用户缩放到的最大比例
+        user-scalable ----- 用户是否可以手动缩放
+    -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>ykb的博客</title>
+    <title>ykb`blog</title>
     <!-- 引入bootstrap -->
-    <link th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" rel="stylesheet">
+    <link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link th:href="@{/asserts/css/signin.css}" rel="stylesheet">
     <!-- 引入layui -->
-    <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+    <!--<link rel="stylesheet" th:href="@{/layui/css/layui.css}">-->
     <!-- 引入swiper -->
     <link rel="stylesheet" th:href="@{/swiper/css/swiper.min.css}">
 </head>
@@ -18,10 +27,9 @@
 </body>
 <div th:fragment="common_js">
     <script type="text/javascript" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}" ></script>
-    <script type="text/javascript" th:src="@{/layui/layui.all.js}" ></script>
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}" ></script>
+    <!--<script type="text/javascript" th:src="@{/layui/layui.all.js}" ></script>-->
     <script type="text/javascript" th:src="@{/swiper/js/swiper.min.js}" ></script>
-    <!--<script type="text/javascript" charset="utf-8" th:src="@{/common/js/L2Dwidget.0.min.js}"></script>
-    <script type="text/javascript" charset="utf-8" th:src="@{/common/js/L2Dwidget.min.js}"></script>-->
     <script src="https://eqcn.ajz.miesnfu.com/wp-content/plugins/wp-3d-pony/live2dw/lib/L2Dwidget.min.js"></script>
 </div>
 </html>

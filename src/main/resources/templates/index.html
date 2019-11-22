@@ -1,30 +1,36 @@
 <!DOCTYPE html>
 <!-- 设置响应式布局 以适应不同分辨率 -->
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:include="common/common_head::common_header">
-</head>
+<head th:include="common/common_head::common_header"></head>
 <link th:href="@{/common/css/index.css}" rel="stylesheet">
 <body class="index_body">
 <div id="index_main" class="index_main">
-    <!-- 导航栏 -->
-    <ul class="layui-nav">
-        <!-- loge文本 -->
-        <div class="title_name">COOL_BLOG</div>
-        <li class="layui-nav-item">
-            <a href="">控制台<span class="layui-badge">9</span></a>
-        </li>
-        <li class="layui-nav-item">
-            <a href="">个人中心<span class="layui-badge-dot"></span></a>
-        </li>
-        <li class="layui-nav-item">
-            <a href=""><img th:src="@{common/img/head.jpg}" class="layui-nav-img">我</a>
-            <dl class="layui-nav-child">
-                <dd><a href="javascript:;">修改信息</a></dd>
-                <dd><a href="javascript:;">安全管理</a></dd>
-                <dd><a href="javascript:;">退了</a></dd>
-            </dl>
-        </li>
-    </ul>
+    <div class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+            　<!-- .navbar-toggle样式用于toggle收缩的内容，即nav-collapse collapse样式所在元素 -->
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!-- 确保无论是宽屏还是窄屏，navbar-brand都显示 -->
+            <a href="##" class="navbar-brand">ykb`blog</a>
+        </div>
+        <!-- 屏幕宽度小于768px时，div.navbar-responsive-collapse容器里的内容都会隐藏，显示icon-bar图标，当点击icon-bar图标时，再展开。屏幕大于768px时，默认显示。 -->
+        <div class="collapse navbar-collapse navbar-responsive-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="##">首页</a></li>
+                <li><a href="##">系列</a></li>
+                <li><a href="##">介绍</a></li>
+                <li><a href="##">案例</a></li>
+                <li><a href="##">关于</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/login">登录</a></li>
+            </ul>
+        </div>
+    </div>
     <!-- 主要内容开始 -->
     <div class="center_main">
         <!-- 轮播图 -->
@@ -101,8 +107,9 @@
         </div>
     </div>
 </div>
-
-</body>
+<!-- bootstrap说js引用放在body结束标签上面 可以提高网页性能 -->
 <div th:include="common/common_head::common_js"></div>
+</body>
+
 <script type="text/javascript" th:src="@{/common/js/index.js}" ></script>
 </html>
