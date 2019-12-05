@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import static com.es.hfuu.common.util.exception.util.ExceptionUtil.*;
 
@@ -20,15 +22,15 @@ import static com.es.hfuu.common.util.exception.util.ExceptionUtil.*;
  * @date 2019/11/8
  **/
 @Api(tags="用户信息管理模块",description = "包含新增、删除、修改、查询等操作")
-@Controller
-@RequestMapping("/sysadmin/user")
+@RestController
+@RequestMapping("/system/user")
 public class UserController extends BaseController {
 
     @Autowired
     private UserService userService;
 
     @ApiOperation(value = "保存用户信息", notes = "根据User对象创建用户")
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value="/saveUser",method = RequestMethod.POST)
     public EsResult<Boolean> saveUser(User user) {
         return providerServiceInvokeConsumer(userService::saveUser,user);
     }
@@ -40,9 +42,9 @@ public class UserController extends BaseController {
     }
 
     @ApiOperation(value = "获取用户信息", notes = "根据User对象修改用户")
-    @RequestMapping(value="/getUserById",method = RequestMethod.PATCH)
-    public EsResult<Boolean> getUserById(Long id) {
-        return providerServiceInvokeConsumer(userService::getFullUserById,id);
+    @RequestMapping(value="/getUserById",method = RequestMethod.GET)
+    public User getUserById(Long id) {
+        return userService.getSimpleUserById(id);
     }
 
 

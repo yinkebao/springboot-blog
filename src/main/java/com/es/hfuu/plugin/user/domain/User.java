@@ -15,7 +15,7 @@ import java.util.List;
  * @author ykb
  * @date 2019/11/8
  **/
-@ApiModel("角色对象Role")
+@ApiModel("用户对象User")
 public class User extends BaseDomain {
 
     @ApiModelProperty(value = "昵称", name = "nickName")
@@ -56,15 +56,6 @@ public class User extends BaseDomain {
 
     @ApiModelProperty(value = "登录失败的次数", name = "failureTimes")
     private Integer failureTimes;
-
-    @ApiModelProperty(value = "用户拥有的岗位列表", name = "roles")
-    private List<Role> roles;
-
-    @ApiModelProperty(value = "用户拥有的岗位名，多个时用逗号分隔", name = "roleNames")
-    private String roleNames;
-
-    @ApiModelProperty(value = "用户拥有的岗位id列表", name = "roleIds")
-    private List<Long> roleIds;
 
     @ApiModelProperty(value = "是否为系统管理员", name = "admin")
     private Boolean admin;
@@ -169,30 +160,6 @@ public class User extends BaseDomain {
 
     public void setFailureTimes(Integer failureTimes) {
         this.failureTimes = failureTimes;
-    }
-
-    public List<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
-    }
-
-    public String getRoleNames() {
-        return roleNames;
-    }
-
-    public void setRoleNames(String roleNames) {
-        this.roleNames = roleNames;
-    }
-
-    public List<Long> getRoleIds() {
-        return roleIds;
-    }
-
-    public void setRoleIds(List<Long> roleIds) {
-        this.roleIds = roleIds;
     }
 
     public Boolean getAdmin() {

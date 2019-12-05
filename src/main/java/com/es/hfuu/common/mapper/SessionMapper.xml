@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.es.hfuu.common.mapper.SessionMapper">
+    <!-- SQL maps -->
+    <resultMap id="sessionResult" type="com.es.hfuu.common.domain.Session">
+        <result property="id" column="id" />
+        <result property="sessionId" column="session_id" />
+        <result property="userId" column="user_id"/>
+        <result property="userName" column="user_name" />
+        <result property="nickName" column="nick_name" />
+        <result property="accessIp" column="access_ip" />
+        <result property="accessTime" column="access_time" />
+        <result property="login" column="is_login" />
+        <result property="loginDate" column="login_date" />
+        <result property="lastUrl" column="last_url" />
+        <result property="loginIp" column="login_ip" />
+        <result property="validateCode" column="validate_code" />
+    </resultMap>
+
+    <!-- 新增 -->
+    <sql id="domains">
+           id, session_id, user_id, user_name,nick_name, access_ip,access_time, is_login, login_date, last_url,
+           login_ip, validate_code
+    </sql>
+
+    <sql id="domainValues">
+               #{id}, #{sessionId}, #{userId}, #{userName},
+               #{accessIp}, #{accessTime}, #{login},
+               #{loginDate}, #{lastUrl}, #{loginIp}, #{validateCode},#{userType}
+    </sql>
+
+    <!-- 新增session -->
+    <insert id="saveEntity" parameterType="com.es.hfuu.common.domain.Session" keyProperty="id">
+        INSERT INTO sys_usersession (
+        <include refid="domains" />
+        ) VALUES(
+        <include refid="domainValues" />
+        )
+    </insert>
+
+    <!-- 根据userId删除session-->
+    <delete id="deleteSessionByUserId">
+        delete from sys_usersession p WHERE p.user_id = #{userId}
+    </delete>
+
+    <!-- 修改session -->
+    <update id="updateEntity" parameterType="com.es.hfuu.common.domain.Session">
+        UPDATE sys_usersession p
+        <set>
+            p.session_Id = #{sessionId}
+            <if test="accessIp != null">
+                ,access_ip = #{accessIp}
+            </if>
+            <if test="accessTime != null">
+                ,access_time = #{accessTime}
+            </if>
+            <if test="lastUrl != null">
+                ,last_url = #{lastUrl}
+            </if>
+        </set>
+        where p.session_id = #{sessionId}
+    </update>
+
+    <!-- 根据sessionId查询session  -->
+    <select id="getSessionBySessionId" resultMap="sessionResult" parameterType="java.lang.String">
+        select * from sys_usersession p where p.session_id = #{sessionId}
+    </select>
+
+    <!-- 根据userId查询sessionId -->
+    <select id="listSessionIdsByUserId" resultType="java.lang.String">
+        SELECT p.session_Id FROM sys_usersession p WHERE p.user_id = #{userId}
+    </select>
+
+    <!-- 删除 -->
+    <delete id="deleteSessionBySessionId" parameterType="java.lang.String">
+        delete from sys_usersession p where p.session_id = #{sessionId}
+    </delete>
+
+
+    <!-- 根据time删除session -->
+    <delete id="deleteSessionsWhenTimeOut" parameterType="java.util.Date">
+        delete from sys_usersession where access_time <![CDATA[<]]> #{time}
+    </delete>
+
+    <delete id="delectSessionsByUserIds" parameterType="java.util.List">
+        delete from sys_usersession where user_id in
+        <foreach collection="list" item="userId" open="(" separator="," close=")">
+            #{userId}
+        </foreach>
+    </delete>
+
+    <!-- by jdeng -->
+    <delete id="deleteSessionsBySessionIds" parameterType="java.util.List">
+        delete from sys_usersession where session_id in
+        <foreach collection="list" item="sessionId" open="(" separator="," close=")">
+            #{sessionId}
+        </foreach>
+    </delete>
+
+    <!--清除所有在线用户（启动服务时候用到，慎用）-->
+    <delete id="removeAllOnlineUser">
+        delete from sys_usersession
+    </delete>
+
+    <update id="updateSessionAccessAttribute" parameterType="com.es.hfuu.common.domain.Session" >
+        update sys_usersession
+        <set>
+            <if test="accessTime != null">
+                access_time = #{accessTime},
+            </if>
+            <if test="accessIp != null and accessIp != ''">
+                access_ip = #{accessIp},
+            </if>
+            <if test="lastUrl != null and lastUrl != ''">
+                last_url = #{lastUrl}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+</mapper>

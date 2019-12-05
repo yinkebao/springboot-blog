@@ -25,8 +25,7 @@ public class LoginController extends BaseController{
     private UserMapper userMapper;
 
     @RequestMapping(value = "/user/login")
-    public String login(String userName, String passWord,
-                        Map<String, Object> map, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+    public String login(String userName, String passWord, Map<String, Object> map, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
         String ipAddr = IpAddressUtil.getIpAddr(request);
         String uri = request.getRequestURI();
         User user = userMapper.getSimpleUserByUserName(userName);

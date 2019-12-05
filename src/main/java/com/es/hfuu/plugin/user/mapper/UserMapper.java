@@ -12,14 +12,6 @@ import com.es.hfuu.plugin.user.vo.UserVO;import org.apache.ibatis.annotations.Pa
 public interface UserMapper extends BaseMapper<User, UserVO> {
 
     /**
-     * 保存用户信息
-     * @Title: saveUser
-     * @param user 用户对象
-     * @return User
-     */
-    User saveUser(User user);
-
-    /**
      * 修改用户信息
      * @Title: updateUser
      * @param user 用户对象

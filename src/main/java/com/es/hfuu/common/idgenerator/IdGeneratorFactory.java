@@ -21,7 +21,7 @@ public class IdGeneratorFactory {
     /**
      * 生产id生成器
      * @Title: createIdGenerator
-     * @param dataCenter 护路系统数据中心版本号（用于生成唯一主键，一般填写的机房id）
+     * @param dataCenter 数据中心版本号（用于生成唯一主键，一般填写的机房id）
      * @param valueOperations redis 键值操作接口
      * @return IdGenerator
      */

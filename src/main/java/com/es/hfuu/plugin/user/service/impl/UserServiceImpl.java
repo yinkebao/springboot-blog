@@ -2,6 +2,8 @@ package com.es.hfuu.plugin.user.service.impl;
 
 import com.es.hfuu.common.mapper.BaseMapper;
 import com.es.hfuu.common.service.impl.BaseServiceImpl;
+import com.es.hfuu.common.util.base.Md5Util;
+import com.es.hfuu.common.util.base.StringUtil;
 import com.es.hfuu.plugin.user.domain.User;
 import com.es.hfuu.plugin.user.mapper.UserMapper;
 import com.es.hfuu.plugin.user.service.UserService;
@@ -32,7 +34,9 @@ public class UserServiceImpl extends BaseServiceImpl<User,UserVO> implements Use
      */
     @Override
     public User saveUser(User user) {
-        return null;
+        user.setLock(true);
+        setUserParam(user);
+        return saveEntity(user);
     }
 
     /**
@@ -92,7 +96,8 @@ public class UserServiceImpl extends BaseServiceImpl<User,UserVO> implements Use
      */
     @Override
     public User getSimpleUserById(Long id) {
-        return null;
+        requireNonNull("请提供用户id", id);
+        return dbInvokeFunction(userMapper::getSimpleUserById, getExceptionTitle(), id);
     }
 
     /**
@@ -104,7 +109,7 @@ public class UserServiceImpl extends BaseServiceImpl<User,UserVO> implements Use
      */
     @Override
     public User getSimpleUserByUserName(String userName) {
-        requireNonNull("请提供用户Id", userName);
+        requireNonNull("请提供用户名", userName);
         return dbInvokeFunction(userMapper::getSimpleUserByUserName, getExceptionTitle(), userName);
     }
 
@@ -129,5 +134,18 @@ public class UserServiceImpl extends BaseServiceImpl<User,UserVO> implements Use
     @Override
     public BaseMapper<User, UserVO> getBaseMapper() {
         return userMapper;
+    }
+
+
+    /**
+     * 设置用户对象参数（密码加密）
+     * @Title: setUserParam
+     * @param user 用户对象
+     * @return void
+     */
+    private void setUserParam(User user) {
+        if (!StringUtil.isEmpty(user.getPassword())){
+            user.setPassword(Md5Util.md5Encrypt(user.getPassword()));
+        }
     }
 }

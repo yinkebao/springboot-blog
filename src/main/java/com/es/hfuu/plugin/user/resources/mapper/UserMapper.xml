@@ -3,15 +3,99 @@
 <mapper namespace="com.es.hfuu.plugin.user.mapper.UserMapper">
 
     <sql id="sql_com">
-        id,nickName,userName,password,phone,birthDay,email,headerUrl,lastLoginTime,lastLoginIp,previousLoginTime,
-        previousLoginIp,failureTimes
+        id,nick_name,user_name,password,phone,birth_day,email,header_url,last_login_time,last_login_ip,previous_login_time,
+        previous_login_ip,failure_times,admin,shut_down,'lock',create_user,create_user,create_date,update_user,update_date
     </sql>
 
-    <insert id="saveUser" parameterType="com.es.hfuu.plugin.user.domain.User">
-        
-    </insert>
-    <update id="updateUser">
+    <!-- user映射 -->
+    <resultMap id="userResult" type="com.es.hfuu.plugin.user.domain.User">
+        <result property="id" column="id" />
+        <result property="nickName" column="nick_name" />
+        <result property="userName" column="user_name" />
+        <result property="password" column="password" />
+        <result property="phone" column="phone" />
+        <result property="birthDay" column="birth_day" />
+        <result property="email" column="email" />
+        <result property="headerUrl" column="header_url" />
+        <result property="lastLoginTime" column="last_login_time" />
+        <result property="lastLoginIp" column="last_login_ip" />
+        <result property="previousLoginTime" column="previous_login_time" />
+        <result property="previousLoginIp" column="previous_login_ip" />
+        <result property="failureTimes" column="failure_times" />
+        <result property="admin" column="admin" />
+        <result property="shutDown" column="shut_down" />
+        <result property="lock" column="lock" />
+        <result property="createUser" column="create_user" />
+        <result property="createDate" column="create_date" />
+        <result property="updateUser" column="update_user" />
+        <result property="updateDate" column="update_date" />
+        <result property="deleted" column="is_deleted" />
+    </resultMap>
 
+    <!-- 新增 -->
+    <insert id="saveEntity" parameterType="com.es.hfuu.plugin.user.domain.User">
+       insert into sys_user(<include refid="sql_com"/>) values(
+        #{id},#{nickName},#{userName} ,#{password} ,#{phone} ,#{birthDay} ,#{email} ,#{headerUrl} ,#{lastLoginTime} ,#{lastLoginIp} ,
+        #{previousLoginTime} ,#{previousLoginIp} ,#{failureTimes} ,#{admin} ,#{shutDown} ,#{lock} ,#{createUser} ,#{createDate}
+        ,#{updateUser} ,#{updateDate} )
+    </insert>
+    <!-- 修改 -->
+    <update id="updateUser">
+        update sys_user
+        <set>
+            <if test="userName != null and userName != ''">
+                user_name = #{userName} ,
+            </if>
+            <if test="password != null and password != ''">
+                password = #{password} ,
+            </if>
+            <if test="nickName != null and nickName != ''">
+                nick_name = #{nickName} ,
+            </if>
+            <if test="phone != null and phone != ''">
+                phone = #{phone} ,
+            </if>
+            <if test="birthDay != null and birthDay != ''">
+                birth_day = #{birthDay}  ,
+            </if>
+            <if test="email != null and email != ''">
+                email = #{email}  ,
+            </if>
+            <if test="headerUrl != null and headerUrl != ''">
+                header_url = #{headerUrl}   ,
+            </if>
+            <if test="lastLoginTime != null ">
+                last_login_time = #{lastLoginTime}  ,
+            </if>
+            <if test="lastLoginIp != null and lastLoginIp != ''">
+                last_login_ip = #{lastLoginIp}  ,
+            </if>
+            <if test="previousLoginTime != null">
+                previous_login_time = #{previousLoginTime}  ,
+            </if>
+            <if test="previousLoginIp != null and previousLoginIp != ''">
+                previous_login_ip = #{previousLoginIp}  ,
+            </if>
+            <if test="failureTimes != null">
+                failure_times = #{failureTimes}  ,
+            </if>
+            <if test="admin != null">
+                admin = #{admin}  ,
+            </if>
+            <if test="shutDown != null">
+                shut_down = #{shutDown}  ,
+            </if>
+            <if test="lock != null">
+                `lock` = #{lock}   ,
+            </if>
+            <if test="updateUser != null and updateUser != ''">
+                update_user = #{updateUser}  ,
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate}
+            </if>
+        </set>
+        where id = #{id}
     </update>
     <update id="updateUserStatusByLock">
 
@@ -22,13 +106,15 @@
     <update id="updateUserByPassword">
 
     </update>
-    <select id="getSimpleUserById" resultType="com.es.hfuu.plugin.user.domain.User">
-
+    <!-- 根据id获取用户信息 -->
+    <select id="getSimpleUserById" resultMap="userResult">
+        select <include refid="sql_com" /> from sys_user where id = #{id}
     </select>
     <select id="getFullUserById" resultType="com.es.hfuu.plugin.user.domain.User">
 
     </select>
-    <select id="getSimpleUserByUserName" parameterType="java.lang.String" resultType="com.es.hfuu.plugin.user.domain.User">
-        select * from users where userName = #{userName}
+    <!-- 根据用户名获取用户 -->
+    <select id="getSimpleUserByUserName" parameterType="java.lang.String" resultMap="userResult">
+        select <include refid="sql_com" /> from sys_user where user_name = #{userName}
     </select>
 </mapper>
