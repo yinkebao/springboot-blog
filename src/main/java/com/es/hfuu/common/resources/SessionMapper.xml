@@ -33,7 +33,7 @@
 
     <!-- 新增session -->
     <insert id="saveEntity" parameterType="com.es.hfuu.common.domain.Session" keyProperty="id">
-        INSERT INTO sys_usersession (
+        INSERT INTO sys_user_session (
         <include refid="domains" />
         ) VALUES(
         <include refid="domainValues" />
@@ -42,12 +42,12 @@
 
     <!-- 根据userId删除session-->
     <delete id="deleteSessionByUserId">
-        delete from sys_usersession p WHERE p.user_id = #{userId}
+        delete from sys_user_session p WHERE p.user_id = #{userId}
     </delete>
 
     <!-- 修改session -->
     <update id="updateEntity" parameterType="com.es.hfuu.common.domain.Session">
-        UPDATE sys_usersession p
+        UPDATE sys_user_session p
         <set>
             p.session_Id = #{sessionId}
             <if test="accessIp != null">
@@ -65,27 +65,27 @@
 
     <!-- 根据sessionId查询session  -->
     <select id="getSessionBySessionId" resultMap="sessionResult" parameterType="java.lang.String">
-        select * from sys_usersession p where p.session_id = #{sessionId}
+        select * from sys_user_session p where p.session_id = #{sessionId}
     </select>
 
     <!-- 根据userId查询sessionId -->
     <select id="listSessionIdsByUserId" resultType="java.lang.String">
-        SELECT p.session_Id FROM sys_usersession p WHERE p.user_id = #{userId}
+        SELECT p.session_Id FROM sys_user_session p WHERE p.user_id = #{userId}
     </select>
 
     <!-- 删除 -->
     <delete id="deleteSessionBySessionId" parameterType="java.lang.String">
-        delete from sys_usersession p where p.session_id = #{sessionId}
+        delete from sys_user_session p where p.session_id = #{sessionId}
     </delete>
 
 
     <!-- 根据time删除session -->
     <delete id="deleteSessionsWhenTimeOut" parameterType="java.util.Date">
-        delete from sys_usersession where access_time <![CDATA[<]]> #{time}
+        delete from sys_user_session where access_time <![CDATA[<]]> #{time}
     </delete>
 
     <delete id="delectSessionsByUserIds" parameterType="java.util.List">
-        delete from sys_usersession where user_id in
+        delete from sys_user_session where user_id in
         <foreach collection="list" item="userId" open="(" separator="," close=")">
             #{userId}
         </foreach>
@@ -93,7 +93,7 @@
 
     <!-- by jdeng -->
     <delete id="deleteSessionsBySessionIds" parameterType="java.util.List">
-        delete from sys_usersession where session_id in
+        delete from sys_user_session where session_id in
         <foreach collection="list" item="sessionId" open="(" separator="," close=")">
             #{sessionId}
         </foreach>
@@ -101,11 +101,11 @@
 
     <!--清除所有在线用户（启动服务时候用到，慎用）-->
     <delete id="removeAllOnlineUser">
-        delete from sys_usersession
+        delete from sys_user_session
     </delete>
 
     <update id="updateSessionAccessAttribute" parameterType="com.es.hfuu.common.domain.Session" >
-        update sys_usersession
+        update sys_user_session
         <set>
             <if test="accessTime != null">
                 access_time = #{accessTime},
