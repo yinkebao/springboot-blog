@@ -5,6 +5,7 @@ import com.es.hfuu.plugin.role.domain.Role;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 import java.util.List;
@@ -31,7 +32,7 @@ public class User extends BaseDomain {
     private String phone;
 
     @ApiModelProperty(value = "生日", name = "birthDay")
-    @JsonFormat(pattern="yyyy-MM-dd", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthDay;
 
     @ApiModelProperty(value = "邮箱", name = "email")
@@ -41,14 +42,14 @@ public class User extends BaseDomain {
     private String headerUrl;
 
     @ApiModelProperty(value = "最后登录时间", name = "lastLoginTime")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date lastLoginTime;
 
     @ApiModelProperty(value = "最后登录IP", name = "lastLoginIp")
     private String lastLoginIp;
 
     @ApiModelProperty(value = "上次登录时间", name = "previousLoginTime")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date previousLoginTime;
 
     @ApiModelProperty(value = "上次登录Ip", name = "previousLoginIp")
@@ -98,6 +99,7 @@ public class User extends BaseDomain {
         this.phone = phone;
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     public Date getBirthDay() {
         return birthDay;
     }
@@ -122,6 +124,7 @@ public class User extends BaseDomain {
         this.headerUrl = headerUrl;
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     public Date getLastLoginTime() {
         return lastLoginTime;
     }
@@ -138,6 +141,7 @@ public class User extends BaseDomain {
         this.lastLoginIp = lastLoginIp;
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     public Date getPreviousLoginTime() {
         return previousLoginTime;
     }

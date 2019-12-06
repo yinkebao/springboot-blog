@@ -1,9 +1,14 @@
 package com.es.hfuu.common.config;
 
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.*;
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
 
 //使用WebMvcConfigurerAdapter可以来扩展SpringMVC的功能
 //@EnableWebMvc   不要接管SpringMVC
@@ -52,6 +57,22 @@ public class MyMvcConfig implements WebMvcConfigurer {
         registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**")
                 .excludePathPatterns("/", "/templates/**","/user/login","/login","/common/**",
                         "/swiper/**","/asserts/**","/layui/**","/webjars/**","/**.ico");
+    }
+
+    /**
+     * 解决long、bigint转json丢失精度【序列换成json时,将所有的long变成string。因为js中得数字类型不能包含所有的java long值】
+     * @Title: jackson2ObjectMapperBuilderCustomizer
+     * @return Jackson2ObjectMapperBuilderCustomizer
+     */
+    @Bean("jackson2ObjectMapperBuilderCustomizer")
+    public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer() {
+        Jackson2ObjectMapperBuilderCustomizer customizer =
+                jacksonObjectMapperBuilder -> jacksonObjectMapperBuilder.serializerByType(Long.class,
+                        ToStringSerializer.instance)
+                        .serializerByType(Long.TYPE, ToStringSerializer.instance)
+                        .serializerByType(BigInteger.class, ToStringSerializer.instance)
+                        .serializerByType(BigDecimal.class, ToStringSerializer.instance);
+        return customizer;
     }
 
 

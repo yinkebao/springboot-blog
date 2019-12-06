@@ -2,6 +2,7 @@ package com.es.hfuu.common.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -22,14 +23,14 @@ public class BaseDomain implements Serializable {
     private String createUser;
 
     @ApiModelProperty(value = "数据添加日期", name = "createDate", required = true)
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date createDate;
 
     @ApiModelProperty(value = "数据修改人（userName）", name = "updateUser", required = true)
     private String updateUser;
 
     @ApiModelProperty(value = "数据修改日期", name = "updateDate", required = true)
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date updateDate;
 
     @ApiModelProperty(value = "数据的状态(0:保存，1：删除)", name = "deleted")
@@ -51,6 +52,7 @@ public class BaseDomain implements Serializable {
         this.createUser = createUser;
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     public Date getCreateDate() {
         return createDate;
     }
@@ -67,6 +69,7 @@ public class BaseDomain implements Serializable {
         this.updateUser = updateUser;
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     public Date getUpdateDate() {
         return updateDate;
     }

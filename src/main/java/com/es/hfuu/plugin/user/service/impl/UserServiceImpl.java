@@ -8,8 +8,12 @@ import com.es.hfuu.plugin.user.domain.User;
 import com.es.hfuu.plugin.user.mapper.UserMapper;
 import com.es.hfuu.plugin.user.service.UserService;
 import com.es.hfuu.plugin.user.vo.UserVO;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.es.hfuu.common.util.exception.util.ExceptionUtil.*;
 
@@ -24,6 +28,11 @@ public class UserServiceImpl extends BaseServiceImpl<User,UserVO> implements Use
 
     @Autowired
     private UserMapper userMapper;
+
+    @Override
+    public PageInfo<User> listUsersByParamForPage(UserVO userVO) {
+        return null;
+    }
 
     /**
      * 保存用户信息
@@ -123,6 +132,24 @@ public class UserServiceImpl extends BaseServiceImpl<User,UserVO> implements Use
     @Override
     public User getFullUserById(Long id) {
         return null;
+    }
+
+    /**
+     * 根据用户Ids删除用户
+     *
+     * @param ids 用户Ids
+     * @Title: deleteUsersByIds
+     */
+    @Override
+    public int deleteUsersByIds(String ids) {
+        requireValidString("请提供用户名", ids);
+        //将字符串的ids转换成Long类型的数组
+        String[] idsStr = ids.replace(" ","").split(",");
+        List<Long> idsLong = new ArrayList<>(idsStr.length);
+        for (String s : idsStr) {
+            idsLong.add(Long.parseLong(s));
+        }
+        return dbInvokeFunction(userMapper::deleteEntitiesByIds, getExceptionTitle(), idsLong);
     }
 
     /**

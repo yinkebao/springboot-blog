@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--日志级别以及优先级排序: OFF > FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL -->
+<Configuration status="off" monitorInterval="1800">
+    <!-- 变量配置 -->
+    <properties>
+        <property name="LOG_HOME">../logs</property>
+        <property name="ERROR_LOG_FILE_NAME">springBootEs</property>
+    </properties>
+
+    <!--先定义所有的appender-->
+    <Appenders>
+        <!--这个输出控制台的配置-->
+        <Console name="Console" target="SYSTEM_OUT">
+            <!--输出日志的格式-->
+            <PatternLayout pattern="%[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n" />
+        </Console>
+
+        <Routing name="Routing">
+            <Routes pattern="$${ctx:hljob}">
+
+                <!-- This route is chosen if ThreadContext has value 'special' for key ROUTINGKEY. -->
+                <!--<Route key="special"></Route>-->
+                <!-- This route is chosen if ThreadContext has no value for key ROUTINGKEY. -->
+                <Route key="$${ctx:hljob}">
+                    <RollingRandomAccessFile name="Rolling-default" fileName="${LOG_HOME}/${ERROR_LOG_FILE_NAME}.log" filePattern="${LOG_HOME}/${ERROR_LOG_FILE_NAME}.log.%d{yyyy-MM-dd}-%i">
+                        <!--输出日志的格式-->
+                        <PatternLayout pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36}.%M@%L - %msg%n"/>
+                        <Policies>
+                            <!-- 这个配置需要和filePattern结合使用，注意filePattern中配置的文件重命名规则是 -->
+                            <TimeBasedTriggeringPolicy/>
+                            <!-- 指定当文件体积大于size指定的值时，触发Rolling -->
+                            <SizeBasedTriggeringPolicy size="100 MB"/>
+                        </Policies>
+                        <!-- 指定最多保存的文件个数 -->
+                        <DefaultRolloverStrategy max="20"/>
+                    </RollingRandomAccessFile>
+                </Route>
+                <!-- This route is chosen if ThreadContext has a value for ROUTINGKEY
+				 (other than the value 'special' which had its own route above).
+				 The value dynamically determines the name of the log file. -->
+                <Route>
+                    <RollingRandomAccessFile name="Rolling-${ctx:hljob}" fileName="${LOG_HOME}/${ctx:hljob}/${ctx:hljob}.log" filePattern="${LOG_HOME}/${ctx:hljob}/${ctx:hljob}.log.%d{yyyy-MM-dd}-%i">
+                        <!--输出日志的格式-->
+                        <PatternLayout pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36}.%M@%L - %msg%n"/>
+                        <Policies>
+                            <!-- 这个配置需要和filePattern结合使用，注意filePattern中配置的文件重命名规则是 -->
+                            <TimeBasedTriggeringPolicy/>
+                            <!-- 指定当文件体积大于size指定的值时，触发Rolling -->
+                            <SizeBasedTriggeringPolicy size="100 MB"/>
+                        </Policies>
+                        <!-- 指定最多保存的文件个数 -->
+                        <DefaultRolloverStrategy max="20"/>
+                    </RollingRandomAccessFile>
+                </Route>
+            </Routes>
+        </Routing>
+    </Appenders>
+
+    <!--然后定义logger，只有定义了logger并引入的appender，appender才会生效-->
+    <Loggers>
+
+        <logger name="org.springframework.jms.listener.DefaultMessageListenerContainer" level="error" includeLocation="true" additivity="false">
+            <appender-ref ref="Routing"/>
+            <!-- Root Logger的Appender引用上面定义的Console -->
+            <appender-ref ref="Console"/>
+        </logger>
+        <logger name="org.springframework.transaction.support.TransactionSynchronizationManager" level="error" includeLocation="true" additivity="false">
+            <appender-ref ref="Routing"/>
+            <!-- Root Logger的Appender引用上面定义的Console -->
+            <appender-ref ref="Console"/>
+        </logger>
+
+        <!-- 定义名字为com.es的Logger，其日志级别为info，additivity为false -->
+        <logger name="com.es" level="error" includeLocation="true" additivity="false">
+            <appender-ref ref="Routing"/>
+            <!-- Root Logger的Appender引用上面定义的Console -->
+            <appender-ref ref="Console"/>
+        </logger>
+
+
+        <logger name="com.ibatis" level="error" includeLocation="true" additivity="false">
+            <appender-ref ref="Routing"/>
+            <!-- Root Logger的Appender引用上面定义的Console -->
+            <appender-ref ref="Console"/>
+        </logger>
+        <logger name="com.ibatis.common.jdbc.SimpleDataSource" level="error" includeLocation="true" additivity="false">
+            <appender-ref ref="Routing"/>
+            <!-- Root Logger的Appender引用上面定义的Console -->
+            <appender-ref ref="Console"/>
+        </logger>
+        <logger name="com.ibatis.common.jdbc.ScriptRunner" level="error" includeLocation="true" additivity="false">
+            <appender-ref ref="Routing"/>
+            <!-- Root Logger的Appender引用上面定义的Console -->
+            <appender-ref ref="Console"/>
+        </logger>
+        <logger name="com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate" level="error" includeLocation="true" additivity="false">
+            <appender-ref ref="Routing"/>
+            <!-- Root Logger的Appender引用上面定义的Console -->
+            <appender-ref ref="Console"/>
+        </logger>
+        <logger name="java.sql.Connection" level="error" includeLocation="true" additivity="false">
+            <appender-ref ref="Routing"/>
+            <!-- Root Logger的Appender引用上面定义的Console -->
+            <appender-ref ref="Console"/>
+        </logger>
+        <logger name="java.sql.Statement" level="error" includeLocation="true" additivity="false">
+            <appender-ref ref="Routing"/>
+            <!-- Root Logger的Appender引用上面定义的Console -->
+            <appender-ref ref="Console"/>
+        </logger>
+        <logger name="java.sql.PreparedStatement" level="error" includeLocation="true" additivity="false">
+            <appender-ref ref="Routing"/>
+            <!-- Root Logger的Appender引用上面定义的Console -->
+            <appender-ref ref="Console"/>
+        </logger>
+        <logger name="java.sql.ResultSet" level="error" includeLocation="true" additivity="false">
+            <appender-ref ref="Routing"/>
+            <!-- Root Logger的Appender引用上面定义的Console -->
+            <appender-ref ref="Console"/>
+        </logger>
+
+
+        <!--<logger name="com.tianque.system.systemUpgrade.dbUpgrade.impl.DefaultDbUpgrade" level="info" includeLocation="true" additivity="false">
+            <appender-ref ref="Routing"/>
+            &lt;!&ndash; Root Logger的Appender引用上面定义的Console &ndash;&gt;
+            <appender-ref ref="Console"/>
+        </logger>
+        <logger name="com.tianque.system.systemUpgrade.dbUpgrade.listener.DBUpgradeListener" level="info" includeLocation="true" additivity="false">
+            <appender-ref ref="Routing"/>
+            &lt;!&ndash; Root Logger的Appender引用上面定义的Console &ndash;&gt;
+            <appender-ref ref="Console"/>
+        </logger>
+        <logger name="com.tianque.common.importData.thread.ExcelDataimportThread" level="error" includeLocation="true" additivity="false">
+            <appender-ref ref="Routing"/>
+            &lt;!&ndash; Root Logger的Appender引用上面定义的Console &ndash;&gt;
+            <appender-ref ref="Console"/>
+        </logger>-->
+
+        <logger name="org.apache.struts2" level="error" includeLocation="true" additivity="false">
+            <appender-ref ref="Routing"/>
+            <!-- Root Logger的Appender引用上面定义的Console -->
+            <appender-ref ref="Console"/>
+        </logger>
+        <logger name="com.opensymphony.xwork2" level="error" includeLocation="true" additivity="false">
+            <appender-ref ref="Routing"/>
+            <!-- Root Logger的Appender引用上面定义的Console -->
+            <appender-ref ref="Console"/>
+        </logger>
+        <logger name="ognl" level="error" includeLocation="true" additivity="false">
+            <appender-ref ref="Routing"/>
+            <!-- Root Logger的Appender引用上面定义的Console -->
+            <appender-ref ref="Console"/>
+        </logger>
+        <logger name="org.apache.struts2.util.StrutsTypeConverter" level="error" includeLocation="true" additivity="false">
+            <appender-ref ref="Routing"/>
+            <!-- Root Logger的Appender引用上面定义的Console -->
+            <appender-ref ref="Console"/>
+        </logger>
+        <logger name="org.springframework.aop.framework.CglibAopProxy" level="error" includeLocation="true" additivity="false">
+            <appender-ref ref="Routing"/>
+            <!-- Root Logger的Appender引用上面定义的Console -->
+            <appender-ref ref="Console"/>
+        </logger>
+
+        <!-- 定义Root Logger，其日志级别为error -->
+        <root level="error" includeLocation="true">
+            <!-- Root Logger的Appender引用上面定义的Console -->
+            <appender-ref ref="Console"/>
+        </root>
+
+    </Loggers>
+</Configuration>

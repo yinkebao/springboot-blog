@@ -1,6 +1,10 @@
 package com.es.hfuu.plugin.user.service;
 
 import com.es.hfuu.plugin.user.domain.User;
+import com.es.hfuu.plugin.user.vo.UserVO;
+import com.github.pagehelper.PageInfo;
+
+import java.util.List;
 
 /**
  * @author ykb
@@ -8,6 +12,8 @@ import com.es.hfuu.plugin.user.domain.User;
  * @date 2019/11/8
  **/
 public interface UserService {
+
+    PageInfo<User> listUsersByParamForPage(UserVO userVO);
 
     /**
      * 保存用户信息
@@ -72,4 +78,11 @@ public interface UserService {
      * @return User 用户对象
      */
     User getFullUserById(Long id);
+
+    /**
+     * 根据用户Ids删除用户
+     * @Title: deleteUsersByIds
+     * @param ids 用户Ids
+     */
+    int deleteUsersByIds(String ids);
 }

@@ -8,5 +8,5 @@
 
 
 # 设置日志文件
-logging:
-  file: es.log
+#logging:
+#  file: es.log
