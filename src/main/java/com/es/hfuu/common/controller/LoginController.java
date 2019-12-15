@@ -1,15 +1,28 @@
 package com.es.hfuu.common.controller;
 
+import com.es.hfuu.common.domain.Session;
+import com.es.hfuu.common.service.SessionService;
+import com.es.hfuu.common.util.base.Md5Util;
+import com.es.hfuu.common.util.base.UuidUtil;
+import com.es.hfuu.common.util.redis.constans.RedisConstants;
+import com.es.hfuu.common.util.redis.util.SessionRedisUtil;
+import com.es.hfuu.common.util.web.CookieUtil;
 import com.es.hfuu.common.util.web.IpAddressUtil;
 import com.es.hfuu.plugin.user.domain.User;
 import com.es.hfuu.plugin.user.mapper.UserMapper;
+import com.es.hfuu.plugin.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -22,24 +35,70 @@ import java.util.Map;
 public class LoginController extends BaseController{
 
     @Autowired
-    private UserMapper userMapper;
+    private UserService userService;
+    @Autowired
+    private SessionService sessionService;
 
     @RequestMapping(value = "/user/login")
-    public String login(String userName, String passWord, Map<String, Object> map, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+    public String login(String userName, String passWord, Model model, Map<String, Object> map, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
         String ipAddr = IpAddressUtil.getIpAddr(request);
         String uri = request.getRequestURI();
-        User user = userMapper.getSimpleUserByUserName(userName);
+        User user = userService.getSimpleUserByUserName(userName);
         if (user == null){
             logger.error("登录失败，用户名不存在");
             throw new IllegalArgumentException("登录失败，用户名不存在");
         }
-        if (userName.equals(user.getUserName()) && passWord.equals(user.getPassword())) {
+        if (userName.equals(user.getUserName()) && Md5Util.md5Encrypt(passWord).equals(user.getPassword())) {
             session.setAttribute("userName", userName);
-            return "index";
+            session.setAttribute("user", user);
+            saveSession(user,ipAddr,uri,response);
+            model.addAttribute("session",session);
+            return "redirect:/";
         } else {
             map.put("msg", "用户名或密码错误");
             return "login";
         }
+    }
+
+    /**
+     * 登录后保存session
+     * @param user 用户信息
+     * @param ipAddr IP地址
+     * @param uri 请求url
+     */
+    private void saveSession(User user,String ipAddr,String uri,HttpServletResponse response){
+        Session session = new Session();
+        session.setLogin(true);
+        session.setSessionId(RedisConstants.PREFIX_SESSION+ UuidUtil.uuid());
+        session.setUserId(user.getId());
+        session.setUserName(user.getUserName());
+        session.setNickName(user.getNickName());
+        session.setLoginIp(ipAddr);
+        session.setLoginDate(Calendar.getInstance().getTime());
+        session.setAccessTime(Calendar.getInstance().getTime());
+        session.setLastUrl(uri);
+        sessionService.saveSession(session);
+        CookieUtil.saveCookie(response, RedisConstants.LOGIN_SESSION_ID, session.getSessionId());
+        CookieUtil.saveCookie(response, RedisConstants.LOGIN_USER_NAME, session.getUserName());
+    }
+
+    @RequestMapping("/saveSession")
+    @ResponseBody
+    public Session saveSession(){
+        Session session = new Session();
+        session.setLogin(true);
+        session.setSessionId(RedisConstants.PREFIX_SESSION+ UuidUtil.uuid());
+        session.setUserId(654686671689879552L);
+        session.setUserName("lsx");
+        sessionService.saveSession(session);
+        sessionService.getSessionBySessionId(session.getSessionId());
+        return session;
+    }
+
+    @RequestMapping("/listSessions")
+    @ResponseBody
+    public List<String> listSessions(){
+        return sessionService.listSessionIdsByUserId(654686671689879552L);
     }
 
     @RequestMapping("/list")

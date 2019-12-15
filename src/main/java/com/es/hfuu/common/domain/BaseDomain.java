@@ -33,8 +33,8 @@ public class BaseDomain implements Serializable {
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date updateDate;
 
-    @ApiModelProperty(value = "数据的状态(0:保存，1：删除)", name = "deleted")
-    private Integer deleted;
+    @ApiModelProperty(value = "数据的状态(删除/未删除)", name = "deleted")
+    private Boolean deleted;
 
     public Long getId() {
         return id;
@@ -78,11 +78,11 @@ public class BaseDomain implements Serializable {
         this.updateDate = updateDate;
     }
 
-    public Integer getDeleted() {
+    public Boolean getDeleted() {
         return deleted;
     }
 
-    public void setDeleted(Integer deleted) {
+    public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
     }
 

@@ -75,7 +75,7 @@ public class SessionServiceImpl extends BaseServiceImpl<Session, PagingVO> imple
     @Override
     public Integer deleteSessionByUserId(Long userId) {
         requireNonNull("用户Id不能为空", userId);
-        // 删除数据库中保存的session信息
+        // 删除redis中保存的session信息
         List<String> list = listSessionIdsByUserId(userId);
         sessionRedisUtil.deleteSession(CollectionUtil.collectionToArray(list, String.class), new Long[]{userId});
         // 删除数据库中保存的session信息
@@ -127,8 +127,8 @@ public class SessionServiceImpl extends BaseServiceImpl<Session, PagingVO> imple
     }
 
     /**
-     * 根据用户ID和用户类型查询sessionId集合
-     * @Title: listSessionIdsByUserIdAndUserType
+     * 根据用户ID查询sessionId集合
+     * @Title: listSessionIdsByUserId
      * @param userId   用户Id
      * @return List<String> 会话Id列表
      */

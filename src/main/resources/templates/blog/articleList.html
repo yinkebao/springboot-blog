@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="/common/backstage::backstage_head"></head>
+
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div th:replace="common/backstage::baskstage_header" class="layui-header"></div>
+    <div th:replace="common/backstage::baskstage_side" class="layui-side layui-bg-black"></div>
+    <!-- 内容主体区域 -->
+    <div class="layui-body">
+        <table class="layui-hide" id="articleList"></table>
+    </div>
+    <div th:replace="common/backstage::baskstage_footer" class="layui-footer"></div>
+</div>
+
+<div th:replace="common/backstage::backstage_js"></div>
+
+<script>
+
+    layui.use('table', function(){
+        var table = layui.table;
+        table.render({
+            elem: '#articleList'
+            ,cellMinWidth: 60
+            ,height: 'full'
+            ,url: '/system/article/page' //数据接口
+            ,page: true //开启分页
+            ,cols: [
+                [ //表头
+                    {type: 'checkbox', fixed: 'left'}
+                    ,{field: 'id', title: 'ID', hide: true , sort: true}
+                    ,{field: 'title', title: '标题', align: 'center'}
+                    ,{field: 'author', title: '作者', sort: true, align: 'center'}
+                    ,{field: 'originalAuthor', title: '原作者' , sort: true, align: 'center'}
+                    ,{field: 'source', title: '来源',  sort: true, align: 'center'}
+                    ,{field: 'viewTimes', title: '浏览次数', sort: true, align: 'center'}
+                    ,{field: 'collectTimes', title: '收藏次数', align: 'center'}
+                ]
+            ]
+            ,parseData:function (res) {
+                return {
+                    "code":res.code,
+                    "msg":res.msg,
+                    "count":res.module.total,
+                    "data":res.module.list
+                };
+            }
+        });
+    });
+
+</script>
+</body>
+</html>

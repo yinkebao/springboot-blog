@@ -2,7 +2,9 @@ package com.es.hfuu.plugin.user.mapper;
 
 import com.es.hfuu.common.mapper.BaseMapper;
 import com.es.hfuu.plugin.user.domain.User;
-import com.es.hfuu.plugin.user.vo.UserVO;import org.apache.ibatis.annotations.Param;
+import com.es.hfuu.plugin.user.vo.UserVO;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * @author ykb
@@ -10,14 +12,6 @@ import com.es.hfuu.plugin.user.vo.UserVO;import org.apache.ibatis.annotations.Pa
  * @date 2019/11/8
  **/
 public interface UserMapper extends BaseMapper<User, UserVO> {
-
-    /**
-     * 修改用户信息
-     * @Title: updateUser
-     * @param user 用户对象
-     * @return User
-     */
-    User updateUser(User user);
 
     /**
      * 解锁/锁定用户
@@ -41,7 +35,7 @@ public interface UserMapper extends BaseMapper<User, UserVO> {
      * @param user 用户对象
      * @return User
      */
-    User updateUserByPassword(User user);
+    void updateUserByPassword(User user);
 
     /**
      * 根据用户Id获取用户的简单信息

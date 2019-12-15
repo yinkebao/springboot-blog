@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="/common/backstage::backstage_head"></head>
+<link th:href="@{/user/css/user.css}" rel="stylesheet">
+<body>
+<div class="userDlg_main">
+    <form class="layui-form" method="post" action="" id="userForm">
+        <input type="text" id="mode" th:value="${mode}" hidden="hidden"/>
+        <input type="text" name="id" th:value="${mode} eq 'edit'?${id}:null" hidden="hidden"/>
+        <div class="layui-form-item">
+            <label class="layui-form-label">昵称:</label>
+            <div class="layui-input-block">
+                <input type="text" name="nickName" th:value="${mode} eq 'edit'?${user.nickName}" autocomplete="off" placeholder="请输入标题" class="layui-input">
+            </div>
+        </div>
+        <input type="text" name="_method" value="patch" th:if="${mode} eq 'edit'" hidden="hidden"/>
+        <div th:if="${mode} ne 'edit'">
+            <div class="layui-form-item">
+                <label class="layui-form-label">用户名:</label>
+                <div class="layui-input-block">
+                    <input type="text" name="userName" autocomplete="off" placeholder="请输入标题" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">密码:</label>
+                <div class="layui-input-block">
+                    <input type="password" name="password" placeholder="请输入密码" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">确认密码:</label>
+                <div class="layui-input-block">
+                    <input type="password" id="rePassword" placeholder="请输入密码" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">手机:</label>
+            <div class="layui-input-block">
+                <input type="tel" name="phone" th:value="${mode} eq 'edit'?${user.phone}" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">邮箱:</label>
+            <div class="layui-input-block">
+                <input type="text" name="email" th:value="${mode} eq 'edit'?${user.email}" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+<script>
+    var mode = $("#mode").val();
+    $(document).ready(function () {
+        //表单校验
+        $("#userForm").validate({
+            submitHandler: function (form) {
+                layer.closeAll();
+                $(form).ajaxSubmit({
+                    success: function (data) {
+                        if (data.module.id){
+                            if (mode == 'add'){
+                                layer.msg("新增成功 !",{time: 2000,offset:'66px'});
+                            }else {
+                                layer.msg("修改成功 !",{time: 2000,offset:'66px'});
+                            }
+                        }else {
+                            layer.msg("新增失败",{icon:1,time: 2000,offset:'66px'});
+                        }
+                    },
+                    error: function () {
+
+                    }
+                })
+            }
+            ,rules: {
+                "nickName":{
+                    required:true
+                }
+            }
+            ,messages: {
+                "nickName":"请输入昵称"
+            }
+        });
+    });
+</script>
+</html>

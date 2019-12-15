@@ -27,12 +27,12 @@
 
     <sql id="domainValues">
                #{id}, #{sessionId}, #{userId}, #{userName},
-               #{accessIp}, #{accessTime}, #{login},
-               #{loginDate}, #{lastUrl}, #{loginIp}, #{validateCode},#{userType}
+               #{nickName},#{accessIp}, #{accessTime}, #{login},
+               #{loginDate}, #{lastUrl}, #{loginIp}, #{validateCode}
     </sql>
 
     <!-- 新增session -->
-    <insert id="saveEntity" parameterType="com.es.hfuu.common.domain.Session" keyProperty="id">
+    <insert id="saveEntity" parameterType="Session" keyProperty="id">
         INSERT INTO sys_user_session (
         <include refid="domains" />
         ) VALUES(
@@ -42,16 +42,15 @@
 
     <!-- 根据userId删除session-->
     <delete id="deleteSessionByUserId">
-        delete from sys_user_session p WHERE p.user_id = #{userId}
+        delete from sys_user_session WHERE user_id = #{userId}
     </delete>
 
     <!-- 修改session -->
-    <update id="updateEntity" parameterType="com.es.hfuu.common.domain.Session">
-        UPDATE sys_user_session p
+    <update id="updateEntity" parameterType="Session">
+        UPDATE sys_user_session
         <set>
-            p.session_Id = #{sessionId}
             <if test="accessIp != null">
-                ,access_ip = #{accessIp}
+                access_ip = #{accessIp}
             </if>
             <if test="accessTime != null">
                 ,access_time = #{accessTime}
@@ -60,17 +59,17 @@
                 ,last_url = #{lastUrl}
             </if>
         </set>
-        where p.session_id = #{sessionId}
+        where session_id = #{sessionId}
     </update>
 
     <!-- 根据sessionId查询session  -->
     <select id="getSessionBySessionId" resultMap="sessionResult" parameterType="java.lang.String">
-        select * from sys_user_session p where p.session_id = #{sessionId}
+        select * from sys_user_session where session_id = #{sessionId}
     </select>
 
     <!-- 根据userId查询sessionId -->
     <select id="listSessionIdsByUserId" resultType="java.lang.String">
-        SELECT p.session_Id FROM sys_user_session p WHERE p.user_id = #{userId}
+        SELECT session_Id FROM sys_user_session WHERE user_id = #{userId}
     </select>
 
     <!-- 删除 -->

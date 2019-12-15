@@ -1,0 +1,27 @@
+.userDlg_main{
+    /*上右下左*/
+    margin: 22px 0 15px 28px;
+    width: 85%;
+}
+.layui-form-label{
+    padding: 9px 0 0 30px;
+    text-align: left;
+}
+
+/*分页放到底部*/
+/*.layui-table-page {*/
+    /*z-index: 99999;*/
+    /*position: fixed;*/
+    /*bottom: 0;*/
+/*}*/
+
+/*.layui-table-box {*/
+    /*margin-bottom: 30px;*/
+/*}*/
+/*.layui-table-body{*/
+    /*overflow: hidden;*/
+/*}*/
+/*.layui-table-page{*/
+    /*position: fixed;*/
+    /*bottom: 0;*/
+/*}*/

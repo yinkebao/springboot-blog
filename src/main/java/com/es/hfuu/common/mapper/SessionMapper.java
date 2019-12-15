@@ -2,6 +2,7 @@ package com.es.hfuu.common.mapper;
 
 import com.es.hfuu.common.domain.Session;
 import com.es.hfuu.common.vo.PagingVO;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -36,6 +37,12 @@ public interface SessionMapper extends BaseMapper<Session, PagingVO> {
      * @return Integer 返回受影响行数（配合函数式接口使用，外部并无实际用处）
      */
     Integer deleteSessionByUserId( @Param("userId") Long userId);
+
+    /**
+     * 根据sessionId删除session
+     * @param sessionId sessionId
+     */
+    void deleteSessionBySessionId(@Param("sessionId")String sessionId);
 
     /**
      * 清除所有在线用户（启动服务时候用到，慎用）

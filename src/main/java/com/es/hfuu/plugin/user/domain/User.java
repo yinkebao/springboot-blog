@@ -62,7 +62,7 @@ public class User extends BaseDomain {
     private Boolean admin;
 
     @ApiModelProperty(value = "用户是否启用", name = "shutDown")
-    private Boolean shutDown;
+    private Boolean enabled;
 
     @ApiModelProperty(value = "是否已锁定", name = "lock")
     private Boolean lock;
@@ -174,12 +174,12 @@ public class User extends BaseDomain {
         this.admin = admin;
     }
 
-    public Boolean getShutDown() {
-        return shutDown;
+    public Boolean getEnabled() {
+        return enabled;
     }
 
-    public void setShutDown(Boolean shutDown) {
-        this.shutDown = shutDown;
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
     public Boolean getLock() {

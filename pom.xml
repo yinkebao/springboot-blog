@@ -38,6 +38,12 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.9.4</version>
+        </dependency>
+
         <!-- 使用log4j2，去掉springboot本身日志依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -71,12 +77,20 @@
             <version>${gson.version}</version>
         </dependency>
 
+        <!-- SpringBoot集成Mybatis分页插件的起步依赖 -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>${pagehelper.spring.boot.version}</version>
+        </dependency>
+
         <!-- SpringBoot集成Mybatis的起步依赖 -->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>${mybatis.spring.boot.version}</version>
         </dependency>
+
         <!-- Mybatis分页插件 -->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
@@ -101,6 +115,21 @@
             <artifactId>jquery</artifactId>
             <version>3.4.1</version>
         </dependency>
+
+        <!-- 引入jquery-validation -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery-validation</artifactId>
+            <version>1.19.0</version>
+        </dependency>
+
+        <!-- 引入jquery-form -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery-form</artifactId>
+            <version>4.2.1</version>
+        </dependency>
+
 
         <!-- 引入bootstrap -->
         <dependency>

@@ -2,6 +2,7 @@ package com.es.hfuu.common.mapper;
 
 import com.es.hfuu.common.domain.BaseDomain;
 import com.es.hfuu.common.vo.PagingVO;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

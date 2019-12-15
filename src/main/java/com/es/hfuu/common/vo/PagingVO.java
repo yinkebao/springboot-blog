@@ -19,6 +19,8 @@ public class PagingVO implements Serializable {
     private Integer page;
     @ApiModelProperty(value = "每页条数", name = "rows",required = true)
     private Integer rows;
+    @ApiModelProperty(value = "每页条数(适配layui)", name = "limit",required = true)
+    private Integer limit;
     @ApiModelProperty(value = "排序字段", name = "sidx",required = true)
     private String sidx;
     @ApiModelProperty(value = "排序方式", name = "sord",required = true)
@@ -38,6 +40,14 @@ public class PagingVO implements Serializable {
 
     public void setRows(Integer rows) {
         this.rows = rows;
+    }
+
+    public Integer getLimit() {
+        return limit;
+    }
+
+    public void setLimit(Integer limit) {
+        this.limit = limit;
     }
 
     public String getSidx() {
@@ -61,6 +71,7 @@ public class PagingVO implements Serializable {
         return "PagingVO{" +
                 "page=" + page +
                 ", rows=" + rows +
+                ", limit=" + limit +
                 ", sidx='" + sidx + '\'' +
                 ", sord='" + sord + '\'' +
                 '}';

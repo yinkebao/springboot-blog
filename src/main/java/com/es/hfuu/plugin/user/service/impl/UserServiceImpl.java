@@ -29,9 +29,17 @@ public class UserServiceImpl extends BaseServiceImpl<User,UserVO> implements Use
     @Autowired
     private UserMapper userMapper;
 
+
+    /**
+     * 获取分页列表
+     *
+     * @param userVO 查询参数
+     * @return User
+     */
     @Override
     public PageInfo<User> listUsersByParamForPage(UserVO userVO) {
-        return null;
+        userVO.setRows(userVO.getLimit());
+        return listEntitiesForPageListByEntity(userVO);
     }
 
     /**
@@ -43,8 +51,8 @@ public class UserServiceImpl extends BaseServiceImpl<User,UserVO> implements Use
      */
     @Override
     public User saveUser(User user) {
-        user.setLock(true);
         setUserParam(user);
+        setPassword(user);
         return saveEntity(user);
     }
 
@@ -57,7 +65,9 @@ public class UserServiceImpl extends BaseServiceImpl<User,UserVO> implements Use
      */
     @Override
     public User updateUser(User user) {
-        return null;
+        setPassword(user);
+        dbInvokeFunction(getBaseMapper()::updateEntity,"修改用户信息",user);
+        return getSimpleUserById(user.getId());
     }
 
     /**
@@ -69,7 +79,8 @@ public class UserServiceImpl extends BaseServiceImpl<User,UserVO> implements Use
      */
     @Override
     public void updateUserStatusByLock(User user) {
-
+        requireNonNulls("请提供用户信息", user, user.getId(), user.getLock());
+        dbInvokeConsumer(userMapper::updateUserStatusByLock, getExceptionTitle(), user);
     }
 
     /**
@@ -81,7 +92,8 @@ public class UserServiceImpl extends BaseServiceImpl<User,UserVO> implements Use
      */
     @Override
     public void updateUserStatusByShutDown(User user) {
-
+        requireNonNulls("请提供用户信息", user, user.getId(), user.getEnabled());
+        dbInvokeConsumer(userMapper::updateUserStatusByShutDown, getExceptionTitle(), user);
     }
 
     /**
@@ -92,8 +104,10 @@ public class UserServiceImpl extends BaseServiceImpl<User,UserVO> implements Use
      * @Title: updateUserByPassword
      */
     @Override
-    public User updateUserByPassword(User user) {
-        return null;
+    public void updateUserByPassword(User user) {
+        requireNonNulls("请提供用户信息", user, user.getId(), user.getPassword());
+        setPassword(user);
+        dbInvokeConsumer(userMapper::updateUserByPassword, getExceptionTitle(), user);
     }
 
     /**
@@ -139,6 +153,7 @@ public class UserServiceImpl extends BaseServiceImpl<User,UserVO> implements Use
      *
      * @param ids 用户Ids
      * @Title: deleteUsersByIds
+     * @return int
      */
     @Override
     public int deleteUsersByIds(String ids) {
@@ -163,16 +178,39 @@ public class UserServiceImpl extends BaseServiceImpl<User,UserVO> implements Use
         return userMapper;
     }
 
+    /**
+     * 密码加密
+     *
+     * @param user 用户对象
+     * @return void
+     */
+    private void setPassword(User user) {
+        if (!StringUtil.isEmpty(user.getPassword())){
+            user.setPassword(Md5Util.md5Encrypt(user.getPassword()));
+        }
+    }
 
     /**
-     * 设置用户对象参数（密码加密）
-     * @Title: setUserParam
+     * 设置用户默认参数
+     * lock：false 未锁定
+     * admin：false 非管理员
+     * shutDown：true
+     *
      * @param user 用户对象
      * @return void
      */
     private void setUserParam(User user) {
-        if (!StringUtil.isEmpty(user.getPassword())){
-            user.setPassword(Md5Util.md5Encrypt(user.getPassword()));
+        if (user.getLock() == null){
+            user.setLock(false);
+        }
+        if (user.getAdmin() == null){
+            user.setAdmin(false);
+        }
+        if (user.getEnabled() == null){
+            user.setEnabled(true);
+        }
+        if (user.getDeleted() == null){
+            user.setDeleted(false);
         }
     }
 }

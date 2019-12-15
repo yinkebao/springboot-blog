@@ -9,7 +9,7 @@ import java.util.Locale;
 
 /**
  * @ClassName MyLocalResolver
- * @Description
+ * @Description 国际化
  * @Author ykb
  * @Date 2019/9/9
  **/

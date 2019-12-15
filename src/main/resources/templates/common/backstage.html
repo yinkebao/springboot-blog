@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="backstage_head">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- 响应式设置 -->
+    <!--
+        width  ----  viewport的宽度（width=device-width意思是：宽度等于设备宽度）
+        height ------  viewport的高度（height=device-height意思是：高度等于设备宽度）
+        initial-scale ----- 初始的缩放比例
+        minimum-scale ----- 允许用户缩放到的最小比例
+        maximum-scale ----- 允许用户缩放到的最大比例
+        user-scalable ----- 用户是否可以手动缩放
+    -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>ykb`blog</title>
+    <!-- 引入bootstrap -->
+    <!--<link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet">-->
+    <!-- 引入layui -->
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+    <!-- 引入swiper -->
+    <link rel="stylesheet" th:href="@{/swiper/css/swiper.min.css}">
+    <link rel="stylesheet" th:href="@{/common/css/backstage.css}">
+</head>
+<body>
+<!-- 头部导航 -->
+<div class="layui-header" th:fragment="baskstage_header">
+    <div class="layui-logo">My Blog</div>
+    <ul class="layui-nav layui-layout-left">
+        <li class="layui-nav-item"><a href="/system/user/list">用户</a></li>
+        <li class="layui-nav-item"><a href="/system/article/list">博客管理</a></li>
+        <li class="layui-nav-item"><a href="">控制台</a></li>
+        <li class="layui-nav-item">
+            <a href="javascript:;">其它系统</a>
+            <dl class="layui-nav-child">
+                <dd><a href="/">博客首页</a></dd>
+                <dd><a href="">消息管理</a></dd>
+                <dd><a href="">授权管理</a></dd>
+            </dl>
+        </li>
+    </ul>
+    <ul class="layui-nav layui-layout-right">
+        <li class="layui-nav-item">
+            <a href="javascript:;">
+                <img th:src="@{/common/img/head.jpg}" class="layui-nav-img">
+                lsx
+            </a>
+            <dl class="layui-nav-child">
+                <dd><a href="">基本资料</a></dd>
+                <dd><a href="">安全设置</a></dd>
+                <dd><a href="">退出</a></dd>
+            </dl>
+        </li>
+        <li class="layui-nav-item"><a href="">退了</a></li>
+    </ul>
+</div>
+
+<!-- 左侧菜单 -->
+<div class="layui-side layui-bg-black" th:fragment="baskstage_side">
+    <div class="layui-side-scroll">
+        <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+            <li class="layui-nav-item layui-nav-itemed"><a href="">用户管理</a></li>
+            <li class="layui-nav-item">
+                <a class="" href="javascript:;">所有商品</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:;">列表一</a></dd>
+                    <dd><a href="">超链接</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">解决方案</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:;">列表一</a></dd>
+                    <dd><a href="">超链接</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="">发布商品</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="layui-footer" style="padding-left: 28%;" th:fragment="baskstage_footer">
+    <!-- 底部固定区域 -->
+    技术支持：人工智能与大数据学院 © hfuu.com
+</div>
+
+</body>
+<div th:fragment="backstage_js">
+    <script type="text/javascript" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}" ></script>
+    <script type="text/javascript" th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}" ></script>
+    <script type="text/javascript" th:src="@{/webjars/jquery-form/4.2.1/jquery.form.min.js}" ></script>
+
+    <!--<script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}" ></script>-->
+    <script type="text/javascript" th:src="@{/layui/layui.all.js}" ></script>
+    <!--<script type="text/javascript" th:src="@{/swiper/js/swiper.min.js}" ></script>-->
+    <script type="text/javascript" th:src="@{/common/js/backstage.js}" ></script>
+</div>
+</html>

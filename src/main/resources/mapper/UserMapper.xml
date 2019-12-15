@@ -4,11 +4,11 @@
 
     <sql id="sql_com">
         id,nick_name,user_name,password,phone,birth_day,email,header_url,last_login_time,last_login_ip,previous_login_time,
-        previous_login_ip,failure_times,admin,shut_down,is_lock,create_user,create_date,update_user,update_date
+        previous_login_ip,failure_times,admin,is_enabled,is_lock,is_deleted,create_user,create_date,update_user,update_date
     </sql>
 
     <!-- user映射 -->
-    <resultMap id="userResult" type="com.es.hfuu.plugin.user.domain.User">
+    <resultMap id="userResult" type="User">
         <result property="id" column="id" />
         <result property="nickName" column="nick_name" />
         <result property="userName" column="user_name" />
@@ -23,114 +23,135 @@
         <result property="previousLoginIp" column="previous_login_ip" />
         <result property="failureTimes" column="failure_times" />
         <result property="admin" column="admin" />
-        <result property="shutDown" column="shut_down" />
+        <result property="enabled" column="is_enabled" />
         <result property="lock" column="is_lock" />
+        <result property="deleted" column="is_deleted" />
         <result property="createUser" column="create_user" />
         <result property="createDate" column="create_date" />
         <result property="updateUser" column="update_user" />
         <result property="updateDate" column="update_date" />
-        <result property="deleted" column="is_deleted" />
     </resultMap>
 
+    <!-- 获取列表 -->
+    <select id="listEntitiesForPageListByEntity" parameterType="UserVO" resultMap="userResult">
+        select <include refid="sql_com"/> from sys_user
+        <where>
+            is_deleted = 0
+            <if test="nickName != null and nickName != ''">
+                and nick_name like #{nickName} '%'
+            </if>
+            <if test="userName != null and userName != ''">
+                and user_name like #{userName} '%'
+            </if>
+        </where>
+    </select>
+
     <!-- 新增 -->
-    <insert id="saveEntity" parameterType="com.es.hfuu.plugin.user.domain.User">
+    <insert id="saveEntity" parameterType="User">
        insert into sys_user(<include refid="sql_com"/>) values(
         #{id},#{nickName},#{userName} ,#{password} ,#{phone} ,#{birthDay} ,#{email} ,#{headerUrl} ,#{lastLoginTime} ,#{lastLoginIp} ,
-        #{previousLoginTime} ,#{previousLoginIp} ,#{failureTimes} ,#{admin} ,#{shutDown} ,#{lock} ,#{createUser} ,#{createDate}
+        #{previousLoginTime} ,#{previousLoginIp} ,#{failureTimes} ,#{admin} ,#{enabled} ,#{lock},#{deleted} ,#{createUser} ,#{createDate}
         ,#{updateUser} ,#{updateDate} )
     </insert>
+
     <!-- 修改 -->
-    <update id="updateUser">
+    <update id="updateEntity" parameterType="User">
         update sys_user
-        <set>
-            <if test="userName != null and userName != ''">
-                user_name = #{userName} ,
+        set id = #{id}
+        <if test="createUser != null and createUser != ''">
+           , create_user = 'ykb'
+        </if>
+        <if test="userName != null and userName != ''">
+                , user_name = #{userName}
             </if>
             <if test="password != null and password != ''">
-                password = #{password} ,
+                , password = #{password}
             </if>
             <if test="nickName != null and nickName != ''">
-                nick_name = #{nickName} ,
+                , nick_name = #{nickName}
             </if>
             <if test="phone != null and phone != ''">
-                phone = #{phone} ,
+                , phone = #{phone}
             </if>
             <if test="birthDay != null and birthDay != ''">
-                birth_day = #{birthDay}  ,
+                , birth_day = #{birthDay}
             </if>
             <if test="email != null and email != ''">
-                email = #{email}  ,
+                , email = #{email}
             </if>
             <if test="headerUrl != null and headerUrl != ''">
-                header_url = #{headerUrl}   ,
+                , header_url = #{headerUrl}
             </if>
             <if test="lastLoginTime != null ">
-                last_login_time = #{lastLoginTime}  ,
+                , last_login_time = #{lastLoginTime}
             </if>
             <if test="lastLoginIp != null and lastLoginIp != ''">
-                last_login_ip = #{lastLoginIp}  ,
+                , last_login_ip = #{lastLoginIp}
             </if>
             <if test="previousLoginTime != null">
-                previous_login_time = #{previousLoginTime}  ,
+                , previous_login_time = #{previousLoginTime}
             </if>
             <if test="previousLoginIp != null and previousLoginIp != ''">
-                previous_login_ip = #{previousLoginIp}  ,
+                , previous_login_ip = #{previousLoginIp}
             </if>
             <if test="failureTimes != null">
-                failure_times = #{failureTimes}  ,
+                ,  failure_times = #{failureTimes}
             </if>
             <if test="admin != null">
-                admin = #{admin}  ,
+                , admin = #{admin}
             </if>
-            <if test="shutDown != null">
-                shut_down = #{shutDown}  ,
+            <if test="enabled != null">
+                , is_enabled = #{enabled}
             </if>
             <if test="lock != null">
-                is_lock = #{lock}   ,
+                ,  is_lock = #{lock}
+            </if>
+            <if test="deleted != null">
+                , is_deleted = #{deleted}
             </if>
             <if test="updateUser != null and updateUser != ''">
-                update_user = #{updateUser}  ,
+                , update_user = #{updateUser}
             </if>
             <if test="updateDate != null">
-                update_date = #{updateDate}
+                , update_date = #{updateDate}
             </if>
-        </set>
         where id = #{id}
     </update>
 
     <!-- 修改用户序锁定状态 -->
-    <update id="updateUserStatusByLock">
-
+    <update id="updateUserStatusByLock" parameterType="User">
+        update sys_user set is_lock = #{lock} where id = #{id}
     </update>
 
     <!-- 修改用户启用/禁用状态 -->
-    <update id="updateUserStatusByShutDown">
-
+    <update id="updateUserStatusByShutDown" parameterType="user">
+        update sys_user set is_enabled = #{enabled}  where id = #{id}
     </update>
 
     <!-- 修改用户密码 -->
     <update id="updateUserByPassword">
-
+        update sys_user set password = #{password}  where id = #{id}
     </update>
 
     <!-- 根据id获取用户信息 -->
     <select id="getSimpleUserById" resultMap="userResult">
-        select <include refid="sql_com" /> from sys_user where id = #{id}
+        select <include refid="sql_com" /> from sys_user where id = #{id} and is_deleted = 0
     </select>
-    <select id="getFullUserById" resultType="com.es.hfuu.plugin.user.domain.User">
+    <select id="getFullUserById" resultType="User">
 
     </select>
     <!-- 根据用户名获取用户 -->
     <select id="getSimpleUserByUserName" parameterType="java.lang.String" resultMap="userResult">
-        select <include refid="sql_com" /> from sys_user where user_name = #{userName}
+        select <include refid="sql_com" /> from sys_user where user_name = #{userName} and is_deleted = 0
     </select>
 
     <!--批量删除用户-->
-    <delete id="deleteEntitiesByIds">
-        delete from sys_user
+    <update id="deleteEntitiesByIds">
+        update sys_user
+        set is_deleted = 1
         where id in
         <foreach collection="ids" item="item"  open="(" close=")" separator=",">
             #{item}
         </foreach>
-    </delete>
+    </update>
 </mapper>

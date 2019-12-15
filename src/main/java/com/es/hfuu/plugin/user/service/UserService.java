@@ -13,11 +13,17 @@ import java.util.List;
  **/
 public interface UserService {
 
+    /**
+     * 获取分页列表
+     *
+     * @param userVO 查询参数
+     * @return User
+     */
     PageInfo<User> listUsersByParamForPage(UserVO userVO);
 
     /**
      * 保存用户信息
-     * @Title: saveUser
+     *
      * @param user 用户对象
      * @return User
      */
@@ -25,7 +31,7 @@ public interface UserService {
 
     /**
      * 修改用户信息
-     * @Title: updateUser
+     *
      * @param user 用户对象
      * @return User
      */
@@ -33,7 +39,7 @@ public interface UserService {
 
     /**
      * 解锁/锁定用户
-     * @Title: updateUserStatusByLock
+     *
      * @param user 用户对象
      * @return void
      */
@@ -53,7 +59,7 @@ public interface UserService {
      * @param user 用户对象
      * @return User
      */
-    User updateUserByPassword(User user);
+    void updateUserByPassword(User user);
 
     /**
      * 根据用户Id获取用户的简单信息
@@ -81,8 +87,9 @@ public interface UserService {
 
     /**
      * 根据用户Ids删除用户
-     * @Title: deleteUsersByIds
+     *
      * @param ids 用户Ids
+     * @return int
      */
     int deleteUsersByIds(String ids);
 }

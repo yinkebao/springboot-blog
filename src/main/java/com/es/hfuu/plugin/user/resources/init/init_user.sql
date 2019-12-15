@@ -14,8 +14,8 @@ CREATE TABLE `sys_user` (
   `previous_login_ip`  varchar(255) NULL COMMENT '上次登录Ip' ,
   `failure_times`  int(8) NULL COMMENT '登录失败的次数' ,
   `admin`  tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否为系统管理员' ,
-  `shut_down`  tinyint(1) NOT NULL DEFAULT 0 COMMENT '用户是否启用' ,
-  `lock`  tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否已锁定' ,
+  `is_enabled`  tinyint(1) NOT NULL DEFAULT 0 COMMENT '用户是否启用' ,
+  `is_lock`  tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否已锁定' ,
   `create_user`  varchar(255) NOT NULL COMMENT '数据添加人' ,
   `create_date`  datetime NOT NULL COMMENT '数据添加时间' ,
   `update_user`  varchar(255) NULL COMMENT '数据修改人' ,
@@ -23,7 +23,11 @@ CREATE TABLE `sys_user` (
   `is_deleted`  tinyint(1) NOT NULL DEFAULT 0 COMMENT '数据的状态(0:保存，1：删除)' ,
   PRIMARY KEY (`id`)
 );
+-- 初始一个管理员用户
+INSERT INTO `sys_user` (`id`, `nick_name`, `user_name`, `password`, `phone`, `birth_day`, `email`, `header_url`, `last_login_time`, `last_login_ip`, `previous_login_time`, `previous_login_ip`, `failure_times`, `admin`, `is_enabled`, `is_lock`, `create_user`, `create_date`, `update_user`, `update_date`, `is_deleted`)
+VALUES ('134958588869487', '胖胖罗', 'lsx', '1bbd886460827015e5d605ed44252251', '15556532746', '2001-10-11 00:00:00', 'yinkebao@hztianque.com', NULL, '2019-12-12 13:54:21', '192.168.40.183', NULL, NULL, '0', '0', '0', '0', 'admin', '2019-12-12 13:55:00', NULL, NULL, '0');
 
+-- 创建session表
 CREATE TABLE `sys_user_session` (
   `id`  bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id' ,
   `session_id`  varchar(255) NOT NULL COMMENT '会话id' ,
