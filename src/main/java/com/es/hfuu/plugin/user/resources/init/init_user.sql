@@ -6,7 +6,7 @@ CREATE TABLE `sys_user` (
   `password`  varchar(255) NOT NULL COMMENT '密码' ,
   `phone`  varchar(255) NOT NULL COMMENT '联系方式' ,
   `birth_day`  datetime NULL COMMENT '生日' ,
-  `email`  varchar(255) NOT NULL COMMENT '邮箱' ,
+  `email`  varchar(255) NULL COMMENT '邮箱' ,
   `header_url`  varchar(255) NULL COMMENT '图像路径' ,
   `last_login_time`  datetime NULL COMMENT '最后登录时间' ,
   `last_login_ip`  varchar(255) NULL COMMENT '最后登录IP' ,
