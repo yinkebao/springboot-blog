@@ -88,6 +88,15 @@ public interface BaseService<T extends BaseDomain, S extends PagingVO> {
     int deleteEntitiesByIds(List<Long> ids);
 
     /**
+     * 根据id数组批量删除数据
+     * @Title: deleteEntitiesByIds
+     * @Description: 根据id数组批量删除数据
+     * @param ids String类型的id字符串，逗号隔开
+     * @return int 执行成功的条数
+     */
+    int deleteEntitiesByIds(String ids);
+
+    /**
      * 根据实体类查询返回一个对象集合【分页查询】
      * @Title: listEntitiesForPageListByEntity
      * @Description: 根据实体类查询返回一个对象集合【分页查询】

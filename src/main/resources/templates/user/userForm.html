@@ -4,13 +4,13 @@
 <link th:href="@{/user/css/user.css}" rel="stylesheet">
 <body>
 <div class="userDlg_main">
-    <form class="layui-form" method="post" action="" id="userForm">
+    <form class="layui-form layui-form-pane" method="post" action="" id="userForm">
         <input type="text" id="mode" th:value="${mode}" hidden="hidden"/>
         <input type="text" name="id" th:value="${mode} eq 'edit'?${id}:null" hidden="hidden"/>
         <div class="layui-form-item">
             <label class="layui-form-label">昵称:</label>
             <div class="layui-input-block">
-                <input type="text" maxlength="16" name="nickName" th:value="${mode} eq 'edit'?${user.nickName}" autocomplete="off" placeholder="请输入标题" class="layui-input">
+                <input type="text" maxlength="16" name="nickName" th:value="${mode} eq 'edit'?${user.nickName}" autocomplete="off" placeholder="请填写昵称" class="layui-input">
             </div>
         </div>
         <input type="text" name="_method" value="patch" th:if="${mode} eq 'edit'" hidden="hidden"/>
@@ -18,32 +18,39 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">用户名:</label>
                 <div class="layui-input-block">
-                    <input type="text" name="userName" autocomplete="off" placeholder="请输入标题" class="layui-input">
+                    <input type="text" name="userName" autocomplete="off" placeholder="请填写用户名" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">密码:</label>
                 <div class="layui-input-block">
-                    <input type="password" id="password" name="password" placeholder="请输入密码" autocomplete="off" class="layui-input">
+                    <input type="password" id="password" name="password" placeholder="请填写密码" autocomplete="new-password" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">确认密码:</label>
                 <div class="layui-input-block">
-                    <input type="password" name="rePassword" id="rePassword" placeholder="请输入密码" autocomplete="off" class="layui-input">
+                    <input type="password" name="rePassword" id="rePassword" placeholder="请确认密码" autocomplete="off" class="layui-input">
                 </div>
+            </div>
+        </div>
+        <div class="layui-form-item" pane>
+            <label class="layui-form-label">是否管理员:</label>
+            <div class="layui-input-block">
+                <input type="text" hidden id="uAdmin" name="admin">
+                <input type="checkbox" lay-filter="uAdmin" th:checked="${mode eq 'edit' && user.admin eq true}" th:value="true" lay-skin="switch" lay-text="是|否">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">手机:</label>
             <div class="layui-input-block">
-                <input type="tel" name="phone" th:value="${mode} eq 'edit'?${user.phone}" autocomplete="off" class="layui-input">
+                <input type="tel" name="phone" placeholder="请填写手机号" th:value="${mode} eq 'edit'?${user.phone}" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">邮箱:</label>
             <div class="layui-input-block">
-                <input type="text" name="email" th:value="${mode} eq 'edit'?${user.email}" autocomplete="off" class="layui-input">
+                <input type="text" name="email" placeholder="请填写邮箱" th:value="${mode} eq 'edit'?${user.email}" autocomplete="off" class="layui-input">
             </div>
         </div>
     </form>

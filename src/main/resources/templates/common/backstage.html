@@ -26,15 +26,13 @@
 <div class="layui-header" th:fragment="baskstage_header">
     <div class="layui-logo">My Blog</div>
     <ul class="layui-nav layui-layout-left">
-        <li class="layui-nav-item"><a href="/system/user/list">用户</a></li>
-        <li class="layui-nav-item"><a href="/system/article/list">博客管理</a></li>
-        <li class="layui-nav-item"><a href="">控制台</a></li>
+        <li class="layui-nav-item"><a href="/system/user/list">系统管理</a></li>
+        <li class="layui-nav-item"><a href="/system/article/list">社区管理</a></li>
         <li class="layui-nav-item">
             <a href="javascript:;">其它系统</a>
             <dl class="layui-nav-child">
                 <dd><a href="/">博客首页</a></dd>
                 <dd><a href="">消息管理</a></dd>
-                <dd><a href="">授权管理</a></dd>
             </dl>
         </li>
     </ul>
@@ -42,7 +40,7 @@
         <li class="layui-nav-item">
             <a href="javascript:;">
                 <img th:src="@{/common/img/head.jpg}" class="layui-nav-img">
-                lsx
+                <span th:text="${session.user.nickName}"></span>
             </a>
             <dl class="layui-nav-child">
                 <dd><a href="">基本资料</a></dd>
@@ -58,22 +56,16 @@
 <div class="layui-side layui-bg-black" th:fragment="baskstage_side">
     <div class="layui-side-scroll">
         <ul class="layui-nav layui-nav-tree"  lay-filter="test">
-            <li class="layui-nav-item layui-nav-itemed"><a href="">用户管理</a></li>
-            <li class="layui-nav-item">
-                <a class="" href="javascript:;">所有商品</a>
+            <li th:if="${url_mode eq 'userList'}" class="layui-nav-item layui-nav-itemed">
+                <a href="/system/user/list">用户管理</a>
+            </li>
+            <li class="layui-nav-item layui-nav-itemed" th:if="${url_mode eq 'articleList'}">
+                <a class="" href="javascript:;">文章管理</a>
                 <dl class="layui-nav-child">
-                    <dd><a href="javascript:;">列表一</a></dd>
-                    <dd><a href="">超链接</a></dd>
+                    <dd><a href="/system/article/list">文章管理</a></dd>
+                    <dd><a href="#">文章类型管理</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item">
-                <a href="javascript:;">解决方案</a>
-                <dl class="layui-nav-child">
-                    <dd><a href="javascript:;">列表一</a></dd>
-                    <dd><a href="">超链接</a></dd>
-                </dl>
-            </li>
-            <li class="layui-nav-item"><a href="">发布商品</a></li>
         </ul>
     </div>
 </div>

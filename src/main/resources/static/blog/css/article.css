@@ -1,0 +1,9 @@
+.articleDlg_main{
+    /*上右下左*/
+    margin: 25px 0 15px 40px;
+    width: 85%;
+}
+.layui-form-label{
+    padding: 9px 0 0 30px;
+    text-align: left;
+}

@@ -1,5 +1,16 @@
 var mode = $("#mode").val();
+
+//监控开关-是否管理员
+form.on('switch(uAdmin)', function(data){
+    $("#uAdmin").val(data.elem.checked);
+    // console.log(data.elem); //得到checkbox原始DOM对象
+    // console.log(data.elem.checked); //开关是否开启，true或者false
+    // console.log(data.value); //开关value值，也可以通过data.elem.value得到
+    // console.log(data.othis); //得到美化后的DOM对象
+});
+
 $(document).ready(function () {
+    form.render();
     //表单校验
     $("#userForm").validate({
         submitHandler: function (form) {
@@ -12,6 +23,7 @@ $(document).ready(function () {
                         }else {
                             layer.msg("修改成功 !",{time: 2000,offset:'66px'});
                         }
+                        userTable.reload('userListTable');
                     }else {
                         layer.msg("操作失败",{time: 2000,offset:'66px'});
                     }

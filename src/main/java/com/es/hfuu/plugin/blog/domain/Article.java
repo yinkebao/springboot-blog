@@ -29,11 +29,11 @@ public class Article extends BaseDomain {
     @ApiModelProperty(value = "内容", name = "content")
     private String content;
 
-    @ApiModelProperty(value = "博客类型id", name = "blogTypeId")
-    private Long blogTypeId;
+    @ApiModelProperty(value = "文章类型id", name = "articleTypeId")
+    private Long articleTypeId;
 
-    @ApiModelProperty(value = "博客类型", name = "blogType")
-    private Integer blogType;
+    @ApiModelProperty(value = "文章类型", name = "articleType")
+    private ArticleType articleType;
 
     @ApiModelProperty(value = "来源（0原创/1转载）", name = "source")
     private Integer source;
@@ -87,20 +87,20 @@ public class Article extends BaseDomain {
         this.content = content;
     }
 
-    public Long getBlogTypeId() {
-        return blogTypeId;
+    public Long getArticleTypeId() {
+        return articleTypeId;
     }
 
-    public void setBlogTypeId(Long blogTypeId) {
-        this.blogTypeId = blogTypeId;
+    public void setArticleTypeId(Long articleTypeId) {
+        this.articleTypeId = articleTypeId;
     }
 
-    public Integer getBlogType() {
-        return blogType;
+    public ArticleType getArticleType() {
+        return articleType;
     }
 
-    public void setBlogType(Integer blogType) {
-        this.blogType = blogType;
+    public void setArticleType(ArticleType articleType) {
+        this.articleType = articleType;
     }
 
     public Integer getSource() {

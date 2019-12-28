@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="/common/backstage::backstage_head"></head>
+<link th:href="@{/blog/css/article.css}" rel="stylesheet">
+<body>
+<div class="articleDlg_main">
+    <form class="layui-form layui-form-pane" method="post" action="" id="articleForm">
+        <input type="text" id="mode" th:value="${mode}" hidden="hidden"/>
+        <input type="text" name="authorId" th:value="${session.user.id}" hidden/>
+        <input type="text" name="id" th:value="${mode} eq 'edit'?${id}:null" hidden="hidden"/>
+        <div class="layui-form-item">
+            <label class="layui-form-label">标题:</label>
+            <div class="layui-input-block">
+                <input type="text" maxlength="16" name="title" th:value="${mode} eq 'edit'?${article.title}" autocomplete="off" placeholder="请填写标题" class="layui-input">
+            </div>
+        </div>
+        <!--转换请求类型为patch-->
+        <input type="text" name="_method" value="patch" th:if="${mode} eq 'edit'" hidden="hidden"/>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">文章类型:</label>
+            <div class="layui-input-block">
+                <select  name="articleTypeId"  lay-verify="">
+                    <option th:value="0">请选择</option>
+                    <option th:each="type:${articleTypes}" th:value="${type.id}" th:selected="${mode eq 'edit' && type.id eq article.articleTypeId}" th:text="${type.cName}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item" pane>
+            <label class="layui-form-label">来源:</label>
+            <div class="layui-input-block">
+                <input type="radio" lay-filter="source" th:checked="${mode eq 'edit' && article.source eq 0}" name="source" value="0" title="原创" checked>
+                <input type="radio" lay-filter="source" th:checked="${mode eq 'edit' && article.source eq 1}" name="source" value="1" title="转载">
+            </div>
+        </div>
+        <div id="af_original" hidden>
+            <div class="layui-form-item">
+                <label class="layui-form-label">原作者:</label>
+                <div class="layui-input-block">
+                    <input type="text" name="originalAuthor" placeholder="请填写原作者" th:value="${mode} eq 'edit'?${article.originalAuthor}" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">原文链接:</label>
+                <div class="layui-input-block">
+                    <input type="text" name="sourceUrl" placeholder="请填写原文链接" th:value="${mode} eq 'edit'?${article.sourceUrl}" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item" pane>
+            <label class="layui-form-label">内容:</label>
+            <div class="layui-input-block">
+                <textarea name="content" th:text="${mode} eq 'edit'?${article.content}"
+                          required lay-verify="required" placeholder="请输入" class="layui-textarea"></textarea>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript" th:src="@{/blog/js/articleForm.js}" ></script>
+</body>
+</html>

@@ -8,46 +8,25 @@
     <div th:replace="common/backstage::baskstage_side" class="layui-side layui-bg-black"></div>
     <!-- 内容主体区域 -->
     <div class="layui-body">
-        <table class="layui-hide" id="articleList"></table>
+        <!--表头上的按钮-->
+        <script type="text/html" id="articleToolBar">
+            <div class="layui-btn-container">
+                <button class="layui-btn layui-btn-sm" lay-event="addArticle">新增</button>
+                <button class="layui-btn layui-btn-sm" lay-event="mulDelete">删除</button>
+            </div>
+        </script>
+
+        <table class="layui-hide" id="articleListTable" lay-filter="articleFilter"></table>
+        <!--表中的操作按钮-->
+        <script type="text/html" id="operateArticle">
+            <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+        </script>
     </div>
     <div th:replace="common/backstage::baskstage_footer" class="layui-footer"></div>
 </div>
 
 <div th:replace="common/backstage::backstage_js"></div>
-
-<script>
-
-    layui.use('table', function(){
-        var table = layui.table;
-        table.render({
-            elem: '#articleList'
-            ,cellMinWidth: 60
-            ,height: 'full'
-            ,url: '/system/article/page' //数据接口
-            ,page: true //开启分页
-            ,cols: [
-                [ //表头
-                    {type: 'checkbox', fixed: 'left'}
-                    ,{field: 'id', title: 'ID', hide: true , sort: true}
-                    ,{field: 'title', title: '标题', align: 'center'}
-                    ,{field: 'author', title: '作者', sort: true, align: 'center'}
-                    ,{field: 'originalAuthor', title: '原作者' , sort: true, align: 'center'}
-                    ,{field: 'source', title: '来源',  sort: true, align: 'center'}
-                    ,{field: 'viewTimes', title: '浏览次数', sort: true, align: 'center'}
-                    ,{field: 'collectTimes', title: '收藏次数', align: 'center'}
-                ]
-            ]
-            ,parseData:function (res) {
-                return {
-                    "code":res.code,
-                    "msg":res.msg,
-                    "count":res.module.total,
-                    "data":res.module.list
-                };
-            }
-        });
-    });
-
-</script>
+<script type="text/javascript" th:src="@{/blog/js/articleList.js}" ></script>
 </body>
 </html>

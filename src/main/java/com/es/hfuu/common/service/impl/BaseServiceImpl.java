@@ -150,6 +150,25 @@ public abstract class BaseServiceImpl<T extends BaseDomain, S extends PagingVO> 
     }
 
     /**
+     * 根据id数组批量删除数据
+     * @Title: deleteEntitiesByIds
+     * @Description: 根据id数组批量删除数据
+     * @param ids String类型的id字符串，逗号隔开
+     * @return int 执行成功的条数
+     */
+    @Override
+    public int deleteEntitiesByIds(String ids) {
+        requireValidString("请提供待删除的ids", ids);
+        //将字符串的ids转换成Long类型的数组
+        String[] idsStr = ids.replace(" ","").split(",");
+        List<Long> idsLong = new ArrayList<>(idsStr.length);
+        for (String s : idsStr) {
+            idsLong.add(Long.parseLong(s));
+        }
+        return dbInvokeFunction(getBaseMapper()::deleteEntitiesByIds, getExceptionTitle(), idsLong);
+    }
+
+    /**
      * 根据实体类查询返回一个对象集合【分页查询】
      * @Title: listEntitiesForPageListByEntity
      * @Description: 根据实体类查询返回一个对象集合【分页查询】

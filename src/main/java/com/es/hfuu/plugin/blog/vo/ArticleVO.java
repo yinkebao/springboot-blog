@@ -14,8 +14,8 @@ public class ArticleVO extends PagingVO {
     private String title;
     /** 来源 0原创1转载 */
     private Integer source;
-    /** 博客类型 */
-    private Long blogTypeId;
+    /** 文章类型 */
+    private Long articleTypeId;
 
     public String getTitle() {
         return title;
@@ -33,11 +33,11 @@ public class ArticleVO extends PagingVO {
         this.source = source;
     }
 
-    public Long getBlogTypeId() {
-        return blogTypeId;
+    public Long getArticleTypeId() {
+        return articleTypeId;
     }
 
-    public void setBlogTypeId(Long blogTypeId) {
-        this.blogTypeId = blogTypeId;
+    public void setArticleTypeId(Long articleTypeId) {
+        this.articleTypeId = articleTypeId;
     }
 }

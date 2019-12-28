@@ -41,6 +41,7 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String userName = (String) request.getSession().getAttribute("userName");
+        String sessionId = request.getParameter(RedisConstants.LOGIN_SESSION_ID);
         String url = request.getRequestURI();
         if (userName == null || "".equals(userName)){
             request.setAttribute("msg","未登录，请登录后访问！");
@@ -48,7 +49,6 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
             return false;
         }else {
             //进行session有效性的校验。
-            String sessionId = request.getParameter(RedisConstants.LOGIN_SESSION_ID);
             if (StringUtil.isEmpty(sessionId)) {
                 sessionId = CookieUtil.getCookie(request,RedisConstants.LOGIN_SESSION_ID);
             }
@@ -71,6 +71,11 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
         }
     }
 
+    /**
+     * session有限期验证
+     * @param session session对象
+     * @return boolean
+     */
     private boolean isSessionTimeOut(Session session) {
         Long accessTime = session.getAccessTime().getTime();
         if ((Calendar.getInstance().getTime().getTime() - accessTime) > RedisConstants.SESSION_TIME_OUT) {

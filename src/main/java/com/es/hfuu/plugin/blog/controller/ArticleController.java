@@ -4,6 +4,7 @@ import com.es.hfuu.common.controller.BaseController;
 import com.es.hfuu.common.vo.EsResult;
 import com.es.hfuu.plugin.blog.domain.Article;
 import com.es.hfuu.plugin.blog.service.ArticleService;
+import com.es.hfuu.plugin.blog.service.ArticleTypeService;
 import com.es.hfuu.plugin.blog.vo.ArticleVO;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
@@ -12,6 +13,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import static com.es.hfuu.common.util.exception.util.ExceptionUtil.providerServiceInvokeConsumer;
@@ -28,13 +30,17 @@ import static com.es.hfuu.common.util.exception.util.ExceptionUtil.providerServi
 @RequestMapping("/system/article")
 public class ArticleController extends BaseController {
 
-    @GetMapping("/list")
-    public String listPage() {
-        return "/blog/articleList";
-    }
-
     @Autowired
     private ArticleService articleService;
+    @Autowired
+    private ArticleTypeService articleTypeService;
+
+    @ApiOperation(value = "文章管理页面")
+    @GetMapping("/list")
+    public String listPage(Model model) {
+        model.addAttribute("url_mode","articleList");
+        return "/blog/articleList";
+    }
 
     @ApiOperation(value = "分页查询文章列表信息")
     @RequestMapping(value="/page",method = RequestMethod.GET)
@@ -72,6 +78,23 @@ public class ArticleController extends BaseController {
     @ResponseBody
     public EsResult<Boolean> deleteArticlesByIds(@RequestParam String ids) {
         return providerServiceInvokeConsumer(articleService::deleteArticlesByIds,ids);
+    }
+
+    @ApiOperation(value = "新增UI")
+    @GetMapping("/addUI")
+    public String addUI(String mode, Model model) {
+        model.addAttribute("mode",mode);
+        model.addAttribute("articleTypes",articleTypeService.listArticleTypes());
+        return "/blog/articleForm";
+    }
+
+    @ApiOperation(value = "修改UI")
+    @GetMapping("/edit/{id}")
+    public String editUI(@PathVariable("id") Long id, String mode, Model model) {
+        model.addAttribute("article",articleService.getSimpleArticleById(id));
+        model.addAttribute("articleTypes",articleTypeService.listArticleTypes());
+        model.addAttribute("mode",mode);
+        return "/blog/articleForm";
     }
 
 

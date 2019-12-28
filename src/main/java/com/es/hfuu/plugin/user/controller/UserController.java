@@ -103,7 +103,8 @@ public class UserController extends BaseController {
 
     @ApiOperation(value = "用户列表")
     @GetMapping("/list")
-    public String listPage() {
+    public String listPage(Model model) {
+        model.addAttribute("url_mode","userList");
         return "/user/userList";
     }
 

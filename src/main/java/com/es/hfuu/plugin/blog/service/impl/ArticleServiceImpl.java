@@ -3,6 +3,7 @@ package com.es.hfuu.plugin.blog.service.impl;
 import com.es.hfuu.common.mapper.BaseMapper;
 import com.es.hfuu.common.service.impl.BaseServiceImpl;
 import com.es.hfuu.common.util.base.StringUtil;
+import com.es.hfuu.plugin.blog.service.ArticleTypeService;
 import com.es.hfuu.plugin.blog.vo.ArticleVO;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class ArticleServiceImpl extends BaseServiceImpl<Article, ArticleVO>
     @Autowired
     private ArticleMapper articleMapper;
 
+    @Autowired
+    private ArticleTypeService articleTypeService;
+
     /**
      * 获取分页列表
      *
@@ -35,7 +39,11 @@ public class ArticleServiceImpl extends BaseServiceImpl<Article, ArticleVO>
     @Override
     public PageInfo<Article> listArticlesByParamForPage(ArticleVO articleVO) {
         articleVO.setRows(articleVO.getLimit());
-        return listEntitiesForPageListByEntity(articleVO);
+        PageInfo<Article> pageInfo = listEntitiesForPageListByEntity(articleVO);
+        for (Article article : pageInfo.getList()) {
+            article.setArticleType(articleTypeService.getArticleTypeById(article.getArticleTypeId()));
+        }
+        return pageInfo;
     }
 
     /**
@@ -58,7 +66,7 @@ public class ArticleServiceImpl extends BaseServiceImpl<Article, ArticleVO>
      */
     @Override
     public Article updateArticle(Article article) {
-        return null;
+        return updateEntity(article);
     }
 
     /**
@@ -69,7 +77,7 @@ public class ArticleServiceImpl extends BaseServiceImpl<Article, ArticleVO>
      */
     @Override
     public Article getSimpleArticleById(Long id) {
-        return null;
+        return getEntityById(id);
     }
 
     /**
@@ -91,7 +99,7 @@ public class ArticleServiceImpl extends BaseServiceImpl<Article, ArticleVO>
      */
     @Override
     public int deleteArticlesByIds(String ids) {
-        return 0;
+        return deleteEntitiesByIds(ids);
     }
 
     /**

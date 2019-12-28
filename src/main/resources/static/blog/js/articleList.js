@@ -1,39 +1,31 @@
-layui.use('element', function(){
-    var element = layui.element;
-});
-
 var form;
-var userTable;
-
-//加载列表
+var articleTable;
 layui.use(['form',  'table'], function(){
-    userTable = layui.table;
+    articleTable = layui.table;
     form = layui.form;
-    userTable.render({
-        elem: '#userListTable'
+    //初始化数据列表
+    articleTable.render({
+        elem: '#articleListTable'
         ,cellMinWidth: 60
         ,height: 'full-125'
-        ,toolbar: '#userToolBar' //开启头部工具栏，并为其绑定左侧模板
+        ,toolbar: '#articleToolBar' //开启头部工具栏，并为其绑定左侧模板
         ,defaultToolbar: ['filter', 'exports', 'print', { //自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
             layEvent: 'refresh'
             ,icon: 'layui-icon-refresh'
         }]
-        ,url: '/system/user/page' //数据接口
+        ,url: '/system/article/page' //数据接口
         ,page: true //开启分页
         ,cols: [
             [ //表头
                 {type: 'checkbox', fixed: 'left'}
                 ,{field: 'id', title: 'ID', hide: true , sort: true}
-                ,{field: 'userName', title: '用户名', align: 'center'}
-                ,{field: 'nickName', title: '昵称', sort: true, align: 'center'}
-                ,{field: 'birthDay', title: '生日' , sort: true, align: 'center'}
-                ,{field: 'phone', title: '手机号', align: 'center'}
-                ,{field: 'email', title: '邮箱', minWidth: 150, align: 'center'}
-                ,{field: 'lastLoginTime', title: '最后登录时间',  sort: true, align: 'center'}
-                ,{field: 'admin', title: '是否管理员', templet: adminTem, width: 100, align: 'center'}
-                ,{field: 'shutDown', title: '是否启用', width: 100, align: 'center'}
-                ,{field: 'lock', title: '是否锁定', width: 100, align: 'center'}
-                ,{fixed: 'right', title:'操作', toolbar: '#operateUser', width:120, align: 'center'}
+                ,{field: 'title', title: '标题', align: 'center'}
+                ,{field: 'articleType', templet: typeTem, title: '文章类型', align: 'center'}
+                ,{field: 'author', title: '作者', sort: true, align: 'center'}
+                ,{field: 'source', title: '来源',  sort: true, align: 'center'}
+                ,{field: 'viewTimes', title: '浏览次数', sort: true, align: 'center'}
+                ,{field: 'collectTimes', title: '收藏次数', align: 'center'}
+                ,{fixed: 'right', title:'操作', toolbar: '#operateArticle', width:120, align: 'center'}
             ]
         ]
         ,parseData:function (res) {
@@ -47,53 +39,52 @@ layui.use(['form',  'table'], function(){
     });
 
     //头工具栏事件
-    userTable.on('toolbar(userFilter)', function(obj){
-        var checkStatus = userTable.checkStatus("userListTable");
+    articleTable.on('toolbar(articleFilter)', function(obj){
+        var checkStatus = articleTable.checkStatus("articleListTable");
         switch(obj.event){
-            case 'addUser':
-                addUser();
+            case 'addArticle':
+                addArticle();
                 break;
             case 'mulDelete':
                 var data = checkStatus.data;
                 if (data.length == 0){
-                    layer.msg("请选择用户",{time: 2000,offset:'66px'});
+                    layer.msg("请选择文章",{time: 2000,offset:'66px'});
                 }else {
                     var ids = '';
                     for (var i=0;i<data.length;i++){
                         ids += data[i].id +',';
                     }
-                    deleteUser(ids);
+                    deleteArticle(ids);
                 }
                 break;
             //自定义头工具栏右侧图标 - 刷新
             case 'refresh':
-                userTable.reload('userListTable');
+                articleTable.reload('articleListTable');
                 break;
         }
     });
 
     //监听行工具事件
-    userTable.on('tool(userFilter)', function(obj){
+    articleTable.on('tool(articleFilter)', function(obj){
         var data = obj.data;
         if(obj.event === 'del'){
-            deleteUser(data.id);
+            deleteArticle(data.id);
         } else if(obj.event === 'edit'){
-            updateUser(data.id);
+            updateArticle(data.id);
         }
     });
 });
 
-//双击事件
-userTable.on('rowDouble(userFilter)', function(obj){
-
-    // layer.alert(obj.data.id);
-});
+//展示文章类型
+function typeTem(data) {
+    return data.articleType.cName;
+}
 
 //新增
-function addUser() {
+function addArticle() {
     $.ajax({
         method:"get",
-        url: '/system/user/addUI',
+        url: '/system/article/addUI',
         data:{"mode":'add'},
         async:false,
         success:function (res) {
@@ -105,7 +96,7 @@ function addUser() {
                 ,shade: [0.3, '#393D49']
                 ,btn: ['提交', '取消']
                 ,btn1: function(index, layero){
-                    $("#userForm").attr("action","/system/user/saveUser").submit();
+                    $("#articleForm").attr("action","/system/article/saveArticle").submit();
                 },
                 btn2: function(index, layero){
                     layer.closeAll();
@@ -116,10 +107,10 @@ function addUser() {
 }
 
 //修改
-function updateUser(id) {
+function updateArticle(id) {
     $.ajax({
         method:"get",
-        url: '/system/user/edit/'+id,
+        url: '/system/article/edit/'+id,
         async:false,
         data:{
             "id":id,
@@ -128,14 +119,14 @@ function updateUser(id) {
         success:function (res) {
             layer.open({
                 type:1
-                ,area:['560px','360px']
+                ,area:['560px','520px']
                 ,title: '修改'
                 ,shade: [0.3, '#393D49']
                 ,content: res
                 ,btn: ['提交', '取消']
                 ,btn1: function(index, layero){
-                    $("#userForm").attr("action","/system/user/updateUser").submit();
-                    userTable.reload('userListTable');
+                    $("#articleForm").attr("action","/system/article/updateArticle").submit();
+                    articleTable.reload('articleListTable');
                 },
                 btn2: function(index, layero){
                     layer.closeAll();
@@ -146,11 +137,11 @@ function updateUser(id) {
 }
 
 //删除
-function deleteUser(ids) {
-    layer.confirm('确认删除用户？', function(index){
+function deleteArticle(ids) {
+    layer.confirm('确认删除文章？', function(index){
         $.ajax({
             method:"delete",
-            url: '/system/user/deleteUsersByIds',
+            url: '/system/article/deleteArticlesByIds',
             async:false,
             data:{
                 "ids":ids
@@ -158,32 +149,10 @@ function deleteUser(ids) {
             success:function (res) {
                 layer.closeAll();
                 layer.msg("删除成功",{time: 2000,offset:'66px'});
-                userTable.reload('userListTable');
+                articleTable.reload('articleListTable');
             }
         });
         layer.close(index);
     });
 }
 
-//设置是否管理员
-function adminTem(d) {
-    return d.admin == true?'是':'否';
-}
-
-//获取选择的数据
-//返回的数据格式：{data:[],isAll}
-//其中isAll：true/false
-function getCheckData(tableName) {
-    var checkStatus = userTable.checkStatus(tableName);
-    return checkStatus.data;
-}
-
-//获取选中数目
-function getCheckLength(tableName) {
-    return getCheckData(tableName).length;
-}
-
-//验证是否全选 0全选1未全选
-function checkIsAll(tableName) {
-    return getCheckData(tableName).isAll?0:1;
-}

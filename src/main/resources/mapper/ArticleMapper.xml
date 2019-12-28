@@ -12,8 +12,8 @@
         <result column="title" property="title" />
         <result column="author_id" property="authorId" />
         <result column="original_author" property="originalAuthor" />
-        <result column="content" property="content" />
-        <result column="blog_type_id" property="blogTypeId" />
+        <result column="content" property="content" typeHandler="com.es.hfuu.common.handler.MyBlobTypeHandler"/>
+        <result column="article_type_id" property="articleTypeId" />
         <result column="source" property="source" />
         <result column="source_url" property="sourceUrl" />
         <result column="view_times" property="viewTimes" />
@@ -22,7 +22,7 @@
 
     <!--表字段-->
     <sql id="sql_com">
-        id,title,author_id,original_author,content,blog_type_id,source,source_url,view_times,
+        id,title,author_id,original_author,content,article_type_id,source,source_url,view_times,
         collect_times,is_deleted,create_user,create_date,update_user,update_date
     </sql>
 
@@ -30,14 +30,15 @@
     <select id="listEntitiesForPageListByEntity" parameterType="ArticleVO" resultMap="articleResult">
         select <include refid="sql_com"/> from article
         <where>
+            is_deleted = 0
             <if test="title != null and title != ''">
-                title like #{title} '%'
+                and title like #{title} '%'
             </if>
             <if test="source != null ">
                 and source = #{source}
             </if>
-            <if test="blogTypeId != null ">
-                and blog_type_id = #{blogTypeId}
+            <if test="articleTypeId != null ">
+                and article_type_id = #{articleTypeId}
             </if>
         </where>
     </select>
@@ -46,7 +47,7 @@
     <insert id="saveEntity" parameterType="article">
         INSERT INTO article (<include refid="sql_com"/>)
         VALUES (
-            #{id},#{title},#{authorId},#{originalAuthor},#{content},#{blogTypeId},#{source},#{sourceUrl},
+            #{id},#{title},#{authorId},#{originalAuthor},#{content},#{articleTypeId},#{source},#{sourceUrl},
             #{viewTimes},#{collectTimes},#{deleted},#{createUser},#{createDate},#{updateUser},#{updateDate}
         )
     </insert>
@@ -59,7 +60,7 @@
             <if test="authorId != null"> author_id= #{authorId},</if>
             <if test="originalAuthor != null"> original_author= #{originalAuthor},</if>
             <if test="content != null"> content= #{content},</if>
-            <if test="blogTypeId != null"> blog_type_id= #{blogTypeId},</if>
+            <if test="articleTypeId != null"> article_type_id= #{articleTypeId},</if>
             <if test="source != null"> source= #{source},</if>
             <if test="sourceUrl != null and sourceUrl != ''"> source_url= #{sourceUrl},</if>
             <if test="updateUser != null and createUser != ''"> update_user= #{updateUser},</if>
@@ -72,5 +73,20 @@
     <select id="getSimpleArticleById" resultMap="articleResult">
 
     </select>
+
+    <!--根据id获取-->
+    <select id="getEntityById" resultMap="articleResult">
+        select <include refid="sql_com" /> from article where id = #{id} and is_deleted = 0
+    </select>
+
+    <!--批量删除-->
+    <update id="deleteEntitiesByIds">
+        update article
+        set is_deleted = 1
+        where id in
+        <foreach collection="ids" item="item"  open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </update>
 </mapper>
 

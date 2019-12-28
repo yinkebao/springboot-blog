@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.es.hfuu.plugin.blog.mapper.ArticleTypeMapper">
+    <!--Article映射-->
+    <resultMap id="articleTypeResult" type="ArticleType">
+        <result property="id" column="id"/>
+        <result property="eName" column="e_name"/>
+        <result property="cName" column="c_name"/>
+        <result property="deleted" column="id_deleted"/>
+        <result property="createUser" column="create_user"/>
+        <result property="createDate" column="create_date"/>
+        <result property="updateUser" column="update_user"/>
+        <result property="updateDate" column="update_date"/>
+    </resultMap>
+
+    <!--表字段-->
+    <sql id="sql_com">
+        id,e_name,c_name,is_deleted,create_user,create_date,update_user,update_date
+    </sql>
+
+    <!--获取列表-->
+    <select id="listArticleTypes" resultMap="articleTypeResult">
+        select <include refid="sql_com"/> from article_type where is_deleted = 0;
+    </select>
+
+    <!--根据id获取-->
+    <select id="getArticleTypeById" resultMap="articleTypeResult">
+        select <include refid="sql_com"/> from article_type where id=#{id} and is_deleted = 0;
+    </select>
+
+    <!--新增-->
+    <insert id="saveEntity" parameterType="ArticleType">
+        INSERT INTO article_type (<include refid="sql_com"/>)
+        VALUES (
+            #{id},#{e_name},#{c_name},#{deleted},
+            #{createUser},#{createDate},#{updateUser},#{updateDate}
+        )
+    </insert>
+
+    <!--修改-->
+    <update id="updateEntity" parameterType="ArticleType">
+        UPDATE article_type
+        <set>
+            <if test="cName != null"> c_name= #{cName},</if>
+            <if test="updateUser != null and createUser != ''"> update_user= #{updateUser},</if>
+            <if test="updateDate != null"> update_date= #{updateDate}</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <!--批量删除-->
+    <update id="deleteEntitiesByIds">
+        update article_type
+        set is_deleted = 1
+        where id in
+        <foreach collection="ids" item="item"  open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </update>
+
+</mapper>

@@ -157,14 +157,7 @@ public class UserServiceImpl extends BaseServiceImpl<User,UserVO> implements Use
      */
     @Override
     public int deleteUsersByIds(String ids) {
-        requireValidString("请提供用户名", ids);
-        //将字符串的ids转换成Long类型的数组
-        String[] idsStr = ids.replace(" ","").split(",");
-        List<Long> idsLong = new ArrayList<>(idsStr.length);
-        for (String s : idsStr) {
-            idsLong.add(Long.parseLong(s));
-        }
-        return dbInvokeFunction(userMapper::deleteEntitiesByIds, getExceptionTitle(), idsLong);
+        return deleteEntitiesByIds(ids);
     }
 
     /**
