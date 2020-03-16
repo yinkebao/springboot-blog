@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
-<head th:include="common/common_head">
-
+<head th:include="common/common_head::common_header">
+	<link th:href="@{/login/css/login.css}" rel="stylesheet">
 	<body class="text-center">
 		<!-- 背景3D动画 -->
 		<div id="canvas" class="gradient"></div>
 
 		<form class="form-signin" th:method="post" action="/user/login">
+			<input th:value="${lastUrl}" name="lastUrl" hidden />
 			<img class="mb-4" th:src="@{/asserts/img/bootstrap-solid.svg}" alt="" width="72" height="72">
 			<h1 class="h3 mb-3 font-weight-normal" th:text="#{login.tip}">Please sign in</h1>
 			<p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
@@ -16,10 +17,13 @@
 			<input type="password" name="passWord" class="form-control" th:placeholder="#{login.password}" required="">
 			<div class="checkbox mb-3">
 				<label>
-          <input type="checkbox" value="remember-me"> [[#{login.remember}]]
+          <a href="/"> [[#{login.visitor}]]</a>
         </label>
 			</div>
 			<button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{login.btn}">Sign in</button>
+			</br>
+			<p>没有账户?<a class="btn btn-link" th:href="@{/user/register}">立即注册</a></p>
+
 			<p class="mt-5 mb-3 text-muted">© 2019-2020</p>
 			<a class="btn btn-sm" th:href="@{/templates/index.html(l='zh_CN')}">中文</a>
 			<a class="btn btn-sm" th:href="@{/templates/index.html(l='en_US')}">English</a>

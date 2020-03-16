@@ -21,8 +21,63 @@
     <!--<link rel="stylesheet" th:href="@{/layui/css/layui.css}">-->
     <!-- 引入swiper -->
     <link rel="stylesheet" th:href="@{/swiper/css/swiper.min.css}">
+    <link th:href="@{/common/css/common.css}" rel="stylesheet">
 </head>
 <body>
+
+<div th:fragment="navigate" class="navbar navbar-default index-head" role="navigation">
+    <div class="navbar-header">
+        　<!-- .navbar-toggle样式用于toggle收缩的内容，即nav-collapse collapse样式所在元素 -->
+        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+            <span class="sr-only">Toggle Navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <!-- 确保无论是宽屏还是窄屏，navbar-brand都显示 -->
+        <a href="##" class="navbar-brand">ykb`blog</a>
+    </div>
+    <!-- 屏幕宽度小于768px时，div.navbar-responsive-collapse容器里的内容都会隐藏，显示icon-bar图标，当点击icon-bar图标时，再展开。屏幕大于768px时，默认显示。 -->
+    <div class="collapse navbar-collapse navbar-responsive-collapse">
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="/"><span class="glyphicon glyphicon-home"></span> 首页</a></li>
+            <li><a href="##"><span class="glyphicon glyphicon-align-right"></span> 系列</a></li>
+            <li><a href="##"><span class="glyphicon glyphicon-info-sign"></span> 介绍</a></li>
+            <li><a href="##"><span class="glyphicon glyphicon-send"></span> 案例</a></li>
+            <li><a href="##"><span class="glyphicon glyphicon-stats"></span> 关于</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="/system/user/list">后台管理</a></li>
+            <li><a href="/system/index/wangEdit" target="_blank">写文章</a></li>
+            <li th:if="${session.user eq null}"><a href="/login">登录</a></li>
+            <li th:if="${session.user ne null}" class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
+                >[[${session.user.nickName}]]<span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="#">
+                            <span class="glyphicon glyphicon-user" style="color: rgb(119,119,119);"></span> 个人中心
+                        </a>
+                    </li>
+                    <li role="separator" class="divider"></li>
+                    <li>
+                        <a id="outLogin" th:onclick="outLogin([[${session.userName}]])">
+                            <span class="glyphicon glyphicon-off" style="color: rgb(119,119,119);"></span> 退出登录
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div th:fragment="common_footer" class="footer">
+    <div>
+        这是一个公共的底部<br>
+        邮箱：yinkebao@hztianque.com<br>
+    </div>
+</div>
 
 </body>
 <div th:fragment="common_js">
@@ -31,5 +86,6 @@
     <!--<script type="text/javascript" th:src="@{/layui/layui.all.js}" ></script>-->
     <script type="text/javascript" th:src="@{/swiper/js/swiper.min.js}" ></script>
     <script src="https://eqcn.ajz.miesnfu.com/wp-content/plugins/wp-3d-pony/live2dw/lib/L2Dwidget.min.js"></script>
+    <script type="text/javascript" th:src="@{/common/js/common.js}"></script>
 </div>
 </html>

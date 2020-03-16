@@ -1,19 +1,17 @@
 package com.es.hfuu.common.aspect;
 
+import com.es.hfuu.common.constants.Constants;
 import com.es.hfuu.common.domain.BaseDomain;
 import com.es.hfuu.common.util.exception.base.ServiceValidationException;
 import com.es.hfuu.common.util.exception.util.LoggerUtil;
-import com.es.hfuu.common.util.redis.util.SessionRedisUtil;
-import com.es.hfuu.common.util.web.CookieUtil;
+import com.es.hfuu.common.util.threadlocal.ThreadLocalMap;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 /**
@@ -26,9 +24,6 @@ import java.util.Date;
 @Component
 public class UserInfoAspect {
     protected Logger logger = LoggerFactory.getLogger(UserInfoAspect.class);
-
-    @Autowired
-    private SessionRedisUtil sessionRedisUtil;
 
     /**
      * 拦截新增
@@ -45,7 +40,8 @@ public class UserInfoAspect {
             }
             try {
                 BaseDomain info = (BaseDomain) args[0];
-                info.setCreateUser("admin");
+                info.setCreateUser((String) ThreadLocalMap.get(Constants.THREADLOCAL_USERNAME));
+                info.setCreateUser("lsx");
                 info.setCreateDate(new Date());
             } catch (Exception e) {
                 logger.error("saveUserInfo:{}", LoggerUtil.processTrace(e));
@@ -69,7 +65,8 @@ public class UserInfoAspect {
             }
             try {
                 BaseDomain info = (BaseDomain) args[0];
-                info.setUpdateUser("admin");
+//                info.setUpdateUser((String) ThreadLocalMap.get(Constants.THREADLOCAL_USERNAME));
+                info.setUpdateUser("lsx");
                 info.setUpdateDate(new Date());
             } catch (Exception e) {
                 logger.error("updateUserInfo:{}", LoggerUtil.processTrace(e));

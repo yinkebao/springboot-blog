@@ -1,19 +1,26 @@
 package com.es.hfuu.common.controller;
 
+import static com.es.hfuu.common.util.exception.util.ExceptionUtil.providerServiceInvokeFunction;
+
+import com.es.hfuu.common.constants.Constants;
 import com.es.hfuu.common.domain.Session;
 import com.es.hfuu.common.service.SessionService;
 import com.es.hfuu.common.util.base.Md5Util;
+import com.es.hfuu.common.util.base.StringUtil;
 import com.es.hfuu.common.util.base.UuidUtil;
 import com.es.hfuu.common.util.redis.constans.RedisConstants;
 import com.es.hfuu.common.util.redis.util.SessionRedisUtil;
+import com.es.hfuu.common.util.threadlocal.ThreadLocalMap;
 import com.es.hfuu.common.util.web.CookieUtil;
 import com.es.hfuu.common.util.web.IpAddressUtil;
+import com.es.hfuu.common.vo.EsResult;
 import com.es.hfuu.plugin.user.domain.User;
 import com.es.hfuu.plugin.user.mapper.UserMapper;
 import com.es.hfuu.plugin.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -40,9 +47,12 @@ public class LoginController extends BaseController{
     private SessionService sessionService;
 
     @RequestMapping(value = "/user/login")
-    public String login(String userName, String passWord, Model model, Map<String, Object> map, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+    public String login(String userName, String passWord,String lastUrl, Model model, Map<String, Object> map, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
         String ipAddr = IpAddressUtil.getIpAddr(request);
         String uri = request.getRequestURI();
+        if (StringUtil.isEmpty(lastUrl)){
+            lastUrl = "/";
+        }
         User user = userService.getSimpleUserByUserName(userName);
         if (user == null){
             logger.error("登录失败，用户名不存在");
@@ -53,11 +63,21 @@ public class LoginController extends BaseController{
             session.setAttribute("user", user);
             saveSession(user,ipAddr,uri,response);
             model.addAttribute("session",session);
-            return "redirect:/";
+            ThreadLocalMap.put(Constants.THREADLOCAL_USERNAME, userName);
+            return "redirect:"+lastUrl;
         } else {
             map.put("msg", "用户名或密码错误");
             return "login";
         }
+    }
+
+    @RequestMapping(value = "/user/outLogin")
+    @ResponseBody
+    public EsResult outLogin(String userName,HttpSession session){
+      session.removeAttribute("userName");
+      session.removeAttribute("user");
+      User user = userService.getSimpleUserByUserName(userName);
+        return providerServiceInvokeFunction(sessionService::deleteSessionByUserId,user.getId());
     }
 
     /**
@@ -99,6 +119,11 @@ public class LoginController extends BaseController{
     @ResponseBody
     public List<String> listSessions(){
         return sessionService.listSessionIdsByUserId(654686671689879552L);
+    }
+
+    @RequestMapping("/user/register")
+    public String register(){
+        return "/register";
     }
 
     @RequestMapping("/list")

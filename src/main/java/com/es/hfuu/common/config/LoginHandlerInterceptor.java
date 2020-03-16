@@ -44,6 +44,7 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
         String sessionId = request.getParameter(RedisConstants.LOGIN_SESSION_ID);
         String url = request.getRequestURI();
         if (userName == null || "".equals(userName)){
+            request.setAttribute("lastUrl",url);
             request.setAttribute("msg","未登录，请登录后访问！");
             request.getRequestDispatcher("/login").forward(request,response);
             return false;
