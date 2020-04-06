@@ -57,7 +57,17 @@ public class MyMvcConfig implements WebMvcConfigurer {
         registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**")
                 .excludePathPatterns("/", "/templates/**","/user/login","/login","/common/**",
                         "/swiper/**","/asserts/**","/layui/**","/webjars/**","/**.ico"
-                ,"/blog/**","/user/**");
+                ,"/blog/**","/user/**", "/static/uploadFiles/**");
+    }
+
+    /**
+     * 配置图片的映射，解决上传图片后不能及时回显的问题
+     *
+     * @param registry 映射配置
+     */
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry){
+        registry.addResourceHandler("/uploadFiles/**").addResourceLocations("file:"+System.getProperty("user.dir")+"/src/main/resources/static/uploadFiles/");
     }
 
     /**

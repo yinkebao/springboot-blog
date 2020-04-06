@@ -20,11 +20,11 @@ CREATE TABLE `sys_user` (
   `create_date`  datetime NOT NULL COMMENT '数据添加时间' ,
   `update_user`  varchar(255) NULL COMMENT '数据修改人' ,
   `update_date`  datetime NULL COMMENT '数据修改日期' ,
-  `is_deleted`  tinyint(1) NOT NULL DEFAULT 0 COMMENT '数据的状态(0:保存，1：删除)' ,
+  `is_idDelete`  tinyint(1) NOT NULL DEFAULT 0 COMMENT '数据的状态(0:保存，1：删除)' ,
   PRIMARY KEY (`id`)
 );
 -- 初始一个管理员用户
-INSERT INTO `sys_user` (`id`, `nick_name`, `user_name`, `password`, `phone`, `birth_day`, `email`, `header_url`, `last_login_time`, `last_login_ip`, `previous_login_time`, `previous_login_ip`, `failure_times`, `admin`, `is_enabled`, `is_lock`, `create_user`, `create_date`, `update_user`, `update_date`, `is_deleted`)
+INSERT INTO `sys_user` (`id`, `nick_name`, `user_name`, `password`, `phone`, `birth_day`, `email`, `header_url`, `last_login_time`, `last_login_ip`, `previous_login_time`, `previous_login_ip`, `failure_times`, `admin`, `is_enabled`, `is_lock`, `create_user`, `create_date`, `update_user`, `update_date`, `is_idDelete`)
 VALUES ('134958588869487', '胖胖罗', 'lsx', '1bbd886460827015e5d605ed44252251', '15556532746', '2001-10-11 00:00:00', 'yinkebao@hztianque.com', NULL, '2019-12-12 13:54:21', '192.168.40.183', NULL, NULL, '0', '0', '0', '0', 'admin', '2019-12-12 13:55:00', NULL, NULL, '0');
 
 -- 创建session表

@@ -19,7 +19,7 @@
 <h4>
     <span th:each="user:${users}"> [[${user}]] </span>
 </h4>
-<form th:action="@{/upload}" method="post" enctype="multipart/form-data">
+<form th:action="@{/static/uploadFiles}" method="post" enctype="multipart/form-data">
     <input type="file" name="file">
     <input type="submit"/>
 </form>

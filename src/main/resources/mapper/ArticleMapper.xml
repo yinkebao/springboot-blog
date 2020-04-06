@@ -1,92 +1,167 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.es.hfuu.plugin.blog.mapper.ArticleMapper">
-    <!--Article映射-->
-    <resultMap id="articleResult" type="Article">
-        <result column="id" property="id" />
-        <result column="create_user" property="createUser" />
-        <result column="create_date" property="createDate" />
-        <result column="update_user" property="updateUser" />
-        <result column="update_date" property="updateDate" />
-        <result column="is_deleted" property="deleted" />
-        <result column="title" property="title" />
-        <result column="author_id" property="authorId" />
-        <result column="original_author" property="originalAuthor" />
-        <result column="content" property="content" typeHandler="com.es.hfuu.common.handler.MyBlobTypeHandler"/>
-        <result column="article_type_id" property="articleTypeId" />
-        <result column="source" property="source" />
-        <result column="source_url" property="sourceUrl" />
-        <result column="view_times" property="viewTimes" />
-        <result column="collect_times" property="collectTimes" />
-    </resultMap>
+  <!--Article映射-->
+  <resultMap id="articleResult" type="Article">
+    <result column="id" property="id"/>
+    <result column="create_user" property="createUser"/>
+    <result column="create_date" property="createDate"/>
+    <result column="update_user" property="updateUser"/>
+    <result column="update_date" property="updateDate"/>
+    <result column="is_deleted" property="isDeleted"/>
+    <result column="title" property="title"/>
+    <result column="is_publish" property="isPublish"/>
+    <result column="publish_date" property="publishDate"/>
+    <result column="author_id" property="authorId"/>
+    <result column="original_author" property="originalAuthor"/>
+    <result column="content" property="content"
+      typeHandler="com.es.hfuu.common.handler.MyBlobTypeHandler"/>
+    <result column="article_type_id" property="articleTypeId"/>
+    <result column="source" property="source"/>
+    <result column="source_url" property="sourceUrl"/>
+    <result column="view_times" property="viewTimes"/>
+    <result column="collect_times" property="collectTimes"/>
+    <result column="author_id" property="authorId"/>
+    <result column="article_type_id" property="articleTypeId"/>
+  </resultMap>
 
-    <!--表字段-->
-    <sql id="sql_com">
-        id,title,author_id,original_author,content,article_type_id,source,source_url,view_times,
-        collect_times,is_deleted,create_user,create_date,update_user,update_date
-    </sql>
+  <!--表字段-->
+  <sql id="sql_com">
+           id,
+           title,
+           author_id,
+           original_author,
+           content,
+           article_type_id,
+           source,
+           source_url,
+           view_times,
+           collect_times,
+           is_publish,
+           publish_date,
+           is_deleted,
+           create_user,
+           create_date,
+           update_user,
+           update_date
+  </sql>
 
-    <!-- 获取列表 -->
-    <select id="listEntitiesForPageListByEntity" parameterType="ArticleVO" resultMap="articleResult">
-        select <include refid="sql_com"/> from article
-        <where>
-            is_deleted = 0
-            <if test="title != null and title != ''">
-                and title like #{title} '%'
-            </if>
-            <if test="source != null ">
-                and source = #{source}
-            </if>
-            <if test="articleTypeId != null ">
-                and article_type_id = #{articleTypeId}
-            </if>
-        </where>
-    </select>
+  <!-- 获取列表 -->
+  <select id="listEntitiesForPageListByEntity" parameterType="ArticleVO" resultMap="articleResult">
+    select
+    <include refid="sql_com"/>
+    from article
+    <where>
+      is_deleted = 0
+      <if test="title != null and title != ''">
+        and title like #{title} '%'
+      </if>
+      <if test="source != null ">
+        and source = #{source}
+      </if>
+      <if test="isPublish != null">
+        and is_publish = #{isPublish}
+      </if>
+      <if test="articleTypeId != null ">
+        and article_type_id = #{articleTypeId}
+      </if>
+    </where>
+  </select>
 
-    <!--新增-->
-    <insert id="saveEntity" parameterType="article">
-        INSERT INTO article (<include refid="sql_com"/>)
-        VALUES (
-            #{id},#{title},#{authorId},#{originalAuthor},#{content},#{articleTypeId},#{source},#{sourceUrl},
-            #{viewTimes},#{collectTimes},#{deleted},#{createUser},#{createDate},#{updateUser},#{updateDate}
-        )
-    </insert>
+  <!--新增-->
+  <insert id="saveEntity" parameterType="article">
+    INSERT INTO article (<include refid="sql_com"/>)
+    VALUES (
+    #{id},#{title},#{authorId},#{originalAuthor},#{content},#{articleTypeId},#{source},#{sourceUrl},
+    #{viewTimes},#{collectTimes},#{isPublish},#{publishDate},#{isDeleted},#{createUser},#{createDate},#{updateUser},#{updateDate}
+    )
+  </insert>
 
-    <!--修改-->
-    <update id="updateEntity" parameterType="article">
-        UPDATE article
-        <set>
-            <if test="title != null"> title= #{title},</if>
-            <if test="authorId != null"> author_id= #{authorId},</if>
-            <if test="originalAuthor != null"> original_author= #{originalAuthor},</if>
-            <if test="content != null"> content= #{content},</if>
-            <if test="articleTypeId != null"> article_type_id= #{articleTypeId},</if>
-            <if test="source != null"> source= #{source},</if>
-            <if test="sourceUrl != null and sourceUrl != ''"> source_url= #{sourceUrl},</if>
-            <if test="updateUser != null and createUser != ''"> update_user= #{updateUser},</if>
-            <if test="updateDate != null"> update_date= #{updateDate}</if>
-        </set>
-        WHERE id = #{id}
-    </update>
+  <!--修改-->
+  <update id="updateEntity" parameterType="article">
+    UPDATE article
+    <set>
+      <if test="title != null">title= #{title},</if>
+      <if test="authorId != null">author_id= #{authorId},</if>
 
-    <!--根据文章Id获取文章信息-->
-    <select id="getSimpleArticleById" resultMap="articleResult">
+      <if test="content != null">content= #{content},</if>
+      <if test="articleTypeId != null">article_type_id= #{articleTypeId},</if>
+      <if test="source != null">source= #{source},</if>
+      <if test="source == 0">
+        source_url = null , original_author = null ,
+      </if>
+      <if test="source == 1">
+        <if test="originalAuthor != null">original_author= #{originalAuthor},</if>
+        <if test="sourceUrl != null ">source_url= #{sourceUrl},</if>
+      </if>
+      <if test="updateUser != null and createUser != ''">update_user= #{updateUser},</if>
+      <if test="updateDate != null">update_date= #{updateDate}</if>
+    </set>
+    WHERE id = #{id}
+  </update>
 
-    </select>
+  <!-- 获取普通列表 -->
+  <select id="listEntitiesForListByEntity" parameterType="ArticleVO" resultMap="articleResult">
+    select
+    <include refid="sql_com"/>
+    from article
+    <where>
+      is_deleted = 0
+      <if test="title != null and title != ''">
+        and title like #{title} '%'
+      </if>
+      <if test="source != null ">
+        and source = #{source}
+      </if>
+      <if test="articleTypeId != null ">
+        and article_type_id = #{articleTypeId}
+      </if>
+    </where>
+  </select>
 
-    <!--根据id获取-->
-    <select id="getEntityById" resultMap="articleResult">
-        select <include refid="sql_com" /> from article where id = #{id} and is_deleted = 0
-    </select>
+  <!--根据id获取-->
+  <select id="getEntityById" resultMap="articleResult">
+    select
+    <include refid="sql_com"/>
+    from article where id = #{id} and is_deleted = 0
+  </select>
 
-    <!--批量删除-->
-    <update id="deleteEntitiesByIds">
-        update article
-        set is_deleted = 1
-        where id in
-        <foreach collection="ids" item="item"  open="(" close=")" separator=",">
-            #{item}
-        </foreach>
-    </update>
+  <!--批量删除-->
+  <update id="deleteEntitiesByIds">
+    update article
+    set is_deleted = 1
+    where id in
+    <foreach collection="ids" item="item" open="(" close=")" separator=",">
+      #{item}
+    </foreach>
+  </update>
+
+  <!-- 发布文章 -->
+  <update id="publishArticle">
+    update article set is_publish = 1,publish_date = sysdate() where id = #{id}
+  </update>
+
+  <!-- 下架文章 -->
+  <update id="takeOffPublishArticle">
+    update article set is_publish = 0 where id = #{id}
+  </update>
+
+  <!--所有文章top5-->
+  <select id="listTopFiveArticles" resultMap="articleResult">
+    select <include refid="sql_com"/>
+    from article
+    where is_deleted = 0 and is_publish = 1
+    order by collect_times,view_times desc limit 5
+  </select>
+
+  <!--本周top5-->
+  <select id="listWeeFireArticles" resultMap="articleResult">
+    select <include refid="sql_com"/>
+    from article
+    where YEARWEEK( date_format(  create_date,'%Y-%m-%d' ) ) = YEARWEEK( now() )
+    and is_deleted = 0 and is_publish = 1
+    order by collect_times,view_times desc limit 5
+  </select>
 </mapper>
 

@@ -16,7 +16,7 @@ import java.util.Date;
 
 /**
  * @ClassName UserInfoAspect
- * @Description
+ * @Description ccuu切面
  * @Author ykb
  * @Date 2019/12/12
  */
@@ -31,7 +31,7 @@ public class UserInfoAspect {
      * @param joinPoint 连接点
      * @return void
      */
-    @Before("execution(public * com.es.hfuu..controller.*Controller.save*(..) )")
+    @Before("execution(public * com.es.hfuu..mapper.*Mapper.save*(..) )")
     public void saveUserInfo(JoinPoint joinPoint){
         if(joinPoint != null && joinPoint.getArgs() != null && joinPoint.getArgs().length > 0){
             Object[] args = joinPoint.getArgs();
@@ -56,7 +56,7 @@ public class UserInfoAspect {
      * @param joinPoint 连接点
      * @return void
      */
-    @Before("execution(public * com.es.hfuu..controller.*Controller.update*(..) )")
+    @Before("execution(public * com.es.hfuu..mapper.*Mapper.update*(..) )")
     public void updateUserInfo(JoinPoint joinPoint){
         if(joinPoint != null && joinPoint.getArgs() != null && joinPoint.getArgs().length > 0){
             Object[] args = joinPoint.getArgs();

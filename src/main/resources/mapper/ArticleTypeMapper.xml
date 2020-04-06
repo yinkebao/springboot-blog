@@ -6,7 +6,7 @@
         <result property="id" column="id"/>
         <result property="eName" column="e_name"/>
         <result property="cName" column="c_name"/>
-        <result property="deleted" column="id_deleted"/>
+        <result property="isDeleted" column="is_idDelete"/>
         <result property="createUser" column="create_user"/>
         <result property="createDate" column="create_date"/>
         <result property="updateUser" column="update_user"/>
@@ -32,7 +32,7 @@
     <insert id="saveEntity" parameterType="ArticleType">
         INSERT INTO article_type (<include refid="sql_com"/>)
         VALUES (
-            #{id},#{e_name},#{c_name},#{deleted},
+            #{id},#{eName},#{cName},#{isDeleted},
             #{createUser},#{createDate},#{updateUser},#{updateDate}
         )
     </insert>

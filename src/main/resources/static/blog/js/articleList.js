@@ -21,7 +21,8 @@ layui.use(['form',  'table'], function(){
                 ,{field: 'id', title: 'ID', hide: true , sort: true}
                 ,{field: 'title', title: '标题', align: 'center'}
                 ,{field: 'articleType', templet: typeTem, title: '文章类型', align: 'center'}
-                ,{field: 'author', title: '作者', sort: true, align: 'center'}
+                ,{field: 'author', title: '作者',templet: nickNameTem, sort: true, align: 'center'}
+                ,{field: 'publish', title: '发布状态',templet: '#switchPublish', sort: true, align: 'center'}
                 ,{field: 'source', title: '来源',  sort: true, align: 'center'}
                 ,{field: 'viewTimes', title: '浏览次数', sort: true, align: 'center'}
                 ,{field: 'collectTimes', title: '收藏次数', align: 'center'}
@@ -37,6 +38,18 @@ layui.use(['form',  'table'], function(){
             };
         }
     });
+
+
+  //监听发布状态操作
+  form.on('switch(publishFilter)', function(obj){
+    // layer.tips(this.value + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);
+    if (obj.elem.checked == true) {
+        publishArticle(this.value);
+    }else {
+      takeOffPublishArticle(this.value);
+    }
+
+  });
 
     //头工具栏事件
     articleTable.on('toolbar(articleFilter)', function(obj){
@@ -78,6 +91,11 @@ layui.use(['form',  'table'], function(){
 //展示文章类型
 function typeTem(data) {
     return data.articleType.cName;
+}
+
+//展示作者
+function nickNameTem(data){
+  return data.originalAuthor == null || data.originalAuthor == "" ? data.author.nickName : data.originalAuthor;
 }
 
 //新增
@@ -134,6 +152,46 @@ function updateArticle(id) {
             })
         }
     });
+}
+
+//发布文章
+function publishArticle(id) {
+  layer.confirm('确认发布文章？', function(index){
+    $.ajax({
+      method:"patch",
+      url: '/system/article/publishArticle',
+      async:false,
+      data:{
+        "id":id
+      },
+      success:function (res) {
+        layer.closeAll();
+        layer.msg("发布成功",{time: 2000,offset:'66px'});
+        articleTable.reload('articleListTable');
+      }
+    });
+    layer.close(index);
+  });
+}
+
+//下架文章
+function takeOffPublishArticle(id) {
+  layer.confirm('确认下架文章？', function(index){
+    $.ajax({
+      method:"patch",
+      url: '/system/article/takeOffPublishArticle',
+      async:false,
+      data:{
+        "id":id
+      },
+      success:function (res) {
+        layer.closeAll();
+        layer.msg("下架成功",{time: 2000,offset:'66px'});
+        articleTable.reload('articleListTable');
+      }
+    });
+    layer.close(index);
+  });
 }
 
 //删除

@@ -64,7 +64,7 @@ public class LoginController extends BaseController{
             saveSession(user,ipAddr,uri,response);
             model.addAttribute("session",session);
             ThreadLocalMap.put(Constants.THREADLOCAL_USERNAME, userName);
-            return "redirect:"+lastUrl;
+            return "redirect:"+ (lastUrl.equals(Constants.ERROR) ? "/" : lastUrl);
         } else {
             map.put("msg", "用户名或密码错误");
             return "login";

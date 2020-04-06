@@ -4,6 +4,11 @@ import com.es.hfuu.common.domain.BaseDomain;
 import com.es.hfuu.plugin.user.domain.User;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * @ClassName Article
@@ -11,6 +16,10 @@ import io.swagger.annotations.ApiModelProperty;
  * @Author ykb
  * @Date 2019/12/11
  */
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 @ApiModel("文章对象Article")
 public class Article extends BaseDomain {
 
@@ -47,91 +56,9 @@ public class Article extends BaseDomain {
     @ApiModelProperty(value = "收藏次数", name = "collectTimes")
     private Integer collectTimes;
 
-    public String getTitle() {
-        return title;
-    }
+    @ApiModelProperty(value = "是否发布", name = "isPublish")
+    private Boolean isPublish;
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Long getAuthorId() {
-        return authorId;
-    }
-
-    public void setAuthorId(Long authorId) {
-        this.authorId = authorId;
-    }
-
-    public User getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(User author) {
-        this.author = author;
-    }
-
-    public String getOriginalAuthor() {
-        return originalAuthor;
-    }
-
-    public void setOriginalAuthor(String originalAuthor) {
-        this.originalAuthor = originalAuthor;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public Long getArticleTypeId() {
-        return articleTypeId;
-    }
-
-    public void setArticleTypeId(Long articleTypeId) {
-        this.articleTypeId = articleTypeId;
-    }
-
-    public ArticleType getArticleType() {
-        return articleType;
-    }
-
-    public void setArticleType(ArticleType articleType) {
-        this.articleType = articleType;
-    }
-
-    public Integer getSource() {
-        return source;
-    }
-
-    public void setSource(Integer source) {
-        this.source = source;
-    }
-
-    public String getSourceUrl() {
-        return sourceUrl;
-    }
-
-    public void setSourceUrl(String sourceUrl) {
-        this.sourceUrl = sourceUrl;
-    }
-
-    public Integer getViewTimes() {
-        return viewTimes;
-    }
-
-    public void setViewTimes(Integer viewTimes) {
-        this.viewTimes = viewTimes;
-    }
-
-    public Integer getCollectTimes() {
-        return collectTimes;
-    }
-
-    public void setCollectTimes(Integer collectTimes) {
-        this.collectTimes = collectTimes;
-    }
+    @ApiModelProperty(value = "发布时间", name = "isPublish")
+    private Date publishDate;
 }

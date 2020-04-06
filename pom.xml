@@ -104,6 +104,25 @@
             <version>5.1.44</version>
         </dependency>
 
+        <!-- lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.8</version>
+        </dependency>
+        <!--mybatis-plus-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.0.7</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>26.0-jre</version>
+        </dependency>
+
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -136,6 +155,20 @@
             <groupId>org.webjars</groupId>
             <artifactId>bootstrap</artifactId>
             <version>3.3.7</version>
+        </dependency>
+
+        <!-- 引入bootstrap-tagsinput -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap-tagsinput</artifactId>
+            <version>0.8.0</version>
+        </dependency>
+
+        <!-- 引入bootstrap-switch开关 -->
+        <dependency>
+            <groupId>org.webjars.npm</groupId>
+            <artifactId>bootstrap-switch</artifactId>
+            <version>4.0.0-alpha.1</version>
         </dependency>
 
         <!--引入wangEditor-富文本编辑器-->

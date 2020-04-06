@@ -4,6 +4,10 @@
   height: 100%;
 }
 
+.blogCommitForm{
+  height: inherit;
+}
+
 .editor-top{
   float: left;
   width: 98%;
@@ -48,6 +52,31 @@
   width: 98%;
   height: 85%!important;
   left: 1%;
+}
+
+/*弹出层样式*/
+.modal-body{
+  overflow-y: auto;
+  padding-top: 20px;
+}
+
+.modal-attr{
+  float: left;
+  width: 100%;
+  margin: 0px 0px 15px 0px;
+}
+
+.attr-title{
+  float: left;
+  margin: 1% 3% 0 3%;
+  text-align: right;
+  width: 13%;
+}
+
+.attr-con{
+  float: right;
+  width: 75%;
+  margin-right: 6%;
 }
 
 /* 响应式布局 */

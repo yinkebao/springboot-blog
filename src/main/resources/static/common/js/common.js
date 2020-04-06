@@ -1,6 +1,9 @@
 $(function () {
 
 });
+var currentUserId = $("#currentUserId").val();
+var currentUserName = $("#currentUserName").val();
+var currentNickName = $("#currentNickName").val();
 
 //退出登录
 function outLogin(userName) {

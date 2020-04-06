@@ -18,14 +18,17 @@
     <!-- Custom styles for this template -->
     <link th:href="@{/asserts/css/signin.css}" rel="stylesheet">
     <!-- 引入layui -->
-    <!--<link rel="stylesheet" th:href="@{/layui/css/layui.css}">-->
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
     <!-- 引入swiper -->
     <link rel="stylesheet" th:href="@{/swiper/css/swiper.min.css}">
     <link th:href="@{/common/css/common.css}" rel="stylesheet">
 </head>
 <body>
-
 <div th:fragment="navigate" class="navbar navbar-default index-head" role="navigation">
+    <!--全局信息-->
+    <input type="text" id="currentUserId" hidden="hidden" th:value="${session.user.id}" />
+    <input type="text" id="currentUserName" hidden="hidden" th:value="${session.user.userName}" />
+    <input type="text" id="currentNickName" hidden="hidden" th:value="${session.user.nickName}" />
     <div class="navbar-header">
         　<!-- .navbar-toggle样式用于toggle收缩的内容，即nav-collapse collapse样式所在元素 -->
         <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-responsive-collapse">
@@ -83,7 +86,7 @@
 <div th:fragment="common_js">
     <script type="text/javascript" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}" ></script>
     <script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}" ></script>
-    <!--<script type="text/javascript" th:src="@{/layui/layui.all.js}" ></script>-->
+    <script type="text/javascript" th:src="@{/layui/layui.all.js}" ></script>
     <script type="text/javascript" th:src="@{/swiper/js/swiper.min.js}" ></script>
     <script src="https://eqcn.ajz.miesnfu.com/wp-content/plugins/wp-3d-pony/live2dw/lib/L2Dwidget.min.js"></script>
     <script type="text/javascript" th:src="@{/common/js/common.js}"></script>

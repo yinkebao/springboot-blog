@@ -26,6 +26,10 @@
     <div th:replace="common/backstage::baskstage_footer" class="layui-footer"></div>
 </div>
 
+<script type="text/html" id="switchPublish">
+    <input type="checkbox" name="publish" value="{{d.id}}" lay-skin="switch" lay-text="发布|保存" {{ d.isPublish == true ? 'checked' : '' }} lay-filter="publishFilter" >
+</script>
+
 <div th:replace="common/backstage::backstage_js"></div>
 <script type="text/javascript" th:src="@{/blog/js/articleList.js}" ></script>
 </body>

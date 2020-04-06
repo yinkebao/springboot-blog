@@ -3,6 +3,7 @@ package com.es.hfuu.plugin.blog.mapper;
 import com.es.hfuu.common.mapper.BaseMapper;
 import com.es.hfuu.plugin.blog.vo.ArticleVO;
 import com.es.hfuu.plugin.blog.domain.Article;
+import java.util.List;
 
 
 /**
@@ -13,12 +14,31 @@ import com.es.hfuu.plugin.blog.domain.Article;
  */
 public interface ArticleMapper extends BaseMapper<Article, ArticleVO> {
 
+    /**
+     * 发布文章
+     *
+     * @param id 文章id
+     */
+    void publishArticle(Long id);
 
     /**
-     * 根据文章Id获取文章信息
-     * @Title: getSimpleArticleById
-     * @param id 文章Id
-     * @return Article 文章对象
+     * 下架文章
+     *
+     * @param id 文章id
      */
-    Article getSimpleArticleById(Long id);
+    void takeOffPublishArticle(Long id);
+
+    /**
+     * 所有文章top5
+     *
+     * @return List<Article>
+     */
+    List<Article> listTopFiveArticles();
+
+    /**
+     * 本周top3
+     *
+     * @return List<Article>
+     */
+    List<Article> listWeeFireArticles();
 }

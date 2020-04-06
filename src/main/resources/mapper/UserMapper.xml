@@ -25,7 +25,7 @@
         <result property="admin" column="admin" />
         <result property="enabled" column="is_enabled" />
         <result property="lock" column="is_lock" />
-        <result property="deleted" column="is_deleted" />
+        <result property="isDeleted" column="is_deleted" />
         <result property="createUser" column="create_user" />
         <result property="createDate" column="create_date" />
         <result property="updateUser" column="update_user" />
@@ -50,7 +50,7 @@
     <insert id="saveEntity" parameterType="User">
        insert into sys_user(<include refid="sql_com"/>) values(
         #{id},#{nickName},#{userName} ,#{password} ,#{phone} ,#{birthDay} ,#{email} ,#{headerUrl} ,#{lastLoginTime} ,#{lastLoginIp} ,
-        #{previousLoginTime} ,#{previousLoginIp} ,#{failureTimes} ,#{admin} ,#{enabled} ,#{lock},#{deleted} ,#{createUser} ,#{createDate}
+        #{previousLoginTime} ,#{previousLoginIp} ,#{failureTimes} ,#{admin} ,#{enabled} ,#{lock},#{isDeleted} ,#{createUser} ,#{createDate}
         ,#{updateUser} ,#{updateDate} )
     </insert>
 
@@ -106,8 +106,8 @@
             <if test="lock != null">
                 ,  is_lock = #{lock}
             </if>
-            <if test="deleted != null">
-                , is_deleted = #{deleted}
+            <if test="isDeleted != null">
+                , is_deleted = #{isDeleted}
             </if>
             <if test="updateUser != null and updateUser != ''">
                 , update_user = #{updateUser}

@@ -202,8 +202,8 @@ public class UserServiceImpl extends BaseServiceImpl<User,UserVO> implements Use
         if (user.getEnabled() == null){
             user.setEnabled(true);
         }
-        if (user.getDeleted() == null){
-            user.setDeleted(false);
+        if (user.getIsDeleted() == null){
+            user.setIsDeleted(false);
         }
     }
 }

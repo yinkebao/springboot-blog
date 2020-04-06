@@ -67,8 +67,9 @@ public class EsResult <T> implements Serializable {
         return msg;
     }
 
-    public void setMsg(String msg) {
+    public EsResult setMsg(String msg) {
         this.msg = msg;
+        return this;
     }
 
     public T getModule() {
@@ -91,6 +92,19 @@ public class EsResult <T> implements Serializable {
         setCode(SUCCESS);
         setMsg("success");
         setSuccess(true);
+    }
+
+    /**
+     * 设置请求成功时无返回值的信息
+     * @Title: success
+     * @Description: 设置请求成功的信息
+     * @return void 无
+     */
+    public EsResult<T> success() {
+        setCode(SUCCESS);
+        setMsg("success");
+        setSuccess(true);
+        return this;
     }
 
     /**

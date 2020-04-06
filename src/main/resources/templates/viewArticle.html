@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="common/common_head::common_header"></head>
+<link th:href="@{/blog/css/viewArticle.css}" rel="stylesheet">
+<link th:href="@{/webjars/bootstrap-switch/4.0.0-alpha.1/dist/css/bootstrap-switch.css}"
+      rel="stylesheet">
+
+<body class="index_body">
+<!--index_main_start-->
+<div class="index_main">
+  <!--导航栏-->
+  <div th:replace="common/common_head::navigate"></div>
+  <!-- 主要内容开始 -->
+  <div class="article_main">
+    <div class="article_title">
+      <p>[[${article.title}]]</p>
+    </div>
+
+    <div class="article_source">
+      <div class="article_author">
+        <span class="label label-success">[[${article.source == 0 ? '原创' : '转载'}]]</span>
+        <span class="glyphicon glyphicon-user" style="color: rgb(162, 179, 191); font-size: 14px;"></span>
+        [[${article.originalAuthor == null ? article.author.nickName : article.originalAuthor}]]
+      </div>
+      <div class="article_publishDate">
+        <span class="glyphicon glyphicon-calendar" style="color: rgb(162, 179, 191); font-size: 14px;"></span>
+        [[${#dates.format(article.publishDate,"yyyy-MM-dd")}]]
+      </div>
+    </div>
+
+    <!--签名-->
+    <div class="article_sign">
+      <div class="sign_content">每一个不曾起舞的日子，都是对生命的辜负 <div class="sign_author">--- 胖胖罗</div></div>
+    </div>
+    <div class="article_content">
+
+    </div>
+
+    <div class="endTag">
+      <span class="label label-success">完</span>
+    </div>
+
+  </div>
+
+  <input type="text" id="inputContent" hidden th:value="${article.content}"/>
+
+  <div th:replace="common/common_head::common_footer"></div>
+</div>
+<div th:include="common/common_head::common_js"></div>
+</body>
+<script>
+  var content = $("#inputContent").val();
+  $(".article_content").append(content);
+</script>

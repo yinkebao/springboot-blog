@@ -1,10 +1,39 @@
 
 $(function () {
-    // initLayui();
+    initLayui();
     // init2DImg();
     setSwiperImgs();
     initSwiper();
+  // listArticles();
 });
+
+//所有文章列表
+function listArticles() {
+    $.ajax({
+      url:"/system/article/listArticles"
+      ,success:function (data) {
+          data.module.forEach(function (article) {
+            var str = '<div class="card_main">';
+            str += '<div class="card_bg">';
+            str += '<p>';
+            str += '<span class="glyphicon glyphicon-tag" style="color: rgb(174, 188, 135); font-size: 14px;">Python</span> '+ article.title;
+            str += '</p>';
+            str += '<img src="/common/img/article/timthumb.png">';
+            str += '<div class="card-content">';
+            str +=  article.content;
+            str += '</div><div class="card-bottom">';
+            str += '<span class="glyphicon glyphicon-user" style="color: rgb(162, 179, 191); font-size: 14px;"></span>';
+            str += article.originalAuthor == null? article.author.nickName : article.originalAuthor;
+            str += '<span class="glyphicon glyphicon-calendar" style="color: rgb(162, 179, 191); font-size: 14px;"></span>'+article.viewTimes;
+            str += '<span class="glyphicon glyphicon-eye-open" style="color: rgb(162, 179, 191); font-size: 14px;"></span>'+article.collectTimes;
+            str += '</div></div></div>';
+            $("#allArticle").append(str);
+          });
+      }
+    })
+}
+
+
 //初始化swiper
 function initSwiper() {
     var mySwiper = new Swiper ('.swiper-container', {
@@ -59,11 +88,55 @@ function setSwiperImgs() {
 
 //初始化layui
 function initLayui(){
-    ;!function(){
-        //无需再执行layui.use()方法加载模块，直接使用即可
-        var form = layui.form
-            ,layer = layui.layer;
-    }();
+  layui.use('flow', function() {
+    var flow = layui.flow;
+    flow.load({
+      elem: '#allArticle' //流加载容器
+      ,done: function(page, next){ //执行下一页的回调
+        var lis = [];
+        var pageSize = 0;
+        $.ajax({
+          url: "/system/article/listArticles",
+          data:{
+            "page":page,
+            "limit":5
+          }
+          , success: function (data) {
+            pageSize = data.module.size;
+            data.module.list.forEach(function (article) {
+              var str = '<div class="card_main">';
+              str += '<div class="card_bg">';
+              str += '<p>';
+              str += '<span class="glyphicon glyphicon-tag" style="color: rgb(174, 188, 135); font-size: 14px;">Python</span> '+ article.title;
+              str += '</p>';
+              str += '<a href="/system/article/viewArticle?id='+article.id+'"  target="_blank"><img src="/common/img/article/timthumb.png"></a>';
+              str += '<div class="card-content">';
+              str +=  article.content;
+              str += '</div><div class="card-bottom">';
+              str += '<span class="glyphicon glyphicon-user" style="color: rgb(162, 179, 191); font-size: 14px;"></span>';
+              str += article.originalAuthor == null? article.author.nickName : article.originalAuthor;
+              str += '<span class="glyphicon glyphicon-calendar" style="color: rgb(162, 179, 191); font-size: 14px;"></span>'+new Date(article.publishDate).getFullYear()+'-'+new Date(article.publishDate).getUTCMonth()+'-'+new Date(article.publishDate).getDay();
+              str += '<span class="glyphicon glyphicon-eye-open" style="color: rgb(162, 179, 191); font-size: 14px;"></span>'+article.collectTimes;
+              str += '</div></div></div>';
+              lis.push(str);
+            });
+          }
+        });
+        //模拟数据插入
+        setTimeout(function(){
+          //执行下一页渲染，第二参数为：满足“加载更多”的条件，即后面仍有分页
+          //pages为Ajax返回的总页数，只有当前页小于总页数的情况下，才会继续出现加载更多
+          next(lis.join(''), page < pageSize); //假设总页数为 10
+        }, 500);
+      }
+    });
+
+  });
+}
+
+//查看文章
+function viewArticle(id) {
+  window.open("/system/article/viewArticle?id="+id);
 }
 
 //初始化2d动画人

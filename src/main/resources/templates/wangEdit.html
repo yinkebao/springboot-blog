@@ -2,32 +2,257 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:include="common/common_head::common_header"></head>
 <link th:href="@{/wangEdit/css/wangEdit.css}" rel="stylesheet">
+<link th:href="@{/webjars/bootstrap-switch/4.0.0-alpha.1/dist/css/bootstrap-switch.css}"
+      rel="stylesheet">
+<style>
+  body {
+    padding-right: 0px !important;
+  }
+
+  *.modal-open {
+    overflow-y: scroll;
+    padding-right: 0 !important;
+  }
+
+  .w-e-toolbar {
+    z-index: 999;
+  }
+
+  .w-e-text-container {
+    z-index: 99 !important;
+  }
+
+  .layui-form-switch {
+    height: 24px;
+    margin: 5px 0 0 0;
+  }
+
+  .layui-form-onswitch {
+    background-color: #2196f3c9;
+  }
+</style>
 <body class="index_body">
 <!--index_main_start-->
 <div class="index_main">
-<!--导航栏-->
-<div th:replace="common/common_head::navigate"></div>
-  <div class="editor-top">
-    <input class="editor-title form-control" id="editor-title" placeholder="请输入文章标题">
-    <button id="editor_save" class="editor-button btn btn-default">
-      保存
-    </button>
-    <button id="editor_submit" class="editor-button btn btn-default">
-      发布
-    </button>
-  </div>
-<!--富文本编辑器-->
-<div id="editor-content" class="editor-main"></div>
-
-<!--index_main_end-->
+  <!--导航栏-->
+  <div th:replace="common/common_head::navigate"></div>
+  <form th:name="blogCommitForm" class="blogCommitForm" action="">
+    <div class="editor-top">
+      <input class="editor-title form-control" id="article-title" placeholder="请输入文章标题">
+      <button id="editor_save" type="button" data-toggle="modal" data-target="#myModal"
+              class="editor-button btn btn-default">
+        保存
+      </button>
+      <button id="editor_submit" type="button" class="editor-button btn btn-default">
+        发布
+      </button>
+    </div>
+    <!--富文本编辑器-->
+    <div id="editor-content" class="editor-main"></div>
+  </form>
+  <!--index_main_end-->
 </div>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" id="closeModal" data-dismiss="modal" aria-hidden="true">
+          &times;
+        </button>
+        <h4 class="modal-title" id="myModalLabel">
+          完善文章信息
+        </h4>
+      </div>
+      <form id="form_data">
+        <div class="modal-body">
+          <div th:class="modal-attr">
+            <div th:class="attr-title">
+              分类:
+            </div>
+            <div th:class="attr-con">
+              <select type="text" class="form-control" id="articleType" name="articleType">
+                <option value>请选择</option>
+              </select>
+            </div>
+          </div>
+          <br>
+          <div th:class="modal-attr">
+            <div th:class="attr-title">
+              标签:
+            </div>
+            <div th:class="attr-con">
+              <input type="text" data-role="tagsinput" class="form-control" value="111,111,12323,"
+                     id="articleTag" name="articleTag"/>
+            </div>
+          </div>
+
+          <br>
+          <div th:class="modal-attr">
+            <div th:class="attr-title">
+              来源:
+            </div>
+            <div th:class="attr-con">
+              <div class="layui-form">
+                <input type="checkbox" id="articleSource" checked lay-filter="ifSource" th:value="0"
+                       name="source" lay-skin="switch" lay-text="原创|转载">
+              </div>
+            </div>
+          </div>
+
+          <br>
+          <div th:class="modal-attr" id="sourceAuthorDiv" hidden="hidden">
+            <div th:class="attr-title">
+              原作者:
+            </div>
+            <div th:class="attr-con">
+              <input type="text" class="form-control" id="sourceAuthor" name="sourceAuthor"/>
+            </div>
+          </div>
+
+          <br>
+          <div th:class="modal-attr" id="sourceUrlDiv" hidden="hidden">
+            <div th:class="attr-title">
+              原文链接:
+            </div>
+            <div th:class="attr-con">
+              <input type="text" class="form-control" id="sourceUrl" name="sourceUrl"/>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+          </button>
+          <button type="button" onclick="add_info()" class="btn btn-primary">
+            提交
+          </button>
+        </div>
+      </form>
+    </div><!-- /.modal-content -->
+  </div>
+</div>
+
 <div th:include="common/common_head::common_js"></div>
 </body>
-<script type="text/javascript" th:src="@{/webjars/wangEditor/3.1.1/release/wangEditor.js}" ></script>
+<script type="text/javascript" th:src="@{/webjars/wangEditor/3.1.1/release/wangEditor.js}"></script>
+<script type="text/javascript"
+        th:src="@{/webjars/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.js}"></script>
+<script type="text/javascript"
+        th:src="@{/webjars/bootstrap-switch/4.0.0-alpha.1/dist/js/bootstrap-switch.js}"></script>
 </html>
 <script>
-    var E = window.wangEditor;
-    var editor = new E('#editor-content');
-    editor.customConfig.uploadImgShowBase64 = true;
-    editor.create();
+
+  //配置并初始化富文本编辑器
+  var E = window.wangEditor;
+  var editor = new E('#editor-content');
+  editor.customConfig.showLinkImg = false;
+  editor.customConfig.uploadImgServer = '/system/file/uploadImg';
+  editor.customConfig.uploadImgMaxLength = 1;
+  editor.customConfig.uploadFileName = 'file';
+  editor.customConfig.uploadImgHeaders = {
+    'Accept': 'text/x-json'
+  };
+  editor.customConfig.uploadImgTimeout = 3000;
+  editor.customConfig.uploadImgHooks = {
+    success: function (xhr, editor, result) {
+    }
+  };
+  editor.create();
+
+  $(function () {
+    articleType();
+    $("#editor_save").click(function () {
+      var img = editor.txt.html();
+    });
+    form.render();
+  });
+
+  //保存
+  function add_info() {
+    var title = $("#article-title").val();
+    var content = editor.txt.text();
+    var articleType = $("#articleType").val();
+    var source = $("#articleSource").val();
+    var sourceAuthor = $("#sourceAuthor").val();
+    var sourceUrl = $("#sourceUrl").val();
+    if (title === "" || title == null) {
+      alert("请输入文章标题");
+      return;
+    }
+    if (content === "" || content == null) {
+      alert("请输入文章内容");
+      return;
+    }
+    if (articleType === "" || articleType == null) {
+      alert("请选择文章分类");
+      return;
+    }
+    if (source == 1) {
+      if (sourceAuthor === "" || sourceAuthor == null) {
+        alert("请输入原作者");
+        return;
+      }
+      if (sourceUrl === "" || sourceUrl == null) {
+        alert("请输入原文链接");
+        return;
+      }
+    }
+    $.ajax({
+      method: 'post',
+      url: "/system/article/saveArticle",
+      data: {
+        "title": title,
+        "content": editor.txt.html(),
+        "articleTypeId": articleType,
+        "source": source,
+        "originalAuthor": sourceAuthor,
+        "sourceUrl": sourceUrl,
+        "authorId": currentUserId
+      },
+      success: function () {
+        alert("文章保存成功");
+        location.reload();
+      },
+      error: function () {
+        alert("文章保存失败");
+      }
+    })
+  }
+
+  //加载标签类型
+  function articleType() {
+    $.ajax({
+      url: "/system/articleType/listInfo",
+      success: function (data) {
+        data.module.forEach(function (o) {
+          $("#articleType").append("<option value='" + o.id + "'>" + o.eName + "</option>")
+        });
+
+      }
+    })
+  }
+
+  layui.use(['form', 'table'], function () {
+
+  });
+
+  var form = layui.form;
+  //监听发布状态操作
+  form.on('switch(ifSource)', function (obj) {
+    // layer.tips(this.value + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);
+    if (obj.elem.checked == true) {
+      this.value = 0;
+      $("#sourceAuthorDiv").hide();
+      $("#sourceAuthorDiv").val(null);
+      $("#sourceUrlDiv").hide();
+      $("#sourceUrlDiv").val(null);
+    } else {
+      $("#sourceAuthorDiv").show();
+      $("#sourceUrlDiv").show();
+      this.value = 1;
+    }
+  })
 </script>

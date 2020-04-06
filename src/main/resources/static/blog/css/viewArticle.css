@@ -1,0 +1,105 @@
+.article_main{
+  /*border: solid 1px silver;*/
+  width: 70%;
+  left: 15%;
+  position: relative;
+  min-height: 100%;
+  padding: 2%;
+}
+
+.label-success{
+  margin: 8px 10px 5px 0px;
+  padding: 7px 8px 5px 8px;
+  border-radius: 0.65em;
+}
+
+.article_title{
+  /*border: solid 1px silver;*/
+  width: 100%;
+  margin-top: 3%;
+}
+
+.article_title p{
+  font-size: 38px;
+  font-family: 黑体;
+  text-align: center;
+}
+
+.article_source{
+  margin-top: 5%;
+  /*border: solid 1px silver;*/
+}
+
+.article_author{
+  /*border: solid 1px silver;*/
+  float: left;
+  padding-right: 2%;
+  width: 50%;
+  text-align: right;
+}
+
+.article_publishDate{
+  /*border: solid 1px silver;*/
+  padding-top: 2.5px;
+  float: left;
+  width: 50%;
+  text-align: left;
+}
+
+.article_sign{
+  /*border: solid 1px silver;*/
+  width: 74%;
+  height: 40px;
+  float: left;
+  left: 13%;
+  position: relative;
+  margin: 8% 0 0 0;
+  border-left: solid 2px #992c12;
+  background-color: #aed9d3;
+}
+
+.sign_content{
+  float: left;
+  width: 100%;
+  padding-top: 12px;
+  left: 2%;
+  position: relative;
+}
+
+.sign_author{
+  float: right;
+  position: relative;
+  right: 5%;
+}
+
+.article_content{
+  margin-top: 8%;
+  /*border: solid 1px silver;*/
+  line-height: 30px;
+  font-family: 宋体;
+  width: 70%;
+  float: left;
+  left: 15%;
+  position: relative;
+}
+
+.article_content img{
+  width: 100%;
+}
+
+.endTag{
+  float: left;
+  position: relative;
+  width: 100%;
+  margin: 60px 0 0 0;
+  height: 60px;
+}
+
+.endTag span{
+  margin: 8px 10px 5px 0px;
+  padding: 20px 20px 20px 20px;
+  border-radius: 30em;
+  font-size: 20px;
+  left: 46%;
+  position: relative;
+}
