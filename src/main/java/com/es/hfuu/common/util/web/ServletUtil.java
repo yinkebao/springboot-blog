@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @ClassName servletUtil
  * @Description Servlet的工具类
- * @Author ykb
+ * @Author lsx
  * @Date 2019/12/5
  */
 public class ServletUtil {

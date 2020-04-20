@@ -24,7 +24,7 @@ import static com.es.hfuu.common.util.exception.util.ExceptionUtil.requireNonNul
 /**
  * @ClassName SessionServiceImpl
  * @Description 会话业务层实现
- * @Author ykb
+ * @Author lsx
  * @Date 2019/12/5
  */
 @Service("sessionService")

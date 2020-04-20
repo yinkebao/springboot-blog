@@ -23,7 +23,7 @@ import static com.es.hfuu.common.util.exception.util.ExceptionUtil.*;
 /**
  * @ClassName BaseServiceImpl
  * @Description 基础业务信息的实现类(作为其他业务的超类)
- * @Author ykb
+ * @Author lsx
  * @Date 2019/11/8
  */
 public abstract class BaseServiceImpl<T extends BaseDomain, S extends PagingVO> implements BaseService<T, S> {

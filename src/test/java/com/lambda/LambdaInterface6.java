@@ -3,7 +3,7 @@ package com.lambda;
 /**
  * @ClassName lambdaInterface6
  * @Description
- * @Author ykb
+ * @Author lsx
  * @Date 2019/11/3
  **/
 public interface LambdaInterface6 {

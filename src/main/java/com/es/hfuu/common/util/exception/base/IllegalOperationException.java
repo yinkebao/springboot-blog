@@ -6,7 +6,7 @@ import com.es.hfuu.common.util.exception.contants.ExceptionCode;
 /**
  * @className IllegalOperationException
  * @description 非法操作异常
- * @author ykb
+ * @author lsx
  * @date 2019/11/8
  */
 @Exceptional(isLogging = true, errorCode = ExceptionCode.ILLEGAL_OPERATION)

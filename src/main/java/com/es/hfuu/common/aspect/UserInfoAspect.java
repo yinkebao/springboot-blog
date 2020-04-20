@@ -17,7 +17,7 @@ import java.util.Date;
 /**
  * @ClassName UserInfoAspect
  * @Description ccuu切面
- * @Author ykb
+ * @Author lsx
  * @Date 2019/12/12
  */
 @Aspect

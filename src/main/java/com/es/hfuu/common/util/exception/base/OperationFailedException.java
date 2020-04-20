@@ -6,7 +6,7 @@ import com.es.hfuu.common.util.exception.contants.ExceptionCode;
 /**
  * @className OperationFailedException
  * @description 操作失败异常（使用场景：数据库，外部服务调用等）
- * @author ykb
+ * @author lsx
  * @date 2019/11/8
  */
 @Exceptional(isLogging = true, errorCode = ExceptionCode.OPERATION_FAILED)

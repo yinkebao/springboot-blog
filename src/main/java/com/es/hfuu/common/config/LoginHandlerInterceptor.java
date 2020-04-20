@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * @ClassName LoginHandlerInterceptor
  * @Description 登录检查的拦截器
- * @Author ykb
+ * @Author lsx
  * @Date 2019/9/10
  **/
 @Component

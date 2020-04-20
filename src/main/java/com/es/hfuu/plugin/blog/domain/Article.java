@@ -13,7 +13,7 @@ import lombok.Setter;
 /**
  * @ClassName Article
  * @Description 文章实体
- * @Author ykb
+ * @Author lsx
  * @Date 2019/12/11
  */
 @Setter
@@ -59,6 +59,9 @@ public class Article extends BaseDomain {
     @ApiModelProperty(value = "是否发布", name = "isPublish")
     private Boolean isPublish;
 
-    @ApiModelProperty(value = "发布时间", name = "isPublish")
+    @ApiModelProperty(value = "发布时间", name = "publishDate")
     private Date publishDate;
+
+    @ApiModelProperty(value = "封面", name = "titlePage")
+    private String titlePage;
 }

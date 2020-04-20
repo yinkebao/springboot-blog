@@ -3,7 +3,7 @@ package com.es.hfuu.common.function;
 /**
  * @ClassName: SelfSufficient
  * @Description: 自给型函数式接口
- * @author: ykb
+ * @author: lsx
  * @date: 2018/10/29
  */
 @FunctionalInterface

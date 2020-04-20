@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 /**
  * @ClassName CollectionUtil
  * @Description 集合工具类
- * @Author ykb
+ * @Author lsx
  * @Date 2019/12/5
  */
 public class CollectionUtil {

@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 /**
  * @ClassName: StringUtil
  * @Description: 字符串类型的工具类【字符串、字符数组的处理的操作】
- * @author ykb
+ * @author lsx
  * @date 2019/11/7
  */
 public class StringUtil {

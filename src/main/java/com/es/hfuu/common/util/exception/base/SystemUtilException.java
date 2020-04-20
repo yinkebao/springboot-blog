@@ -6,7 +6,7 @@ import com.es.hfuu.common.util.exception.contants.ExceptionCode;
 /**
  * @className SystemUtilException
  * @description 系统工具异常
- * @author ykb
+ * @author lsx
  * @date 2019/11/8
  */
 @Exceptional(errorCode = ExceptionCode.SYSTEM_UTIL)

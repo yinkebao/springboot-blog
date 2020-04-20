@@ -1,4 +1,4 @@
--- auto ykb on 2019-12-11
+-- auto lsx on 2019-12-11
 -- 文章表
 CREATE TABLE article(
 	id BIGINT (20) AUTO_INCREMENT COMMENT 'id',

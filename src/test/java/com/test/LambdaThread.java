@@ -3,7 +3,7 @@ package com.test;
 /**
  * @ClassName LambdaThread
  * @Description
- * @Author ykb
+ * @Author lsx
  * @Date 2019/11/3
  **/
 public class LambdaThread {

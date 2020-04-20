@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * @ClassName Session
  * @Description
- * @Author ykb
+ * @Author lsx
  * @Date 2019/11/12
  */
 @ApiModel("会话对象Session")

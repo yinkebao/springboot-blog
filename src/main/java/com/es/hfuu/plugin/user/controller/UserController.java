@@ -25,7 +25,7 @@ import java.util.Map;
 import static com.es.hfuu.common.util.exception.util.ExceptionUtil.*;
 
 /**
- * @author ykb
+ * @author lsx
  * @className UserController
  * @description 用户信息控制层
  * @date 2019/11/8
@@ -121,6 +121,12 @@ public class UserController extends BaseController {
         model.addAttribute("user",userService.getSimpleUserById(id));
         model.addAttribute("mode",mode);
         return "/user/userForm";
+    }
+
+    @ApiOperation(value = "个人中心")
+    @GetMapping("/userCenter")
+    public String userCenter() {
+        return "/userCenter";
     }
 
 }

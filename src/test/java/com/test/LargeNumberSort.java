@@ -5,7 +5,7 @@ import java.util.Scanner;
 /**
  * @ClassName LargeNumberSort
  * @Description
- * @Author ykb
+ * @Author lsx
  * @Date 2019/11/10
  */
 public class LargeNumberSort {

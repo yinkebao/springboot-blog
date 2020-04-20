@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * @ClassName SessionMapper
  * @Description 会话信息数据库层接口
- * @Author ykb
+ * @Author lsx
  * @Date 2019/12/5
  */
 public interface SessionMapper extends BaseMapper<Session, PagingVO> {

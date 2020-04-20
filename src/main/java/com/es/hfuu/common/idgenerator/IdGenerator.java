@@ -3,7 +3,7 @@ package com.es.hfuu.common.idgenerator;
 /**
  * @ClassName IdGenerator
  * @Description id生成器接口
- * @Author ykb
+ * @Author lsx
  * @Date 2019/11/8
  */
 public interface IdGenerator {

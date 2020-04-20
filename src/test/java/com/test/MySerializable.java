@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * @ClassName Serializable
  * @Description
- * @Author ykb
+ * @Author lsx
  * @Date 2019/11/1
  **/
 public class MySerializable implements Serializable {

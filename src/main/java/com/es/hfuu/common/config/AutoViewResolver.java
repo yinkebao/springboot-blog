@@ -8,7 +8,7 @@ import java.util.Locale;
 /**
  * @ClassName AutoViewResolver
  * @Description
- * @Author ykb
+ * @Author lsx
  * @Date 2019/9/6
  **/
 /*public class AutoViewResolver implements ViewResolver {

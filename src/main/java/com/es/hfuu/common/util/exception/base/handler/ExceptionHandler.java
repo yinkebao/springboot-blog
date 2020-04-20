@@ -5,7 +5,7 @@ import com.es.hfuu.common.util.exception.domain.ExceptionResult;
 /**
  * @className Exceptional
  * @description 异常处理接口
- * @author ykb
+ * @author lsx
  * @date 2019/11/8
  */
 public interface ExceptionHandler {

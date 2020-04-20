@@ -16,7 +16,7 @@ import java.net.URLEncoder;
  * @Description: Cookie的工具类
  * 		1、Cookie的key和path都一样，后边的cookie可以覆盖前边的cookie。
  * 		2、Cookie的key一样并且都未设置path，后边的cookie可以覆盖前边的cookie】
- * @Author ykb
+ * @Author lsx
  * @Date 2019/11/7
  */
 public class CookieUtil {

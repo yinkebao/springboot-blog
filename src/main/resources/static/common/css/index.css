@@ -72,10 +72,19 @@
     left: 7%;
     margin: 10px;
 }
+
+.rightLine a{
+    text-decoration: none;
+}
+
+.rightLine a:hover{
+    color: #1a6681
+}
+
 .rightLineInfo{
     padding: 10px;
     width: 100%;
-    height: 64%;
+    height: 62%;
     position: relative;
     float: left;
     overflow: auto;
@@ -85,7 +94,7 @@
     box-shadow: 0 2px 5px 0 rgba(33, 22, 22, 0.2), 0 2px 10px 0 rgba(0,0,0,0.12);
 }
 .rankInfo{
-    height: 100%;
+    height: 70%;
 }
 .lineIfo-top{
     height: 12%;
@@ -95,14 +104,14 @@
     padding-left: 10px;
 }
 .lineIfo{
-    height: 18%;
+    height: 14%;
     width: 95%;
     padding-top: 10px;
     margin: 3px 0 0px 5px;
     padding-left: 10px;
 }
 .rankInfo .lineIfo{
-     height: 12%;
+     height: 14%;
  }
 .rankInfo .lineIfo-top{
     height: 8%;
@@ -128,6 +137,8 @@
     box-shadow: 0 2px 5px 0 rgba(33, 22, 22, 0.2), 0 2px 10px 0 rgba(0,0,0,0.12);
     background: white;
     border-radius: 3px;
+    line-height: 24px;
+    font-family: monospace;
 }
 .card_bg{
     /*background-image :url("../img/head.jpg");*/

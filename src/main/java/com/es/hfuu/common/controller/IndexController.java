@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 /**
  * @ClassName IndexController
  * @Description 首页控制层
- * @Author ykb
+ * @Author lsx
  * @Date 2020/2/1
  */
 @Controller

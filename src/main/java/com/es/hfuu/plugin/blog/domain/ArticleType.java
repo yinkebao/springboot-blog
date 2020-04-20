@@ -7,7 +7,7 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * @ClassName ArticleType
  * @Description 文章类型
- * @Author ykb
+ * @Author lsx
  * @Date 2019/12/17
  */
 @ApiModel("文章类型对象ArticleType")

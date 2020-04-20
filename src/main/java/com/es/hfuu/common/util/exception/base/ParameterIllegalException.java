@@ -7,7 +7,7 @@ import com.es.hfuu.common.util.exception.contants.ExceptionCode;
 /**
  * @className ParameterIllegalException
  * @description 参数校验失败异常（使用场景：校验参数是否合法）
- * @author ykb
+ * @author lsx
  * @date 2019/11/8
  */
 @Exceptional(errorCode = ExceptionCode.PARAMETER_ILLEGAL, handler = OperationExceptionHandler.class)

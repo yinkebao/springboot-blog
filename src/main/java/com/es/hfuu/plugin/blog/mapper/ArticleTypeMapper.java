@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * @ClassName ArticleTypeMapper
  * @Description 文章类型Mapper接口
- * @Author ykb
+ * @Author lsx
  * @Date 2019/12/17
  */
 public interface ArticleTypeMapper extends BaseMapper<ArticleType, ArticleVO> {

@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * @className EsResult
  * @description 服务层调用返回值
- * @author ykb
+ * @author lsx
  * @date 2019/11/8
  **/
 public class EsResult <T> implements Serializable {

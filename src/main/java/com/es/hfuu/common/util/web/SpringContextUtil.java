@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 /**
  * @ClassName SpringContextUtil
  * @Description 通过封装applicationContext上线文,获取 spring bean对象 bean启动时候 已经被打印出，可直接根据name、class、name class获取
- * @Author ykb
+ * @Author lsx
  * @Date 2019/12/5
  */
 @Component

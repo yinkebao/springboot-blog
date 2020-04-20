@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * @ClassName IteratorUtil
  * @Description 迭代器工具类
- * @Author ykb
+ * @Author lsx
  * @Date 2019/12/5
  */
 public class IteratorUtil {

@@ -10,7 +10,7 @@ import org.springframework.data.redis.core.ValueOperations;
 /**
  * @ClassName IdGeneratorConfig
  * @Description 分布式id生成器初始化
- * @Author ykb
+ * @Author lsx
  * @Date 2019/11/8
  */
 @Configuration

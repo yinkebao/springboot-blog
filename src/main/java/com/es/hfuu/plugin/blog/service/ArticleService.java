@@ -2,13 +2,14 @@ package com.es.hfuu.plugin.blog.service;
 
 import com.es.hfuu.plugin.blog.domain.Article;
 import com.es.hfuu.plugin.blog.vo.ArticleVO;
+import com.es.hfuu.plugin.blog.vo.MyArticleVo;
 import com.github.pagehelper.PageInfo;
 import java.util.List;
 
 /**
  * @ClassName ArticleService
  * @Description 文章服务层接口
- * @Author ykb
+ * @Author lsx
  * @Date 2019/12/11
  */
 public interface ArticleService {
@@ -30,6 +31,14 @@ public interface ArticleService {
   PageInfo<Article> listArticlesByParam(ArticleVO articleVO);
 
   /**
+   * 设置封面
+   *
+   * @param ids 文章id
+   * @param titlePage 封面
+   */
+  void siteTitlePage(String titlePage, String ids);
+
+  /**
    * 所有文章top5
    *
    * @return List<Article>
@@ -42,6 +51,31 @@ public interface ArticleService {
    * @return List<Article>
    */
   List<Article> listWeeFireArticles();
+
+  /**
+   * 查询我收藏的文章
+   *
+   * @param userId 用户名
+   * @return List<Article>
+   */
+  List<ArticleVO> listCollectArticles(Long userId);
+
+  /**
+   * 查询我的文章
+   *
+   * @param userId 用户名
+   * @return List<Article>
+   */
+  List<ArticleVO> listMyArticles(Long userId);
+
+  /**
+   * 统计我的文章信息
+   *
+   * @param userId 用户名
+   * @return MyArticleVo
+   */
+  MyArticleVo countMyArticleInfo(Long userId);
+
 
   /**
    * 保存文章信息
@@ -98,4 +132,6 @@ public interface ArticleService {
    * @return int
    */
   int deleteArticlesByIds(String ids);
+
+
 }

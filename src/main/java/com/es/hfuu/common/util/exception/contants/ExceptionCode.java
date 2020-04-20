@@ -1,7 +1,7 @@
 package com.es.hfuu.common.util.exception.contants;
 
 /**
- * @author ykb
+ * @author lsx
  * @className ExceptionCode
  * @description 异常码
  * @date 2019/11/8

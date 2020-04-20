@@ -3,7 +3,7 @@ package com.es.hfuu.common.util.exception.base;
 /**
  * @className BaseAppException
  * @description 基础受检查异常
- * @author ykb
+ * @author lsx
  * @date 2019/11/8
  */
 public class BaseAppException extends Exception {

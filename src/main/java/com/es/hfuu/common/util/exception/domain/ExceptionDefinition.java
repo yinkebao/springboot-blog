@@ -4,7 +4,7 @@ import com.es.hfuu.common.util.exception.base.handler.DefaultExceptionHandler;
 import com.es.hfuu.common.util.exception.base.handler.ExceptionHandler;
 
 /**
- * @author ykb
+ * @author lsx
  * @className ExceptionDefinition
  * @description 异常定义
  * @date 2019/11/8

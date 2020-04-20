@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * @ClassName: ArrayUtil
  * @Description: 数组工具类【通过反编译可以看到泛型T在类中就是Object类型，所以不能是byte、char、shor、int、long、float、double、boolean等基本数据类型，所以泛型的方法会跟基本数据类型的方法分开】
- * @author ykb
+ * @author lsx
  * @date 2019/11/7
  */
 public class ArrayUtil {

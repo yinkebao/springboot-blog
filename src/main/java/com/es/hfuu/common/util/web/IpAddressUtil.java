@@ -10,7 +10,7 @@ import java.util.Enumeration;
 /**
  * @ClassName IpAddressUtil
  * @Description 获得用户远程地址
- * @Author ykb
+ * @Author lsx
  * @Date 2019/11/7
  **/
 public class IpAddressUtil {

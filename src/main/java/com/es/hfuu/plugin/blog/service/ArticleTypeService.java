@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * @ClassName ArticleTypeService
  * @Description 文章类型接口
- * @Author ykb
+ * @Author lsx
  * @Date 2019/12/17
  */
 public interface ArticleTypeService {

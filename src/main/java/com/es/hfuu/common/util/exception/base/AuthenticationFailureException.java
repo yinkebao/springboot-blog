@@ -7,7 +7,7 @@ import com.es.hfuu.common.util.exception.contants.ExceptionCode;
 /**
  * @className AuthenticationFailureException
  * @description 权限异常类
- * @author ykb
+ * @author lsx
  * @date 2019/11/8
  */
 @Exceptional(errorCode = ExceptionCode.AUTHENTICATION_FAILURE)

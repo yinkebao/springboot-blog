@@ -18,18 +18,18 @@
 
 .editor-title{
   float: left;
-  width: 80%;
+  width: 90%;
   height: 65%;
   margin: 1% 0px 0px 0%;
   background-color: #F8F8F8;
 }
 
 .editor-button{
-  float: left;
+  float: right;
   height: 65%;
   width: 8%;
   margin: 1% 0px 0px 2%;
-  background-color: #ccc;
+  background-color: #78ade4;
 }
 
 #editor_submit{
@@ -91,12 +91,13 @@
   }
 
   .editor-title{
-    width: 70%;
+    width: 85%;
     height: 65%;
     margin: 0 0px 0px 0%;
   }
 
   .editor-button{
+    float: right;
     height: 61%;
     width: 13%;
     margin: 0 0px 0px 2%;
@@ -113,7 +114,7 @@
   }
 
   .editor-title{
-    width: 70%;
+    width: 85%;
     height: 65%;
     margin: 0 0px 0px 0%;
   }

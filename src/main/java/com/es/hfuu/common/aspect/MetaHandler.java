@@ -24,8 +24,7 @@ public class MetaHandler implements MetaObjectHandler {
   @Override
   public void insertFill(MetaObject metaObject) {
     this.setFieldValByName("createDate", new Timestamp(System.currentTimeMillis()), metaObject);
-    this.setFieldValByName("createUser", "lsx",
-        metaObject);
+    this.setFieldValByName("createUser", "lsx", metaObject);
   }
 
   /**

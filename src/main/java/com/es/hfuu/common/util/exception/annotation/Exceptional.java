@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
 /**
  * @className Exceptional
  * @description
- * @author ykb
+ * @author lsx
  * @date 2019/11/8
  **/
 @Target({ java.lang.annotation.ElementType.TYPE })

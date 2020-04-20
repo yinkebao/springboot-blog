@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
- * @author ykb
+ * @author lsx
  * @description springboot启动类
  * @date 2019/9/8
  **/

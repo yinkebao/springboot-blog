@@ -10,7 +10,7 @@ import java.sql.*;
 /**
  * @ClassName MyBlobTypeHandler
  * @Description mysql中的blob类型数据转换成utf编码
- * @Author ykb
+ * @Author lsx
  * @Date 2019/12/19
  */
 public class MyBlobTypeHandler extends BaseTypeHandler<String> {

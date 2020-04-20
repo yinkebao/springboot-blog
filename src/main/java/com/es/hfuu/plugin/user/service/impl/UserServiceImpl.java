@@ -20,7 +20,7 @@ import static com.es.hfuu.common.util.exception.util.ExceptionUtil.*;
 /**
  * @className UserServiceImpl
  * @description 用户服务层实现
- * @author ykb
+ * @author lsx
  * @date 2019/11/8
  **/
 @Service

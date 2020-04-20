@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * @ClassName  ObjectUtil
  * @Description  一些通用的函数
- * @Author  ykb
+ * @Author  lsx
  * @Date  2019/11/7
  */
 public class ObjectUtil {

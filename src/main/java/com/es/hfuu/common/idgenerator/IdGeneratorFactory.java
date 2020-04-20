@@ -11,7 +11,7 @@ import java.net.UnknownHostException;
 /**
  * @ClassName IdGeneratorFactory
  * @Description id生成器工厂
- * @Author ykb
+ * @Author lsx
  * @Date 2019/11/8
  */
 public class IdGeneratorFactory {

@@ -3,7 +3,7 @@ package com.es.hfuu.common.util.exception.base;
 /**
  * @className BaseAppRuntimeException
  * @description 基础运行时异常
- * @author ykb
+ * @author lsx
  * @date 2019/11/8
  */
 public class BaseAppRuntimeException extends RuntimeException {

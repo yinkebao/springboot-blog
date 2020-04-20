@@ -128,6 +128,8 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+
         <!-- 引入jquery -->
         <dependency>
             <groupId>org.webjars</groupId>
@@ -182,6 +184,13 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
+        <!-- 引入echarts -->
+        <dependency>
+            <groupId>org.webjars.bower</groupId>
+            <artifactId>echarts</artifactId>
+            <version>4.7.0</version>
         </dependency>
 
         <!-- 开启热部署 -->

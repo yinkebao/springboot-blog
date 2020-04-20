@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @ClassName RedisUtil
  * @Description Redis的工具类
- * @Author ykb
+ * @Author lsx
  * @Date 2019/12/5
  */
 @Component("sessionRedisUtil")

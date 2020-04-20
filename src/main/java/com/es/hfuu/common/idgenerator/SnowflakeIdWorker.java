@@ -15,7 +15,7 @@ package com.es.hfuu.common.idgenerator;
 /**
  * @ClassName SnowflakeIdWorker
  * @Description 雪花算法分布式id生成器
- * @Author ykb
+ * @Author lsx
  * @Date 2019/11/8
  */
 public class SnowflakeIdWorker implements IdGenerator {

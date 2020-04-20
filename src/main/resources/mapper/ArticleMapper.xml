@@ -21,6 +21,7 @@
     <result column="source" property="source"/>
     <result column="source_url" property="sourceUrl"/>
     <result column="view_times" property="viewTimes"/>
+    <result column="title_page" property="titlePage"/>
     <result column="collect_times" property="collectTimes"/>
     <result column="author_id" property="authorId"/>
     <result column="article_type_id" property="articleTypeId"/>
@@ -40,6 +41,7 @@
            collect_times,
            is_publish,
            publish_date,
+           title_page,
            is_deleted,
            create_user,
            create_date,
@@ -74,7 +76,7 @@
     INSERT INTO article (<include refid="sql_com"/>)
     VALUES (
     #{id},#{title},#{authorId},#{originalAuthor},#{content},#{articleTypeId},#{source},#{sourceUrl},
-    #{viewTimes},#{collectTimes},#{isPublish},#{publishDate},#{isDeleted},#{createUser},#{createDate},#{updateUser},#{updateDate}
+    #{viewTimes},#{collectTimes},#{isPublish},#{publishDate},#{titlePage},#{isDeleted},#{createUser},#{createDate},#{updateUser},#{updateDate}
     )
   </insert>
 
@@ -163,5 +165,50 @@
     and is_deleted = 0 and is_publish = 1
     order by collect_times,view_times desc limit 5
   </select>
+
+  <!--我的文章-->
+  <select id="listMyArticles" resultMap="articleResult">
+    select <include refid="sql_com"/>
+    from article where is_deleted = 0 and is_publish = 1 and author_id = #{userId}
+  </select>
+
+  <!--我收藏的文章-->
+  <select id="listCollectArticles" resultMap="articleResult">
+    select <include refid="sql_com"/>
+    from article a left join article_collect c on a.id = c.article_id
+    where a.is_deleted = 0 and c.is_deleted = 0 and is_publish = 1
+    and c.user_id = #{userId}
+  </select>
+
+  <!--我的文章浏览数-->
+  <select id="countViewTimes" resultType="java.lang.Integer">
+    select sum(view_times)
+    from article where is_deleted = 0 and is_publish = 1 and create_user = #{userId}
+  </select>
+
+  <!--我的文章收藏数-->
+  <select id="countCollectTimes" resultType="java.lang.Integer">
+    select sum(collect_times)
+    from article where is_deleted = 0 and is_publish = 1 and create_user = #{userId}
+  </select>
+
+  <!--我的文章数量-->
+  <select id="countMyArticleNum" resultType="java.lang.Integer">
+    select count(0)
+    from article where is_deleted = 0 and is_publish = 1 and author_id = #{userId}
+  </select>
+
+  <!--阅读-->
+  <update id="readArticle">
+    update article set view_times = view_times+1 where id = #{id}
+  </update>
+
+  <!--设置封面-->
+  <update id="siteTitlePage">
+    update article set title_page = #{titlePage} where id in
+    <foreach collection="ids" item="item" open="(" close=")" separator=",">
+      #{item}
+    </foreach>
+  </update>
 </mapper>
 

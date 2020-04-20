@@ -12,7 +12,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
- * @author ykb
+ * @author lsx
  * @className Swagger2Config
  * @description Swagger2配置类
  * @date 2019/11/8
@@ -32,20 +32,20 @@ public class Swagger2Config {
 
     private ApiInfo groupApiInfo(){
         return new ApiInfoBuilder()
-                .title("ykb的博客")
-                .description("ykb的博客")
+                .title("lsx的博客")
+                .description("lsx的博客")
                 .termsOfServiceUrl("http://www.hztianque.com/")
-                .contact(new Contact("ykb","http://www.hztianque.com/","yinkebao@hztianque.com"))
+                .contact(new Contact("lsx","http://www.hztianque.com/","yinkebao@hztianque.com"))
                 .version("1.0")
                 .build();
     }
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("ykb的博客")
-                .description("ykb的博客")
+                .title("lsx的博客")
+                .description("lsx的博客")
                 .termsOfServiceUrl("http://www.hztianque.com/")
-                .contact(new Contact("ykb","http://www.hztianque.com/","yinkebao@hztianque.com"))
+                .contact(new Contact("lsx","http://www.hztianque.com/","yinkebao@hztianque.com"))
                 .version("1.0")
                 .build();
     }

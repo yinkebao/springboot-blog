@@ -5,7 +5,7 @@ import com.es.hfuu.common.vo.PagingVO;
 /**
  * @ClassName UserVO
  * @Description 用户查询vo类
- * @Author ykb
+ * @Author lsx
  * @Date 2019/11/8
  */
 public class UserVO extends PagingVO {

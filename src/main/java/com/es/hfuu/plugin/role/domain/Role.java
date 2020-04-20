@@ -5,7 +5,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * @author ykb
+ * @author lsx
  * @className Role
  * @description 角色
  * @date 2019/11/8

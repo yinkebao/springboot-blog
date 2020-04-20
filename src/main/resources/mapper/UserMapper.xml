@@ -59,7 +59,7 @@
         update sys_user
         set id = #{id}
         <if test="createUser != null and createUser != ''">
-           , create_user = 'ykb'
+           , create_user = 'lsx'
         </if>
         <if test="userName != null and userName != ''">
                 , user_name = #{userName}

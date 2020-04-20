@@ -3,7 +3,7 @@ package com.es.hfuu.common.util.exception.base;
 /**
  * @className ParameterizableException
  * @description 参数化异常
- * @author ykb
+ * @author lsx
  * @date 2019/11/8
  */
 public class ParameterizableException extends BaseAppRuntimeException {

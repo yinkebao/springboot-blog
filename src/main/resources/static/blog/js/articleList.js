@@ -1,8 +1,11 @@
 var form;
+var upload;
 var articleTable;
-layui.use(['form',  'table'], function(){
+var selectIds = '';
+layui.use(['form', 'table', 'upload'], function(){
     articleTable = layui.table;
     form = layui.form;
+    upload = layui.upload;
     //初始化数据列表
     articleTable.render({
         elem: '#articleListTable'
@@ -23,7 +26,7 @@ layui.use(['form',  'table'], function(){
                 ,{field: 'articleType', templet: typeTem, title: '文章类型', align: 'center'}
                 ,{field: 'author', title: '作者',templet: nickNameTem, sort: true, align: 'center'}
                 ,{field: 'publish', title: '发布状态',templet: '#switchPublish', sort: true, align: 'center'}
-                ,{field: 'source', title: '来源',  sort: true, align: 'center'}
+                ,{field: 'source', title: '来源', templet:sourceTem,  sort: true, align: 'center'}
                 ,{field: 'viewTimes', title: '浏览次数', sort: true, align: 'center'}
                 ,{field: 'collectTimes', title: '收藏次数', align: 'center'}
                 ,{fixed: 'right', title:'操作', toolbar: '#operateArticle', width:120, align: 'center'}
@@ -51,6 +54,7 @@ layui.use(['form',  'table'], function(){
 
   });
 
+
     //头工具栏事件
     articleTable.on('toolbar(articleFilter)', function(obj){
         var checkStatus = articleTable.checkStatus("articleListTable");
@@ -70,6 +74,20 @@ layui.use(['form',  'table'], function(){
                     deleteArticle(ids);
                 }
                 break;
+          case 'siteTitlePage':
+            var data = checkStatus.data;
+            if (data.length == 0){
+              selectIds = '';
+              layer.msg("请选择文章",{time: 2000,offset:'66px'});
+            }else {
+              var ids = '';
+              for (var i=0;i<data.length;i++){
+                ids += data[i].id +',';
+              }
+              selectIds = ids;
+              // siteTilePage(ids);
+            }
+            break;
             //自定义头工具栏右侧图标 - 刷新
             case 'refresh':
                 articleTable.reload('articleListTable');
@@ -86,6 +104,30 @@ layui.use(['form',  'table'], function(){
             updateArticle(data.id);
         }
     });
+
+  //图片上传
+  upload.render({
+    elem: '#siteTitlePage' //绑定元素
+    ,url: '/system/file/uploadImg' //上传接口
+    ,before:function (obj) {
+      layer.load();
+    }
+    ,done: function(res){
+      if (selectIds==''){
+        layer.close('loading');
+        layer.msg("设置封面失败：未选择文章",{time: 2000,offset:'66px'});
+      }else {
+        siteTilePage(res.data[0],selectIds);
+        layer.close('loading');
+      }
+      //上传完毕回调
+    }
+    ,error: function(){
+      layer.close('loading');
+      layer.msg("设置封面失败",{time: 2000,offset:'66px'});
+      //请求异常回调
+    }
+  });
 });
 
 //展示文章类型
@@ -96,6 +138,11 @@ function typeTem(data) {
 //展示作者
 function nickNameTem(data){
   return data.originalAuthor == null || data.originalAuthor == "" ? data.author.nickName : data.originalAuthor;
+}
+
+//来源
+function sourceTem(data){
+  return data.source == 0 ? "原创" : "转载";
 }
 
 //新增
@@ -211,6 +258,26 @@ function deleteArticle(ids) {
             }
         });
         layer.close(index);
+    });
+}
+
+//设置封面
+function siteTilePage(titlePage,ids) {
+    $.ajax({
+      method:"post",
+      url: '/system/article/siteTitlePage',
+      data:{
+        "titlePage":titlePage,
+        "ids":ids
+      },
+      success:function (res) {
+        layer.closeAll();
+        layer.msg("设置成功",{time: 2000,offset:'66px'});
+      },
+      error:function () {
+        layer.closeAll('loading');
+        layer.msg("设置封面失败",{time: 2000,offset:'66px'});
+      }
     });
 }
 

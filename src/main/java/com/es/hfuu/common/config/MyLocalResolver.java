@@ -10,7 +10,7 @@ import java.util.Locale;
 /**
  * @ClassName MyLocalResolver
  * @Description 国际化
- * @Author ykb
+ * @Author lsx
  * @Date 2019/9/9
  **/
 public class MyLocalResolver implements LocaleResolver {

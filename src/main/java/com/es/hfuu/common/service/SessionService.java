@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * @ClassName SessionService
  * @Description 会话业务层接口
- * @Author ykb
+ * @Author lsx
  * @Date 2019/12/5
  */
 public interface SessionService {

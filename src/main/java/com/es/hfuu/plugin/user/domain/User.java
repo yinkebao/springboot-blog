@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * @className User
  * @description 用户
- * @author ykb
+ * @author lsx
  * @date 2019/11/8
  **/
 @ApiModel("用户对象User")

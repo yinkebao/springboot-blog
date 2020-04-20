@@ -5,7 +5,7 @@ import com.google.gson.Gson;
 /**
  * @ClassName GsonUtil
  * @Description 谷歌的Json工具类
- * @Author ykb
+ * @Author lsx
  * @Date 2019/12/5
  */
 public class GsonUtil {

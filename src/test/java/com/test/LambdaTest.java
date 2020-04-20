@@ -8,7 +8,7 @@ import com.lambda.LambdaInterface6;
 /**
  * @ClassName LambdaTest
  * @Description
- * @Author ykb
+ * @Author lsx
  * @Date 2019/11/3
  **/
 public class LambdaTest {

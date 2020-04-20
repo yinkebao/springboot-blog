@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 /**
  * @className ExceptionTitle
  * @description 异常主题
- * @author ykb
+ * @author lsx
  * @date 2019/11/8
  **/
 @Target({ java.lang.annotation.ElementType.TYPE })

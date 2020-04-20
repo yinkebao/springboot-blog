@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * @ClassName PagingVO
  * @Description 分页查询基类信息
- * @Author ykb
+ * @Author lsx
  * @Date 2019/11/8
  */
 @ApiModel("分页查询基类PagingVO")

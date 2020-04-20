@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * @ClassName BaseService
  * @Description 业务类的基础接口
- * @Author ykb
+ * @Author lsx
  * @Date 2019/11/8
  */
 public interface BaseService<T extends BaseDomain, S extends PagingVO> {

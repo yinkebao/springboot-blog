@@ -18,7 +18,7 @@ import static com.es.hfuu.common.util.exception.util.ExceptionUtil.requireValidS
 /**
  * @ClassName ArticleTypeServiceImpl
  * @Description 文章类型接口实现
- * @Author ykb
+ * @Author lsx
  * @Date 2019/12/17
  */
 @Service

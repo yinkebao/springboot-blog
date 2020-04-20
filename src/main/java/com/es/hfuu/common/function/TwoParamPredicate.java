@@ -3,7 +3,7 @@ package com.es.hfuu.common.function;
 /**
  * @ClassName: TwoParamPredicate
  * @Description: 双参数断言函数接口
- * @author: ykb
+ * @author: lsx
  * @date: 2018/8/29
  */
 @FunctionalInterface

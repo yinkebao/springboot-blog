@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * @ClassName LambdaList
  * @Description 使用lambda进行集合排序
- * @Author ykb
+ * @Author lsx
  * @Date 2019/11/3
  **/
 public class LambdaList {

@@ -33,14 +33,14 @@ public class ArticleTagController {
   @Autowired
   private ArticleTagService articleTagService;
 
-  @ApiOperation(value = "分页查询文章列表信息")
+  @ApiOperation(value = "获取所有标签")
   @RequestMapping(value="/list",method = RequestMethod.GET)
   @ResponseBody
   public EsResult<List<ArticleTag>> listArticleTags() {
     return providerServiceInvokeFunction(articleTagService::list,new QueryWrapper());
   }
 
-  @ApiOperation(value = "保存文章标签", notes = "根据ArticleTag对象创建文章")
+  @ApiOperation(value = "新增标签", notes = "根据ArticleTag对象创建文章")
   @ApiImplicitParams({
       @ApiImplicitParam(name = "title", value = "标题", required = true)
   })

@@ -22,7 +22,7 @@ import static com.es.hfuu.common.util.exception.util.ExceptionUtil.*;
 /**
  * @ClassName ArticleTypeController
  * @Description
- * @Author ykb
+ * @Author lsx
  * @Date 2019/12/17
  */
 @Api(tags="文章类型管理",description = "包含新增、删除、修改、查询等操作")

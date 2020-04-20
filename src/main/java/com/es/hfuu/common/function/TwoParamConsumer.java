@@ -3,7 +3,7 @@ package com.es.hfuu.common.function;
 /**
  * @ClassName: TwoParamConsumer
  * @Description: 双参数消费函数接口
- * @author: ykb
+ * @author: lsx
  * @date: 2018/8/29
  */
 @FunctionalInterface

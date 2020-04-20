@@ -4,7 +4,7 @@ import java.util.UUID;
 /**
  * @ClassName UuidUtil
  * @Description 封装JDK自带的UUID, 全部转大写, 中间无-分割
- * @author ykb
+ * @author lsx
  * @date 2019/11/7
  */
 public class UuidUtil {
