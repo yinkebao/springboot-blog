@@ -82,15 +82,6 @@ public class ArticleServiceImpl extends BaseServiceImpl<Article, ArticleVO>
   public List<Article> recommend(Long userId){
 
 	try {
-//    List<UserArticleScore> scores = userArticleScoreService.list();
-//	FastByIDMap<PreferenceArray> preMap = new FastByIDMap<>();
-//	PreferenceArray preferences = new GenericUserPreferenceArray(scores.size());
-//	for (int i = 0; i < scores.size(); i++) {
-//	  preferences.setUserID(i,scores.get(i).getUserId());
-//	  preferences.setItemID(i,scores.get(i).getArticleId());
-//	  preferences.setValue(i,scores.get(i).getScore());
-//	}
-//	preMap.put(3,preferences);
 	  requireNonNull("请提供用户id", userId);
 	  //构造数据连接池
 	  MysqlDataSource dataSource = new MysqlDataSource();

@@ -4,6 +4,7 @@ $(function () {
   setSwiperImgs();
   initSwiper();
   weeFireArticles();
+  recommend();
   listTopFiveArticles();
   // listArticles();
 });
@@ -93,6 +94,22 @@ function listTopFiveArticles() {
             + '"  target="_blank"><span class="label '+colors[index]+'">'+(index+1)+'</span> &nbsp; '
             + article.title + '</a></div>';
         $("#topFiveArticles").append(str);
+      })
+    }
+  })
+}
+
+//文章推荐
+function recommend() {
+  $.ajax({
+    url:"/system/article/recommend",
+    data:{
+      'userId':$("#currentUserId").val()
+    },
+    success:function (data) {
+      data.module.forEach(function (article) {
+        var str = '<div class="lineIfo"><a href="/system/article/viewArticle?id=' + article.id+'"> '+article.title+'</a></div>';
+        $("#recommend").append(str);
       })
     }
   })
