@@ -14,6 +14,8 @@ import java.util.List;
  */
 public interface ArticleService {
 
+  List<Article> recommend(Long userId);
+
   /**
    * 获取分页列表
    *

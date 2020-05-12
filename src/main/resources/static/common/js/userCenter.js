@@ -102,34 +102,34 @@ function articleTagsEcharts() {
   var articleTags = echarts.init(document.getElementById('article_tags'));
   var plantCap = [{
     name: '协同过滤',
-    value: '222'
+    value: '2'
   }, {
     name: '推荐',
-    value: '115'
+    value: '2'
   }, {
     name: '数据结构',
-    value: '113'
+    value: '3'
   }, {
     name: 'java',
-    value: '95'
+    value: '1'
   }, {
     name: 'HTML',
-    value: '92'
+    value: '6'
   }, {
     name: 'bootstrap',
-    value: '87'
+    value: '4'
   }, {
     name: 'ES',
-    value: '87'
+    value: '2'
   }, {
     name: '数据库',
-    value: '60'
+    value: '6'
   }, {
     name: '前端',
-    value: '92'
+    value: '2'
   }, {
     name: 'oracle',
-    value: '50'
+    value: '7'
   }];
 
   var datalist = [{
@@ -430,7 +430,7 @@ function articleTypeEcharts() {
         show:false //隐藏坐标轴的刻度
       },
       type: 'category',
-      data: ['springBoot', 'java', 'python', 'c++', 'sql', 'oracle', '分布式']
+      data: ['springBoot', 'java', 'python', 'c++', 'sql', 'oracle']
     },
     yAxis: {
       splitLine:{
@@ -453,7 +453,7 @@ function articleTypeEcharts() {
       }
     },
     series: [{
-      data: [120, 200, 150, 80, 70, 110, 130],
+      data: [2, 3, 2, 1, 1, 1],
       type: 'bar',
       barWidth:'18',
       itemStyle: {

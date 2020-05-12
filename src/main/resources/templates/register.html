@@ -2,6 +2,22 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
 <head th:include="common/common_head::common_header">
 
+<body class="text-center">
+
+<form class="form-signin" th:method="post" action="/system/user/register">
+  <img class="mb-4" th:src="@{/asserts/img/bootstrap-solid.svg}" alt="" width="72" height="72"/>
+  <h1 class="h3 mb-3 font-weight-normal" >注册</h1>
+  <p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
+  <!--<label class="sr-only" >Username</label>-->
+  <input type="text" name="nickName" class="form-control" th:placeholder="昵称" required="" >
+  <input type="text" name="userName" class="form-control" th:placeholder="用户名" required="" >
+  <!--<label class="sr-only" >Password</label>-->
+  <input type="password" name="password" class="form-control" th:placeholder="密码" required="">
+  <input type="password" name="rePassword" class="form-control" th:placeholder="确认密码" required="">
+
+  <button class="btn btn-lg btn-primary btn-block" type="submit" >注册</button>
+</form>
+</body>
 
 注册
 </html>

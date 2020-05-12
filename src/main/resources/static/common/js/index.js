@@ -1,6 +1,6 @@
 $(function () {
   initLayui();
-  // init2DImg();
+  init2DImg();
   setSwiperImgs();
   initSwiper();
   weeFireArticles();

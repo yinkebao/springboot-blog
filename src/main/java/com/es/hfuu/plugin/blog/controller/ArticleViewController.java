@@ -41,6 +41,6 @@ public class ArticleViewController extends BaseController {
   @RequestMapping(value = "/view", method = RequestMethod.POST)
   @ResponseBody
   public EsResult<Boolean> view(ArticleView articleView) {
-    return providerServiceInvokeConsumer(articleViewService::save,articleView);
+    return providerServiceInvokeConsumer(articleViewService::view,articleView);
   }
 }

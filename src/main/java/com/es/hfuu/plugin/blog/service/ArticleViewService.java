@@ -19,4 +19,12 @@ public interface ArticleViewService extends IService<ArticleView> {
    * @return Boolean
    */
   Boolean isViewed(Long articleId, Long userId);
+
+  /**
+   * 阅读
+   *
+   * @param articleView
+   * @return Boolean
+   */
+  Boolean view(ArticleView articleView);
 }

@@ -59,6 +59,12 @@ public class UserController extends BaseController {
         return providerServiceInvokeFunction(userService::saveUser,user);
     }
 
+    @RequestMapping(value="/register",method = RequestMethod.POST)
+    public String register(User user) {
+       providerServiceInvokeFunction(userService::saveUser,user);
+       return "/login";
+    }
+
     @ApiOperation(value = "修改用户信息", notes = "根据User对象修改用户")
     @RequestMapping(value="/updateUser",method = RequestMethod.PATCH)
     @ResponseBody

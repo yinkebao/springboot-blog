@@ -2,6 +2,8 @@ package com.es.hfuu.plugin.comment.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.es.hfuu.plugin.blog.domain.UserArticleScore;
+import com.es.hfuu.plugin.blog.service.UserArticleScoreService;
 import com.es.hfuu.plugin.comment.CommentVo;
 import com.es.hfuu.plugin.comment.domain.Comment;
 import com.es.hfuu.plugin.comment.domain.CommentLike;
@@ -14,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @ClassName CommentServiceImpl
@@ -34,6 +37,9 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
   @Autowired
   private CommentLikeService commentLikeService;
 
+  @Autowired
+  private UserArticleScoreService userArticleScoreService;
+
   /**
    * 评论
    *
@@ -41,8 +47,20 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
    * @return Comment
    */
   @Override
+  @Transactional(rollbackFor = Exception.class)
   public Comment saveComment(Comment comment) {
     commentMapper.insert(comment);
+    if (userArticleScoreService.ifExist(UserArticleScore.builder()
+        .articleId(comment.getArticleId())
+        .userId(comment.getUserId())
+        .build())) {
+      userArticleScoreService
+          .addScore(userArticleScoreService.getOne(new QueryWrapper<UserArticleScore>()
+              .lambda()
+              .eq(UserArticleScore::getUserId, comment.getUserId())
+              .eq(UserArticleScore::getArticleId, comment.getArticleId())
+          ), 2);
+    }
     return this.getById(comment.getId());
   }
 

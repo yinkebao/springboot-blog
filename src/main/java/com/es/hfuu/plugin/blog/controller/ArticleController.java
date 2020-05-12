@@ -45,6 +45,12 @@ public class ArticleController extends BaseController {
     return "/blog/articleList";
   }
 
+  @RequestMapping(value = "/recommend", method = RequestMethod.GET)
+  @ResponseBody
+  public EsResult<List<Article>> recommend(Long userId) {
+	return providerServiceInvokeFunction(articleService::recommend,userId);
+  }
+
   @ApiOperation(value = "分页查询文章列表信息")
   @RequestMapping(value = "/page", method = RequestMethod.GET)
   @ResponseBody

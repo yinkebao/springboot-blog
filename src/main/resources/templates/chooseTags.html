@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="common/common_head::common_header"></head>
+<link th:href="@{/common/css/chooseTags.css}" rel="stylesheet">
+<body class="index_body">
+<!--index_main_start-->
+<div class="index_main">
+  <!--导航栏-->
+  <div th:replace="common/common_head::navigate"></div>
+  <div class="tags_main">
+    <div class="tags"></div>
+    <div class="tags"></div>
+    <div class="tags"></div>
+    <div class="tags"></div>
+    <div class="tags"></div>
+    <div class="tags"></div>
+    <div class="tags"></div>
+    <div class="tags"></div>
+    <div class="tags"></div>
+  </div>
+  <a class="commit_tags">
+      <span>
+        <img src="/common/img/chooseTags/arrow-right.png">
+      </span>
+  </a>
+
+</div>
+</body>
+</html>

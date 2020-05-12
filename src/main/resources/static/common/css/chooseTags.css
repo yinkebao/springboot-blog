@@ -1,0 +1,34 @@
+.tags_main{
+  border: solid 1px #4e83c0;
+  width: 60%;
+  height: 65%;
+  position: relative;
+  top: 5%;
+  left: 20%;
+}
+
+.tags{
+  border: solid 1px #4e83c0;
+  width: 100px;
+  height: 40px;
+  float: left;
+  margin: 30px 10px 30px 30px;
+  border-radius: 20px;
+  background-color: #e4dce3;
+}
+
+.commit_tags{
+  position: relative;
+  top: 60px;
+  width: 100%;
+  height: 80px;
+  float: left;
+  border: solid 1px #4e83c0;
+  text-align: center;
+}
+
+.commit_tags img{
+  width: 50px;
+  height: 50px;
+  font-size: 28px;
+}
